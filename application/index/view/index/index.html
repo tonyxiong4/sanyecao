@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>test</h2>
+	<h2>用户列表（{$count}）</h2> 
+	{volist name="list" id="user" }
+	<div class="info">
+		ID：{$user.id}<br/>
+		昵称：{$user.username}<br/>
+		邮箱：{$user.phone}<br/>
+		生日：{$user.departid}<br/>
+	</div>
+	{/volist}
+</body>
+</html>
