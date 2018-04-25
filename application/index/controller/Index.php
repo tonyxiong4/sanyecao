@@ -10,17 +10,7 @@ class Index extends Controller
 {
     public function index()
     {
-        echo "file:". __FILE__."<br>";
-        echo "dir:".dirname(__FILE__)."<br>";
-        echo "this is ".__LINE__."hang"."<br>";
-        echo "__DIR__:".__DIR__."<br>";
-        echo "fucntion:".__FUNCTION__."<br>";
-        echo "class:".__CLASS__."<br>";
-        // $list=UserModel::all();
-        $list=Db::name('user')->where('status',0)->select();
-        dump($list);
-        $this->assign('list',$list);
-        $this->assign('count',count($list));    
+ 
         
         return $this->fetch('index');  
     }
