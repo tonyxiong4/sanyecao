@@ -139,7 +139,24 @@ return [
     ],
 
     // 视图输出字符串内容替换
-    'view_replace_str'       => [],
+    'view_replace_str'       => [
+         // 静态资源目录
+         '__STATIC__'    =>  './public/static',
+         // 文件上传目录
+         '__UPLOADS__'   =>  './public/uploads',
+         // JS插件目录
+         '__LIBS__'      =>  './public/static/libs',
+         // 后台CSS目录
+         '__ADMIN_CSS__' =>  './public/static/admin/css',
+         // 后台JS目录
+         '__ADMIN_JS__'  =>  './public/static/admin/js',
+         // 后台IMG目录
+         '__ADMIN_IMG__' =>  './public/static/admin/img',
+         // 前台CSS目录
+         '__HOME_CSS__'  =>  './public/static/home/css',
+         // 前台JS目录
+         '__HOME_JS__'   =>  './public/static/home/js',
+    ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
     'dispatch_error_tmpl'    => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',

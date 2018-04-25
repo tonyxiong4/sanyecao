@@ -16,12 +16,12 @@ class Index extends Controller
         echo "__DIR__:".__DIR__."<br>";
         echo "fucntion:".__FUNCTION__."<br>";
         echo "class:".__CLASS__."<br>";
-        $list=UserModel::all();
+        // $list=UserModel::all();
+        $list=Db::name('user')->where('status',0)->select();
         dump($list);
         $this->assign('list',$list);
         $this->assign('count',count($list));    
-        $a=["dd"=>100,"tr"=>102];
-        $this->assign('list',$a);
+        
         return $this->fetch('index');  
     }
 
