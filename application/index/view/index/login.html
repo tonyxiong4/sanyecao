@@ -1,1 +1,110 @@
 {__NOLAYOUT__}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="__CSS__reset.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__style.css">
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_597444_wtp2se1d8pktke29.css">
+	<title>登录</title>
+</head>
+<body style="min-width: 1220px; overflow-x: hidden;">
+		<div class="login_wrap">
+			<div class="content" id="login_cont">
+				<a href="" class="login-wrap clearfix">
+					<img class="fl" src="__IMG__logo.png">
+					<div class="fl title">三叶草后台管理系统</div>
+				</a>
+				<div class="loginBox loginBoxOne" style="display: block;">
+					<div class="baseLogin">
+						<div class="error-msg">
+							<i class="iconfont icon-msnui-sub"></i>
+							 您输入的信息不完整！
+							 <i class="iconfont icon-cha"></i>
+						</div>
+						<form action="">
+							<div class="input-field"> 
+								<input type="text" name="account" autocomplete="off" spellcheck="false" placeholder="姓名/手机号">
+							</div>
+							<div class="input-field"> 
+								<input type="password" name="password" autocomplete="off" spellcheck="false" placeholder="密码"> 
+							</div>
+							
+
+							
+
+							<div class="action"> 
+									<label for="agreement">没有分销账号？</label>  
+									<a class="forget forget1" href="javascript:;">立即注册</a> 
+							</div>
+
+							<a class="action-btn" href="index.html">登录</a>
+						</form>
+
+					
+					</div>
+				</div>
+
+
+				<!-- 注册 -->
+				<div class="loginBox registerBox" style="display: none;">
+					<div class="baseLogin">
+						<div class="error-msg">
+							<i class="iconfont icon-msnui-sub"></i>
+							 您输入的信息不完整！
+							 <i class="iconfont icon-cha"></i>
+						</div>
+						<form action="">
+							<div class="input-field"> 
+								<input  type="text" name="account" autocomplete="off" spellcheck="false" placeholder="请输入您的真实姓名">
+							</div>
+							<div class="input-field"> 
+								<input  type="text" name="account" autocomplete="off" spellcheck="false" placeholder="请输入手机号">
+							</div>
+							<div class="input-field"> 
+								<input  type="text" name="account" autocomplete="off" spellcheck="false" placeholder="请输入所属部门">
+							</div>
+							
+							<div class="input-field"> 
+								<input  type="password" name="password" autocomplete="off" spellcheck="false" placeholder="请输入您的密码"> 
+							</div>
+							<div class="input-field"> 
+								<input  type="password" name="password" autocomplete="off" spellcheck="false" placeholder="请重复您的密码"> 
+							</div>
+							<div class="action"> 
+									<label for="agreement">已有账号！</label>  
+									<a class="forget forget2" href="javascript:;">返回登录</a> 
+							</div>
+
+							<input type="submit" name="submitBtn" class="action-btn" value="立即提交">
+							
+						</form>
+
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <script type="text/javascript" src="__JS__jquery-1.11.2.min.js"></script>
+        <script type="text/javascript">
+            var windowHeight =document.documentElement.clientHeight;
+            var loginCont = document.getElementById('login_cont');
+            loginCont.style.height = windowHeight + "px";
+            $('.baseLogin .action .forget1').click(function(event) {
+                $('.loginBoxOne').hide();
+                $('.registerBox').show();
+        
+            });
+            $('.baseLogin .action .forget2').click(function(event) {
+                $('.loginBoxOne').show();
+                $('.registerBox').hide();
+        
+            });
+        
+        
+        
+        </script>	
+		
+</body>
+</html>

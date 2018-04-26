@@ -35,4 +35,9 @@ class Index extends Controller
     {
         return $this->fetch('myorder');
     }
+    // login
+    public function login()
+    {
+        return $this->fetch('login');
+    }
 }
