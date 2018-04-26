@@ -136,6 +136,8 @@ return [
         'taglib_begin' => '{',
         // 标签库标签结束标记
         'taglib_end'   => '}',
+        'layout_on'=>'true',
+        'layout_name'=>'layout',
     ],
 
     // 视图输出字符串内容替换
@@ -150,7 +152,7 @@ return [
          // JS目录
          '__JS__'        =>  '/js/',
          // IMG目录
-         '__IMG__'       =>  '/images',
+         '__IMG__'       =>  '/images/',
     ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',

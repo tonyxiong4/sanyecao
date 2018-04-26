@@ -30,4 +30,9 @@ class Index extends Controller
         
         return $this->fetch('hello');
     }
+
+    public function myorder()
+    {
+        return $this->fetch('myorder');
+    }
 }

@@ -1,0 +1,90 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{
+	margin:0;
+	padding:0;
+}
+html{
+	color:#000;
+}
+body{
+	font-size: 12px;
+	font-family:"Microsoft YaHei","微软雅黑";
+}
+table{
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,img,input{
+	border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var{
+	font-style:normal;
+	font-weight:normal;
+}
+ol,ul{
+	list-style:none;
+}
+caption,th{
+	text-align:left;
+}
+h1,h2,h3,h4,h5,h6{
+	font-size:100%;
+	font-weight:normal;
+}
+q:before,q:after{
+	content:'';
+}
+abbr,acronym{
+	border:0;
+	font-variant:normal;
+}
+sup{
+	vertical-align:text-top;
+}
+sub{
+	vertical-align:text-bottom;
+}
+input,textarea,select{
+	font-family:inherit;
+	font-size:inherit;
+	font-weight:inherit;
+	*font-size:100%;
+}
+legend{
+	color:#000;
+}
+input,button,textarea,select,a{
+	outline: none;
+}
+input{blr:expression(this.onFocus=this.blur());}
+
+.dn{ display: none; }.db{display:block;}.dib{display:inline-block;}.di{display:inline;}
+.h5{ height:5px; _font-size:0;}
+.h14{height:14px;}.h16{height:16px;}.h18{height:18px;}.h20{height:20px;}.h22{height:22px;}.h24{height:24px;}.h40{ height:40px;}.h58{ height:58px;}
+.lh14{line-height:14px;}.lh16{line-height:16px;}.lh18{line-height:18px;}.lh20{line-height:20px;}.lh22{line-height:22px;}.lh24{line-height:24px;}.lh26{line-height:26px;}.lh25{ line-height:25px;}.lh50{ line-height:50px;}.lh28{line-height:28px;}
+.m0{margin:0!important;}.ml1{margin-left:1px;}.ml2{margin-left:2px;}.ml5{margin-left:5px;}.ml8{ margin-left:8px;}.ml10{margin-left:10px;} .ml15{ margin-left:15px;} .ml17{ margin-left:17px;}.ml20{margin-left:20px;}.ml25{ margin-left:25px;}.ml30{ margin-left:30px;}.ml35{ margin-left:35px;}.ml40{ margin-left:40px;}.ml50{ margin-left:50px;}.ml70{ margin-left:70px;}.ml130{ margin-left:130px;}.ml60{ margin-left:60px;} .mt60{ margin-top:60px;}.ml90{ margin-left:90px;}.mr1{margin-right:1px;}.mr2{margin-right:2px;}.mr3{margin-right:3px;}.mr4{margin-right:4px;}.mr5{margin-right:5px;}.mr6{margin-right:6px;}.mr8{margin-right:8px;}.mr10{margin-right:10px;}.mr15{margin-right:15px;}.mr20{margin-right:20px;}.mr30{margin-right:30px;}.mr32{margin-right:32px;}.mr40{margin-right:40px;}.mr90{margin-right:90px;}.mr300{margin-right:300px;}.mt1{margin-top:1px;}.mt2{margin-top:2px;}.mt3{margin-top:3px;}.mt4{margin-top:4px;}.mt5{margin-top:5px;}.mt8{margin-top:8px;}.mt10{margin-top:10px;}.mt15{margin-top:15px;}.mt18{margin-top:18px;}.mt20{margin-top:20px;}.mt25{margin-top:25px;}.mt30{margin-top:30px;}.mt45{margin-top:45px;}.mt50{margin-top:50px;}.mt55{margin-top:55px;}.mt80{ margin-top:80px;}.mb1{margin-bottom:1px;}.mb2{margin-bottom:2px;}.mb5{margin-bottom:5px;}.mb6{margin-bottom:6px;}.mb8{margin-bottom:8px;}.mb9{margin-bottom:9px;}.mb10{margin-bottom:10px;}.mb12{margin-bottom:12px;}.mb15{margin-bottom:15px;}.mb18{margin-bottom:18px;}.mb20{margin-bottom:20px;}.mb25{margin-bottom:25px;}.mb30{margin-bottom:30px;}.mb40{margin-bottom:40px;}.mb45{margin-bottom:45px;}.mb50{margin-bottom:50px;}.mb60{margin-bottom:60px;}.mb100{margin-bottom:100px;}.mb110{margin-bottom:110px;}.ml-1{margin-left:-1px;}.mt-1{margin-top:-1px;}
+.p1{padding:1px;}.pl1{padding-left:1px;}.pt1{padding-top:1px;}.pr1{padding-right:1px;}.pb1{padding-bottom:1px;}.p2{padding:2px;}.pl2{padding-left:2px;}.pt2{padding-top:2px;}.pt3{padding-top:3px;}.pr2{padding-right:2px;}.pb2{padding-bottom:2px;}.pl5{padding-left:5px;}.p5{padding:5px;}.pt5{padding-top:5px;}.pr5{padding-right:5px;}.pb5{padding-bottom:5px;}.p10{padding:10px;}.pl10{padding-left:10px;}.pl20{padding-left:20px;}.pt10{padding-top:10px;}.pt15{padding-top:15px;}.pt19{padding-top:19px;}.pt20{padding-top:20px;}.pt25{padding-top:25px;}.pt30{padding-top:30px;}.pt45{padding-top:45px;}.pt40{padding-top:40px;}.pt50{padding-top:50px;}.pr10{padding-right:10px;}.pb10{padding-bottom:10px;}.p20{padding:20px;}.pl20{padding-left:20px;}.pr20{padding-right:20px;}.pb15{padding-bottom:15px;}.pb20{padding-bottom:20px;}.pb60{padding-bottom:60px;}.fd9{ color:#fd9905}
+.g0{color:#000;}.g3{color:#333;}.g6{color:#666;}.g9{color:#999;}.wh{color:white;}.g88{ color:#888888;}.ge2{ color:#e20e0e;}.gcf{ color:#cf0000;}.gae{ color:#aeaeae;}.g50{ color:#bb6f04;}.g91{ color:#918684;}.ml80{ margin-left:80px;}.g0e{ color:#0e0e0e;}
+.f0{font-size:0;}.f10{font-size:10px;}.f12{font-size:12px;}.f13{font-size:13px;}.f14{font-size:14px;}.f16{font-size:16px;}.f18{font-size:18px;}.f20{font-size:20px;}.f24{font-size:24px;}.f25{font-size:25px;}.f30{ font-size:30px;}
+.fa{font-family:Arial;}.ft{font-family:Tahoma;}.fv{font-family:Verdana;}.fs{font-family:\5b8b\4f53;}.fw{font-family:"Microsoft YaHei","微软雅黑";}.fs{ font-family:"宋体";}
+.n{font-weight:normal; font-style:normal;}.b{font-weight:bold;}.i{font-style:italic;}
+.tc{text-align:center;}.tr{text-align:right;}.tl{text-align:left;}.tj{text-align:justify;} .ti{ text-indent:2em;}
+.tdl{text-decoration:underline;}.tdn,.tdn:hover,a.tdl:hover{text-decoration:none;}
+.lt0{letter-spacing:0;}.lt1{letter-spacing:1px;}
+.bk{word-wrap:break-word;}
+.vm{vertical-align:middle;}.vtb{vertical-align:text-bottom;}.vb{vertical-align:bottom;}.vt{vertical-align:top;}.vn{vertical-align:-2px;}
+.fl{float:left;}.fr{float:right;}
+.cl{clear:both;}
+.rel{position:relative;}.abs{position:absolute;}
+.zx1{z-index:1;}.zx2{z-index:2;}
+.poi{cursor:pointer;}.def{cursor:default;}
+.ovh{overflow:hidden;}
+.vh{visibility:hidden;}.vv{visibility:visible;}
+.z{*zoom:1;}
+.g90{ color:#909090;}
+.clearfix:after {visibility: hidden;display: block;content:" ";clear: both;height: 0;} 
+.clearfix{*zoom:1;}
+.red{ color:red;}
+.c-black{color:#000;}
+.lp1{ letter-spacing: 1px;}.lp2{ letter-spacing: 2px;}.lp3{ letter-spacing: 3px;}.lp4{ letter-spacing: 4px;}.lp5{ letter-spacing: 5px;}
+.b0{border:0!important;}
+.coef{color: #ef0707;}
