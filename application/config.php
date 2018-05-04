@@ -144,15 +144,15 @@ return [
     'view_replace_str'       => [
          
          // 文件上传目录
-         '__UPLOADS__'   =>  '/uploads/',
+         '__UPLOADS__'   =>  '/public/uploads/',
          // JS插件目录
-         '__LIBS__'      =>  '/libs/',
+         '__LIBS__'      =>  '/public/libs/',
          // CSS目录
-         '__CSS__'       =>  '/css/',
+         '__CSS__'       =>  '/public/css/',
          // JS目录
-         '__JS__'        =>  '/js/',
+         '__JS__'        =>  '/public/js/',
          // IMG目录
-         '__IMG__'       =>  '/images/',
+         '__IMG__'       =>  '/public/images/',
     ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
