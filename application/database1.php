@@ -13,7 +13,7 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => '127.0.0.1',
+    'hostname'        => 'hdm310089504.my3w.com',
     // 数据库名
     'database'        => 'hdm310089504_db',
     // 用户名
