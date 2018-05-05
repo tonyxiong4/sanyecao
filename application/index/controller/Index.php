@@ -38,7 +38,11 @@ class Index extends Controller
     // login
     public function login()
     {
-        return $this->fetch('login');
+        $departData=action('Data/getDepart');
+        $this->assign('depart',$departData);
+        $jobData=action('Data/getJob');
+        $this->assign('job',$jobData);
+        return $this->fetch('login');   
     }
 
     public function doLgoin($value='')
