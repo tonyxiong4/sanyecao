@@ -30,6 +30,11 @@ class Index extends Controller
         
         return $this->fetch('hello');
     }
+    //客户管理
+    public function customser()
+    {
+        return $this->fetch('customser');
+    }
     //系统首页
     public function sysindex()
     {

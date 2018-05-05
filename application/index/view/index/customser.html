@@ -1,0 +1,97 @@
+<!-- contnet -->
+<div class="garr-panel">
+    {include file="index/navleft"}
+    <!-- 右侧内容 -->
+    <div class="garr-container">
+        <div class="pgc-private-letter-wrap garr-container-white">
+            <div class="title-tab-status-wrap clearfix">
+                <ul class="">
+                    <li class="category-item selected selected-line">客户管理</li>
+                    
+                </ul>
+                <div class="addAll_btn addAll_btn1">添加客户<i class="iconfont icon-msnui-add-line"></i></div>
+            </div>
+            <div class="tui-table-container" style="margin-top:25px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>公司名称</th>
+                            <th>电话</th>
+                            <th>所属人员</th>
+                            <th>添加时间</th>
+                            <th>删除</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>周华健</td>
+                            <td>苏州无限俱乐部</td>
+                            <td>152000002394</td>
+                            <td>赵磊</td>
+                            <td>2018/05/22</td>
+                            <td><i class="iconfont icon-delete"></i></td>
+                        </tr>
+                        <tr>
+                            <td>刘德华</td>
+                            <td>苏州关福科技</td>
+                            <td>152000002394</td>
+                            <td>赵磊</td>
+                            <td>2018/05/22</td>
+                            <td><i class="iconfont icon-delete"></i></td>
+                        </tr>
+                        <tr>
+                            <td>吴奇隆</td>
+                            <td>苏州6998网络科技有限公司</td>
+                            <td>152000002394</td>
+                            <td>赵磊</td>
+                            <td>2018/05/22</td>
+                            <td><i class="iconfont icon-delete"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>	
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 添加客户 -->
+<div class="popOutWrap popOutWrap2" style="display:none;">
+
+<div class="popOut">
+    <!-- 关闭按钮 -->
+    <i class="iconfont icon-guanbi"></i>
+    <div class="title">添加客服</div>
+    <div class="formList clearfix">				
+        <div class="lineOne clearfix">
+            <div class="name fl">客户姓名：</div>
+            <input class="fl" type="text" placeholder="请输入客户信息" />
+        </div>
+        <div class="lineOne clearfix">
+            <div class="name fl">所在公司：</div>
+            <input class="fl" type="text" placeholder="请输入所在公司" />
+        </div>
+        <div class="lineOne clearfix">
+            <div class="name fl">电话：</div>
+            <input class="fl" type="text" placeholder="请输入客户电话" />
+        </div>
+        
+    </div>
+
+    <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
+</div>
+</div>
+<script src="__JS__jquery-1.11.2.min.js"></script>
+<script>
+$('.popOutWrap .iconfont.icon-guanbi').click(function(){
+
+$('.popOutWrap2').hide();
+})
+
+$('.addAll_btn1').click(function(){
+$('.popOutWrap2').show();
+})
+</script>
