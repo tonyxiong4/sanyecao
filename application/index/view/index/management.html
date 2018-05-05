@@ -1,0 +1,114 @@
+<!-- contnet -->
+<div class="garr-panel">
+    {include file="index/navleft"}
+    <!-- 右侧内容 -->
+    <div class="garr-container">
+        <div class="pgc-private-letter-wrap garr-container-white">
+            <div class="title-tab-status-wrap">
+                <ul>
+                    <li class="category-item selected selected-line">人员管理</li>
+                </ul>
+            </div>
+                        
+            
+            <div class="tui-table-container" style="margin-top:25px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>所属部门</th>
+                            <th>电话</th>
+                            <th>客户转让</th>
+                            <th>重置密码</th>
+                            <th>删除</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>章三</td>
+                            <td>建筑部</td>
+                            <td>152000002394</td>
+                            <td><span class="zr" style="color:#FF9800;cursor: pointer;">点击转让</span></td>
+                            <td><i class="iconfont icon-shezhi"></i></td>
+                            <td><i class="iconfont icon-delete"></i></td>
+                        </tr>
+                        <tr>
+                            <td>章三</td>
+                            <td>建筑部</td>
+                            <td>152000002394</td>
+                            <td><span class="zr" style="color:#FF9800;cursor: pointer;">点击转让</span></td>
+                            <td><i class="iconfont icon-shezhi"></i></td>
+                            <td><i class="iconfont icon-delete"></i></td>
+                        </tr>
+                        <tr>
+                            <td>章三</td>
+                            <td>建筑部</td>
+                            <td>152000002394</td>
+                            <td><span class="zr" style="color:#FF9800;cursor: pointer;">点击转让</span></td>
+                            <td><i class="iconfont icon-shezhi"></i></td>
+                            <td><i class="iconfont icon-delete"></i></td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+            </div>	
+
+        </div>
+    </div>
+</div>
+
+<!-- 转让客户 -->
+<div class="popOutWrap popOutWrap1" style="display:none;">
+
+<div class="popOut">
+<!-- 关闭按钮 -->
+<i class="iconfont icon-guanbi"></i>
+<div class="title">转让客户</div>
+<div class="formList clearfix">				
+    <div class="lineOne clearfix">
+        <div class="name fl">转让人姓名：</div>
+        <input class="fl" type="text" placeholder="请输入真实姓名" />
+    </div>
+    
+</div>
+
+<button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
+</div>
+</div>
+
+<!-- 转让客户 -->
+<div class="popOutWrap popOutWrap2" style="display:none;">
+
+<div class="popOut">
+    <!-- 关闭按钮 -->
+    <i class="iconfont icon-guanbi"></i>
+    <div class="title">重置密码</div>
+    <div class="formList clearfix">				
+        <div class="lineOne clearfix">
+            <div class="name fl">输入新密码：</div>
+            <input class="fl" type="text" placeholder="请输入输入密码" />
+        </div>
+        <div class="lineOne clearfix">
+            <div class="name fl">重复密码：</div>
+            <input class="fl" type="text" placeholder="请输入重复密码" />
+        </div>
+        
+    </div>
+
+    <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
+</div>
+</div>
+<script src="__JS__jquery-1.11.2.min.js"></script>
+<script>
+$('.popOutWrap .iconfont.icon-guanbi').click(function(){
+$('.popOutWrap1').hide();
+$('.popOutWrap2').hide();
+})
+$('.zr').click(function(){
+$('.popOutWrap1').show();
+})
+$('.icon-shezhi').click(function(){
+$('.popOutWrap2').show();
+})
+</script>
