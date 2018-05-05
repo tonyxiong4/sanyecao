@@ -30,6 +30,11 @@ class Index extends Controller
         
         return $this->fetch('hello');
     }
+     //人员管理
+     public function management()
+     {
+         return $this->fetch('management');
+     }
     //客户管理
     public function customser()
     {
