@@ -40,4 +40,9 @@ class Index extends Controller
     {
         return $this->fetch('login');
     }
+
+    public function doLgoin($value='')
+    {
+        
+    }
 }
