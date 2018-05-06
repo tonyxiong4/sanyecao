@@ -250,4 +250,10 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    //密文配置
+    'passwordext' =>'szsyc',
+    'cookie_key' =>'SYC_LOGINED_USER',
+    'secure_code'  => '12335546ae49340b21', // 数据加密密钥与SNS一样
+    "coding" => "Content-Type: text/html; charset=utf-8",
 ];

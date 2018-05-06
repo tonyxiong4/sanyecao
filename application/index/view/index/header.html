@@ -19,13 +19,14 @@
 							
 							<div class="new_user_info">
 								<div class="new_user_type">欢迎您！</div>
-								<div class="new_user_name">唧唧歪歪63</div>
+								<div class="new_user_name">{:session('userinfo.username')}</div>
 							</div>
 						</div>
 					</div>
 					<div class="shead-post-wrap">
 						<div class="pgc-hover-popup">
-							<div class="shead-post">退出</div>
+							<!-- <div class="shead-post">退出</div> -->
+							<a href="{:url('index/logout')}" class="shead-post">退出</a>
 						</div>
 					</div>
 				</div>

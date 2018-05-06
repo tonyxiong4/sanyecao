@@ -22,23 +22,20 @@
 							 您输入的信息不完整！
 							 <i class="iconfont icon-cha"></i>
 						</div>
-						<form action="">
+						<form action="{:url('index/doLogin')}" method="post">
 							<div class="input-field"> 
 								<input type="text" name="account" autocomplete="off" spellcheck="false" placeholder="姓名/手机号">
 							</div>
 							<div class="input-field"> 
 								<input type="password" name="password" autocomplete="off" spellcheck="false" placeholder="密码"> 
 							</div>
-							
-
-							
-
 							<div class="action"> 
 									<label for="agreement">没有分销账号？</label>  
 									<a class="forget forget1" href="javascript:;">立即注册</a> 
 							</div>
 
-							<a class="action-btn" href="index.html">登录</a>
+							<!-- <a class="action-btn">登录</a> -->
+							<input type="submit" name="submitBtn" class="action-btn" value="登录">
 						</form>
 
 					
@@ -54,28 +51,34 @@
 							 您输入的信息不完整！
 							 <i class="iconfont icon-cha"></i>
 						</div>
-						<form action="">
+						<form action="{:url('index/doRegister')}" method="post">
 							<div class="input-field"> 
-								<input  type="text" name="account" autocomplete="off" spellcheck="false" placeholder="请输入您的真实姓名">
+								<input  type="text" name="username" autocomplete="off" spellcheck="false" placeholder="请输入您的真实姓名">
 							</div>
 							<div class="input-field"> 
-								<input  type="text" name="account" autocomplete="off" spellcheck="false" placeholder="请输入手机号">
+								<input  type="text" name="phone" autocomplete="off" spellcheck="false" placeholder="请输入手机号">
 							</div>
 							<div class="input-field"> 
 								<select name='depart'>
 									<option value="0">===请选择部门===</option>
+									{volist name='depart' id="vo"}
+										<option value="{$vo.id}">{$vo.departname}</option>
+									{/volist}
 								</select>
 							</div>
 							<div class="input-field"> 
 								<select name='job'>
 									<option value="0">===请选择职位===</option>
+									{volist name='job' id="vo"}
+										<option value="{$vo.id}">{$vo.jobname}</option>
+									{/volist}
 								</select>
 							</div>
 							<div class="input-field"> 
 								<input  type="password" name="password" autocomplete="off" spellcheck="false" placeholder="请输入您的密码"> 
 							</div>
 							<div class="input-field"> 
-								<input  type="password" name="password" autocomplete="off" spellcheck="false" placeholder="请重复您的密码"> 
+								<input  type="password" name="repassword" autocomplete="off" spellcheck="false" placeholder="请重复您的密码"> 
 							</div>
 							<div class="action"> 
 									<label for="agreement">已有账号！</label>  
@@ -107,9 +110,6 @@
                 $('.registerBox').hide();
         
             });
-        
-        	
-        
         </script>	
 		
 </body>

@@ -3,12 +3,11 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-06 00:50:51
+ * @Last Modified time: 2018-05-06 18:00:23
  */
 
 namespace app\index\controller;
 use think\Db;
-use think\Request;
 use think\Controller;
 /**
 * 
