@@ -34,6 +34,11 @@ class Syc extends Base
     //客户管理
     public function customser()
     {
+        $list=Db::view('customer','id,name,company,phone,belonguid,addtime,status')
+              ->view('user','username','user.id=customer.belonguid','LEFT')
+              ->where('status',0)
+              ->select();
+        $this->assign('list',$list);
         return $this->fetch('customser');
     }
     //系统首页

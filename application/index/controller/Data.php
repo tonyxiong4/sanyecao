@@ -15,7 +15,6 @@ use think\Controller;
 class Data extends Controller
 {
 	
-	
 	public function getDepart()
 	{
 		$list=Db::name('department')->where('status=0')->select();
@@ -25,6 +24,7 @@ class Data extends Controller
 		return [];
 	}
 
+
 	public function getJob()
 	{
 		$list=Db::name('Job')->where('status=0')->select();
@@ -32,5 +32,12 @@ class Data extends Controller
 			return $list;
 		}
 		return [];
+	}
+
+	public function addCustomser()
+	{
+		$param=$this->request->param();
+		dump($param);
+		
 	}
 }
