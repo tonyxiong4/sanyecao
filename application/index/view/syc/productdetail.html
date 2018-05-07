@@ -1,0 +1,69 @@
+<!-- contnet -->
+<div class="garr-panel">
+        {include file="index/navleft"}
+        <!-- 右侧内容 -->
+        <div class="garr-container">
+                <div class="pgc-private-letter-wrap garr-container-white">
+                    <div class="title-tab-status-wrap">
+                        <ul>
+                            <li class="category-item selected selected-line">产品详细</li>
+                        </ul>
+                    </div>
+                    <div class="tui-tab-panel income-panel">
+                        <div class="row clearfix">
+                            <div class="tui-rangepicker clearfix fl">
+                                <input type="text" class="tui-btn fl" placeholder="请输入订单名称">
+                                <input type="text" class="tui-btn fl" id="selTime" placeholder="请输入选择时间">
+                                <input type="submit" style="width:60px;padding-left: 0; cursor: pointer;" class="tui-btn active fl" value="查询">
+                                <input type="submit" style="width:60px;padding-left: 0; cursor: pointer;" class="tui-btn tui-btn1 active fl" value="添加">
+                            </div>
+                            
+                        </div>
+                    </div>				
+                    
+                    <div class="tui-table-container" style="margin-top:25px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>产品名称</th>
+                                    <th>产品属性</th>
+                                    <th>单位</th>
+                                    <th>价格</th>
+                                    <th>创建时间</th>
+                                    <th>删除</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>苏州拟剥离呀公司</td>
+                                    <td>3楼电梯</td>
+                                    <td>包</td>
+                                    <td>27</td>
+                                    <td>2018-04-11</td>
+                                    <td></td>
+                                </tr>
+                              
+                                
+                            </tbody>
+                        </table>
+                    </div>	
+        
+                </div>
+            </div>
+        </div>
+        
+        
+        
+              
+        
+        <script type="text/javascript" src="__JS__laydate/laydate.js"></script>
+        
+        <script type="text/javascript">
+            //执行一个laydate实例
+            laydate.render({
+              elem: '#selTime' //指定元素
+              ,type: 'datetime'
+            });
+        
+           
+        </script>
