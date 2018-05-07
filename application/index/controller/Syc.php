@@ -52,6 +52,11 @@ class Syc extends Base
         $data=[];
         return $this->fetch('myorder');
     }
+     //订单详细
+     public function myorderdetail()
+     {
+         return $this->fetch('myorderdetail');
+     }
     // login
     public function login()
     {
