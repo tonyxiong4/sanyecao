@@ -38,6 +38,12 @@ class Data extends Controller
 	{
 		$param=$this->request->param();
 		dump($param);
-		
+
+	}
+
+	public function delCustomser()
+	{
+		$param=$this->request->param();
+		dump($param);
 	}
 }
