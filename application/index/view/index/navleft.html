@@ -1,4 +1,4 @@
-<ul class="tui-menu-container garr-menu">
+<ul class="tui-menu-container garr-menu" id="garr-menu">
     <li class="tui-menu-item">
         <a href="{:url('syc/sysindex')}" class="no-icon">
             <div class="private-letter-menu">
@@ -7,7 +7,7 @@
             </div>
         </a>
     </li>
-    <li class="tui-menu-item tui-menu-item-active">
+    <li class="tui-menu-item">
         <a href="{:url('syc/myorder')}" class="no-icon">
             <div class="private-letter-menu">
                 <i class="iconfont icon-dingdan"></i>
@@ -48,3 +48,14 @@
         </a>
     </li>
 </ul>
+<script src="__JS__jquery-1.11.2.min.js"></script>
+<script>
+    //tabs class
+    $(document).ready(function(){
+        $('.tui-menu-container .tui-menu-item a').each(function(){
+            if($($(this))[0].href==String(window.location))
+            $(this).parent().addClass('tui-menu-item-active');
+        })
+    })
+  
+</script>
