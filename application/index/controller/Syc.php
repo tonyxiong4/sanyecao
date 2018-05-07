@@ -57,6 +57,21 @@ class Syc extends Base
      {
          return $this->fetch('myorderdetail');
      }
+     //部门管理
+     public function department()
+     {
+         return $this->fetch('department');
+     }
+      //產品
+      public function product()
+      {
+          return $this->fetch('product');
+      }
+     //产品详细
+     public function productdetail()
+     {
+         return $this->fetch('productdetail');
+     }
     // login
     public function login()
     {
