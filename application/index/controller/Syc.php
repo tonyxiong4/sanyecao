@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-06 18:00:23
+ * @Last Modified time: 2018-05-08 00:57:12
  */
 
 namespace app\index\controller;
@@ -49,6 +49,7 @@ class Syc extends Base
     //订单
     public function myorder()
     {
+        $data=[];
         return $this->fetch('myorder');
     }
     // login
