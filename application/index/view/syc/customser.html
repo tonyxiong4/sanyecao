@@ -31,7 +31,7 @@
                                 <td>{$vo.phone}</td>
                                 <td>{$vo.username}</td>
                                 <td>{$vo.addtime}</td>
-                                <td><i class="iconfont icon-delete"></i></td>
+                                <td><i class="iconfont icon-delete" onclick="delCustomser({$vo.id})"></i></td>
                             </tr>
                         {/volist}
                     </tbody>
@@ -51,20 +51,20 @@
     <!-- 关闭按钮 -->
     <i class="iconfont icon-guanbi"></i>
     <div class="title">添加客户</div>
-    <div class="formList clearfix">				
-        <div class="lineOne clearfix">
-            <div class="name fl">客户姓名：</div>
-            <input class="fl" id="custname" type="text" placeholder="请输入客户信息" />
+        <div class="formList clearfix">             
+            <div class="lineOne clearfix">
+                <div class="name fl">客户姓名：</div>
+                <input class="fl" id="custname" type="text" placeholder="请输入客户信息" />
+            </div>
+            <div class="lineOne clearfix">
+                <div class="name fl">所在公司：</div>
+                <input class="fl" id="custcompany" type="text" placeholder="请输入所在公司" />
+            </div>
+            <div class="lineOne clearfix">
+                <div class="name fl">电话：</div>
+                <input class="fl" id="custphone" type="text" placeholder="请输入客户电话" />
+            </div>
         </div>
-        <div class="lineOne clearfix">
-            <div class="name fl">所在公司：</div>
-            <input class="fl" id="custcompany" type="text" placeholder="请输入所在公司" />
-        </div>
-        <div class="lineOne clearfix">
-            <div class="name fl">电话：</div>
-            <input class="fl" id="custphone" type="text" placeholder="请输入客户电话" />
-        </div>
-    </div>
     <button id='addCustomer' class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
 </div>
 </div>
@@ -79,13 +79,56 @@
     $('.popOutWrap2').show();
     })
 
-    $.ajax({
-        type: "post",
-        url: "url",
-        data: "data",
-        dataType: "dataType",
-        success: function (response) {
-            
-        }
+    /**
+     * [添加客户]
+     * @param  {String} 
+     * @return {[type]}    [description]
+     */
+    $("#addCustomer").on('click', '', function(event) {
+        var url="{:url('data/addCustomser')}";
+        var custname=$("#custname").val();
+        var custcompany=$("#custcompany").val();
+        var custphone=$("#custphone").val();
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            data: {custname:custname,custcompany:custcompany,custphone:custphone}
+        })
+        .done(function(data) {
+            if(data&&data.code==200){
+                alert(data.msg);
+                window.location.reload();
+            }else{
+                alert(data.msg);
+            }
+        });
+        
     });
+
+    /**
+     * [delCustomser 删除客户]
+     * @param  {[type]} id [description]
+     * @return {[type]}    [description]
+     */
+    function delCustomser(id) {
+        var c=confirm("您确认要删除吗？");
+        if(!c)return;
+        var url="{:url('data/delCustomser')}";
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            data: {id: id}
+        })
+        .done(function(data) {
+            if(data&&data.code==200){
+                alert(data.msg);
+                window.location.reload();
+            }else{
+                alert(data.msg);
+            }
+        });
+    }
+   
 </script>
