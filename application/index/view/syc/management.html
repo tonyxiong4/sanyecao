@@ -9,14 +9,30 @@
                     <li class="category-item selected selected-line">人员管理</li>
                 </ul>
             </div>
-                        
-            
+            <div class="tui-tab-panel income-panel">
+                <div class="row clearfix">
+                    <div class="tui-rangepicker clearfix fl">
+                        <form method="POST" action="{:url('syc/management')}">
+                            <input type="text" name="searchname" class="tui-btn fl" value="{:input('param.searchname')}" placeholder="请输入人员名称">
+                            <select name='depart'>
+                                <option value="0">===请选择部门===</option>
+                                {volist name='depart' id="vo"}
+                                    <option value="{$vo.id}">{$vo.departname}</option>
+                                {/volist}
+                            </select>
+                            <input type="submit" style="width:60px;padding-left: 0; cursor: pointer;" class="tui-btn active fl" value="查询">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <div class="tui-table-container" style="margin-top:25px;">
                 <table>
                     <thead>
                         <tr>
                             <th>姓名</th>
                             <th>所属部门</th>
+                            <th>职位</th>
                             <th>电话</th>
                             <th>客户转让</th>
                             <th>重置密码</th>
@@ -24,36 +40,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>章三</td>
-                            <td>建筑部</td>
-                            <td>152000002394</td>
-                            <td><span class="zr" style="color:#FF9800;cursor: pointer;">点击转让</span></td>
-                            <td><i class="iconfont icon-shezhi"></i></td>
-                            <td><i class="iconfont icon-delete"></i></td>
-                        </tr>
-                        <tr>
-                            <td>章三</td>
-                            <td>建筑部</td>
-                            <td>152000002394</td>
-                            <td><span class="zr" style="color:#FF9800;cursor: pointer;">点击转让</span></td>
-                            <td><i class="iconfont icon-shezhi"></i></td>
-                            <td><i class="iconfont icon-delete"></i></td>
-                        </tr>
-                        <tr>
-                            <td>章三</td>
-                            <td>建筑部</td>
-                            <td>152000002394</td>
-                            <td><span class="zr" style="color:#FF9800;cursor: pointer;">点击转让</span></td>
-                            <td><i class="iconfont icon-shezhi"></i></td>
-                            <td><i class="iconfont icon-delete"></i></td>
-                        </tr>
-                        
-                        
+                        {volist name='list' id='vo'}
+                            <tr>
+                                <td>{$vo.username}</td>
+                                <td>{$vo.departname}</td>
+                                <td>{$vo.jobname}</td>
+                                <td>{$vo.phone}</td>
+                                <td>
+                                    <span class="zr" style="color:#FF9800;cursor: pointer;">点击转让</span>
+                                </td>
+                                <td>
+                                    <i class="iconfont icon-shezhi"></i>
+                                </td>
+                                <td>
+                                    <i class="iconfont icon-delete"></i>
+                                </td>
+                            </tr>
+                        {/volist}
                     </tbody>
                 </table>
-            </div>	
-
+            </div>
+            {$list->render()}
         </div>
     </div>
 </div>
@@ -61,53 +68,54 @@
 <!-- 转让客户 -->
 <div class="popOutWrap popOutWrap1" style="display:none;">
 
-<div class="popOut">
-<!-- 关闭按钮 -->
-<i class="iconfont icon-guanbi"></i>
-<div class="title">转让客户</div>
-<div class="formList clearfix">				
-    <div class="lineOne clearfix">
-        <div class="name fl">转让人姓名：</div>
-        <input class="fl" type="text" placeholder="请输入真实姓名" />
-    </div>
-    
-</div>
+    <div class="popOut">
+        <!-- 关闭按钮 -->
+        <i class="iconfont icon-guanbi"></i>
+        <div class="title">转让客户</div>
+        <div class="formList clearfix">
+            <div class="lineOne clearfix">
+                <div class="name fl">转让人姓名：</div>
+                <input class="fl" type="text" placeholder="请输入真实姓名" />
+            </div>
 
-<button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
-</div>
+        </div>
+
+        <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
+    </div>
 </div>
 
 <!-- 转让客户 -->
 <div class="popOutWrap popOutWrap2" style="display:none;">
 
-<div class="popOut">
-    <!-- 关闭按钮 -->
-    <i class="iconfont icon-guanbi"></i>
-    <div class="title">重置密码</div>
-    <div class="formList clearfix">				
-        <div class="lineOne clearfix">
-            <div class="name fl">输入新密码：</div>
-            <input class="fl" type="text" placeholder="请输入输入密码" />
-        </div>
-        <div class="lineOne clearfix">
-            <div class="name fl">重复密码：</div>
-            <input class="fl" type="text" placeholder="请输入重复密码" />
-        </div>
-        
-    </div>
+    <div class="popOut">
+        <!-- 关闭按钮 -->
+        <i class="iconfont icon-guanbi"></i>
+        <div class="title">重置密码</div>
+        <div class="formList clearfix">
+            <div class="lineOne clearfix">
+                <div class="name fl">输入新密码：</div>
+                <input class="fl" type="text" placeholder="请输入输入密码" />
+            </div>
+            <div class="lineOne clearfix">
+                <div class="name fl">重复密码：</div>
+                <input class="fl" type="text" placeholder="请输入重复密码" />
+            </div>
 
-    <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
-</div>
+        </div>
+
+        <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
+    </div>
 </div>
 <script>
-$('.popOutWrap .iconfont.icon-guanbi').click(function(){
-$('.popOutWrap1').hide();
-$('.popOutWrap2').hide();
-})
-$('.zr').click(function(){
-$('.popOutWrap1').show();
-})
-$('.icon-shezhi').click(function(){
-$('.popOutWrap2').show();
-})
+    $('.popOutWrap .iconfont.icon-guanbi').click(function () {
+        $('.popOutWrap1').hide();
+        $('.popOutWrap2').hide();
+    })
+    $('.zr').click(function () {
+        $('.popOutWrap1').show();
+    })
+    $('.icon-shezhi').click(function () {
+        $('.popOutWrap2').show();
+    })
+
 </script>

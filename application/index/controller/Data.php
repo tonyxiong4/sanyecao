@@ -15,6 +15,9 @@ use think\Controller;
 class Data extends Controller
 {
 	
+	/**
+	 * [getDepart 获取部门]
+	 */
 	public function getDepart()
 	{
 		$list=Db::name('department')->where('status=0')->select();
@@ -24,7 +27,9 @@ class Data extends Controller
 		return [];
 	}
 
-
+	/**
+	 * [getJob 获取职位]
+	 */
 	public function getJob()
 	{
 		$list=Db::name('Job')->where('status=0')->select();
@@ -60,15 +65,16 @@ class Data extends Controller
 	}
 
 	/**
-	 * [delCustomser 删除客户]
+	 * [commonDel 通用删除]
 	 * @return [type] [description]
 	 */
-	public function delCustomser()
+	public function commonDel()
 	{
 		$param=$this->request->param();
-		$id=$param['id'];
+		$id=$param['id'];//id
+		$tablename=$param['tablename'];
 		$where['id']=$id;
-		$result=Db::name('customer')->where($where)->setField('status',9);
+		$result=Db::name($tablename)->where($where)->setField('status',9);
 		if($result>0){
 			$mes['code']=200;
 			$mes['msg']="删除成功";
@@ -78,4 +84,45 @@ class Data extends Controller
 		}
 		return json($mes);
 	}
+
+
+
+	/**
+	 * [resetPassword 重置密码]
+	 * @return [type] [description]
+	 */
+	public function resetPassword()
+	{
+		$param=$this->request->param();
+		$uid=$param['uid'];
+		$password=$param['password'];
+		$password=md5(md5($password).config('passwordext'));
+		$result=Db::name('user')->where('id',$uid)->setField('passwrod',$password);
+		if($result>0){
+			$mes['code']=200;
+			$mes['msg']="重置成功";
+		}else{
+			$mes['code']=-1;
+			$mes['msg']="重置失败";
+		}
+		return json($mes);
+	}
+	
+	/**
+	 * 转移客户
+	 */
+	public function transferCustomer()
+	{
+		$username=$this->request->param('username');
+		$isExist=Db::name('user')->where('status',0)->where('username')->find();
+		if(!empty($isExist)){
+			//TODO 转移客户
+			
+		}else{
+			$mes['code']=-2;
+			$mes['msg']="此客户不存在请确认";
+		}
+		return json($mes);
+	}
+
 }

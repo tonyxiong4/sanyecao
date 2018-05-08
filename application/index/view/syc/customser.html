@@ -7,9 +7,20 @@
             <div class="title-tab-status-wrap clearfix">
                 <ul class="">
                     <li class="category-item selected selected-line">客户管理</li>
-                    
                 </ul>
-                <div class="addAll_btn addAll_btn1">添加客户<i class="iconfont icon-msnui-add-line"></i></div>
+                <div class="addAll_btn addAll_btn1">添加客户
+                    <i class="iconfont icon-msnui-add-line"></i>
+                </div>
+            </div>
+            <div class="tui-tab-panel income-panel">
+                <div class="row clearfix">
+                    <div class="tui-rangepicker clearfix fl">
+                        <form method="POST" action="{:url('syc/customser')}">
+                            <input type="text" name="searchname" class="tui-btn fl" value="{:input('param.searchname')}" placeholder="请输入客户名称或销售员名称">
+                            <input type="submit" style="width:60px;padding-left: 0; cursor: pointer;" class="tui-btn active fl" value="查询">
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="tui-table-container" style="margin-top:25px;">
                 <table>
@@ -25,19 +36,21 @@
                     </thead>
                     <tbody>
                         {volist name='list' id='vo'}
-                            <tr>
-                                <td>{$vo.name}</td>
-                                <td>{$vo.company}</td>
-                                <td>{$vo.phone}</td>
-                                <td>{$vo.username}</td>
-                                <td>{$vo.addtime}</td>
-                                <td><i class="iconfont icon-delete" onclick="delCustomser({$vo.id})"></i></td>
-                            </tr>
+                        <tr>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.company}</td>
+                            <td>{$vo.phone}</td>
+                            <td>{$vo.username}</td>
+                            <td>{$vo.addtime}</td>
+                            <td>
+                                <i class="iconfont icon-delete" onclick="delCustomser({$vo.id})"></i>
+                            </td>
+                        </tr>
                         {/volist}
                     </tbody>
                 </table>
-            </div>	
-
+            </div>
+            {$list->render()}
         </div>
     </div>
 </div>
@@ -47,11 +60,11 @@
 <!-- 添加客户 -->
 <div class="popOutWrap popOutWrap2" style="display:none;">
 
-<div class="popOut">
-    <!-- 关闭按钮 -->
-    <i class="iconfont icon-guanbi"></i>
-    <div class="title">添加客户</div>
-        <div class="formList clearfix">             
+    <div class="popOut">
+        <!-- 关闭按钮 -->
+        <i class="iconfont icon-guanbi"></i>
+        <div class="title">添加客户</div>
+        <div class="formList clearfix">
             <div class="lineOne clearfix">
                 <div class="name fl">客户姓名：</div>
                 <input class="fl" id="custname" type="text" placeholder="请输入客户信息" />
@@ -65,18 +78,18 @@
                 <input class="fl" id="custphone" type="text" placeholder="请输入客户电话" />
             </div>
         </div>
-    <button id='addCustomer' class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
-</div>
+        <button id='addCustomer' class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
+    </div>
 </div>
 
 <script>
-    $('.popOutWrap .iconfont.icon-guanbi').click(function(){
+    $('.popOutWrap .iconfont.icon-guanbi').click(function () {
 
-    $('.popOutWrap2').hide();
+        $('.popOutWrap2').hide();
     })
 
-    $('.addAll_btn1').click(function(){
-    $('.popOutWrap2').show();
+    $('.addAll_btn1').click(function () {
+        $('.popOutWrap2').show();
     })
 
     /**
@@ -84,26 +97,26 @@
      * @param  {String} 
      * @return {[type]}    [description]
      */
-    $("#addCustomer").on('click', '', function(event) {
-        var url="{:url('data/addCustomser')}";
-        var custname=$("#custname").val();
-        var custcompany=$("#custcompany").val();
-        var custphone=$("#custphone").val();
+    $("#addCustomer").on('click', '', function (event) {
+        var url = "{:url('data/addCustomser')}";
+        var custname = $("#custname").val();
+        var custcompany = $("#custcompany").val();
+        var custphone = $("#custphone").val();
         $.ajax({
             url: url,
             type: 'post',
             dataType: 'json',
-            data: {custname:custname,custcompany:custcompany,custphone:custphone}
+            data: { custname: custname, custcompany: custcompany, custphone: custphone }
         })
-        .done(function(data) {
-            if(data&&data.code==200){
+        .done(function (data) {
+            if (data && data.code == 200) {
                 alert(data.msg);
                 window.location.reload();
-            }else{
+            } else {
                 alert(data.msg);
             }
         });
-        
+
     });
 
     /**
@@ -112,20 +125,20 @@
      * @return {[type]}    [description]
      */
     function delCustomser(id) {
-        var c=confirm("您确认要删除吗？");
-        if(!c)return;
-        var url="{:url('data/delCustomser')}";
+        var c = confirm("您确认要删除吗？");
+        if (!c) return;
+        var url = "{:url('data/commonDel')}";
         $.ajax({
             url: url,
             type: 'post',
             dataType: 'json',
-            data: {id: id}
+            data: { id: id ,tablename:'customer'}
         })
-        .done(function(data) {
-            if(data&&data.code==200){
+        .done(function (data) {
+            if (data && data.code == 200) {
                 alert(data.msg);
                 window.location.reload();
-            }else{
+            } else {
                 alert(data.msg);
             }
         });
