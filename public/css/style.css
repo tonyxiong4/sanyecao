@@ -1083,3 +1083,11 @@ color: #00A520;
 .addAll_btn:hover{
     background-color: rgb(10, 141, 36);
 }
+.imgBoxLIst .imgList .item{
+    width:820px;
+    margin:0 auto;
+    margin-top:10px;
+}
+.imgBoxLIst .imgList .item>img{
+    width:100%;
+}

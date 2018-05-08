@@ -1,4 +1,8 @@
+<<<<<<< .merge_file_a11972
 <ul class="tui-menu-container garr-menu">
+=======
+<ul class="tui-menu-container garr-menu" id="garr-menu">
+>>>>>>> .merge_file_a04020
     <li class="tui-menu-item">
         <a href="{:url('syc/sysindex')}" class="no-icon">
             <div class="private-letter-menu">
@@ -7,7 +11,11 @@
             </div>
         </a>
     </li>
+<<<<<<< .merge_file_a11972
     <li class="tui-menu-item tui-menu-item-active">
+=======
+    <li class="tui-menu-item">
+>>>>>>> .merge_file_a04020
         <a href="{:url('syc/myorder')}" class="no-icon">
             <div class="private-letter-menu">
                 <i class="iconfont icon-dingdan"></i>
@@ -40,11 +48,38 @@
         </a>
     </li>
     <li class="tui-menu-item">
+<<<<<<< .merge_file_a11972
         <a href="{:url('syc/sysindex')}" class="no-icon">
+=======
+        <a href="{:url('syc/product')}" class="no-icon">
+>>>>>>> .merge_file_a04020
             <div class="private-letter-menu">
                 <i class="iconfont icon-weibiaoti35"></i>
                 产品管理
             </div>
         </a>
     </li>
+<<<<<<< .merge_file_a11972
 </ul>
+=======
+    <li class="tui-menu-item">
+        <a href="{:url('syc/department')}" class="no-icon">
+            <div class="private-letter-menu">
+                <i class="iconfont icon-weibiaoti35"></i>
+                部门管理
+            </div>
+        </a>
+    </li>
+</ul>
+<script src="__JS__jquery-1.11.2.min.js"></script>
+<script>
+    //tabs class
+    $(document).ready(function(){
+        $('.tui-menu-container .tui-menu-item a').each(function(){
+            if($($(this))[0].href==String(window.location))
+            $(this).parent().addClass('tui-menu-item-active');
+        })
+    })
+  
+</script>
+>>>>>>> .merge_file_a04020

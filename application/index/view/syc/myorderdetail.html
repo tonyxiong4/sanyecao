@@ -1,0 +1,127 @@
+<!-- contnet -->
+<div class="garr-panel">
+        {include file="index/navleft"}
+        <!-- 右侧内容 -->
+        <div class="garr-container">
+            <div class="pgc-private-letter-wrap garr-container-white">
+                <div class="title-tab-status-wrap">
+                    <ul>
+                        <li class="category-item selected selected-line">订单详细</li>
+                        <li class="category-item">查看图片</li>
+                    </ul>
+                </div>
+                <div class="orderbox1"  style="display:block;">
+                    <ul class="cashTitle clearfix" style="margin:40px auto 10px auto;">
+                        <li class="num fl">
+                            <div class="sum">订单地址</div>
+                            <div class="little_title">苏州滴水穿石的</div>
+                        </li>
+                        <li class="num fl">
+                            <div class="sum">电话</div>
+                            <div class="little_title">15262403000</div>
+                        </li>
+                    </ul>
+                    
+                    <div class="tui-tab-panel income-panel">
+                        <div class="row clearfix">
+                            <div class="tui-rangepicker clearfix fl">
+                                <input type="submit" style="width:80px;padding-left: 0; cursor: pointer;" class="tui-btn active fl" value="返回上级">
+                                <input type="submit" style="width:80px;padding-left: 0; cursor: pointer;" class="tui-btn active fl" value="上传图片">
+                                <input type="submit" style="width:60px;padding-left: 0; cursor: pointer;" class="tui-btn tui-btn1 active fl" value="添加">
+                            </div>
+                            <ul class="allPriceWrap fr clearfix">
+                                <li class="item fl">下单时间：2018/05/09</li>
+                                <li class="item fl">预计到达时间：2018/06/09</li>
+                            </ul>
+                        </div>
+                    </div>				
+                    
+                    <div class="tui-table-container" style="margin-top:25px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>产品名称</th>
+                                    <th>单位</th>
+                                    <th>数量</th>
+                                    <th>单价（元）</th>
+                                    <th>总价（元）</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>水泥包装盒</td>
+                                
+                                    <td>包</td>
+                                    <td>18</td>
+                                    <td>100</td>
+                                    <td>1000</td>
+                                    
+                                </tr>
+                                
+                                
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="orderbox1" style="display:none;">
+                    <div class="imgBoxLIst">
+                        <ul class="imgList">
+                            <li class="item"><img src="__IMG__/img001.jpg" /></li>
+                            <li class="item"><img src="__IMG__/img001.jpg" /></li>
+                        </ul>
+                    </div>
+                </div>	
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 添加订单 -->
+<div class="popOutWrap popOutWrap2" style="display:none;">
+
+    <div class="popOut">
+        <!-- 关闭按钮 -->
+        <i class="iconfont icon-guanbi"></i>
+        <div class="title">添加订单</div>
+        <div class="formList clearfix">				
+            <div class="lineOne clearfix">
+                <div class="name fl">客户姓名：</div>
+                <input class="fl" type="text" placeholder="请输入客户信息" />
+            </div>
+            <div class="lineOne clearfix">
+                <div class="name fl">所在公司：</div>
+                <input class="fl" type="text" placeholder="请输入所在公司" />
+            </div>
+            <div class="lineOne clearfix">
+                <div class="name fl">电话：</div>
+                <input class="fl" type="text" placeholder="请输入客户电话" />
+            </div>
+            
+        </div>
+
+        <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+$('.category-item').click(function(){
+    var index = $(this).index()-1;
+    $(this).addClass('selected selected-line').siblings().removeClass('selected selected-line');
+    $('.orderbox1').eq(index).hide().siblings().show();
+})
+
+$('.popOutWrap .iconfont.icon-guanbi').click(function(){
+    
+    $('.popOutWrap2').hide();
+})
+
+$('.tui-btn1').click(function(){
+    $('.popOutWrap2').show();
+})
+</script>

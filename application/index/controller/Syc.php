@@ -3,7 +3,11 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
+<<<<<<< .merge_file_a12716
  * @Last Modified time: 2018-05-06 18:00:23
+=======
+ * @Last Modified time: 2018-05-08 00:57:12
+>>>>>>> .merge_file_a10360
  */
 
 namespace app\index\controller;
@@ -49,8 +53,34 @@ class Syc extends Base
     //订单
     public function myorder()
     {
+<<<<<<< .merge_file_a12716
         return $this->fetch('myorder');
     }
+=======
+        $data=[];
+        return $this->fetch('myorder');
+    }
+     //订单详细
+     public function myorderdetail()
+     {
+         return $this->fetch('myorderdetail');
+     }
+     //部门管理
+     public function department()
+     {
+         return $this->fetch('department');
+     }
+      //產品
+      public function product()
+      {
+          return $this->fetch('product');
+      }
+     //产品详细
+     public function productdetail()
+     {
+         return $this->fetch('productdetail');
+     }
+>>>>>>> .merge_file_a10360
     // login
     public function login()
     {
