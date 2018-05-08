@@ -3,11 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
-<<<<<<< .merge_file_a12716
- * @Last Modified time: 2018-05-06 18:00:23
-=======
  * @Last Modified time: 2018-05-08 00:57:12
->>>>>>> .merge_file_a10360
  */
 
 namespace app\index\controller;
@@ -53,10 +49,6 @@ class Syc extends Base
     //订单
     public function myorder()
     {
-<<<<<<< .merge_file_a12716
-        return $this->fetch('myorder');
-    }
-=======
         $data=[];
         return $this->fetch('myorder');
     }
@@ -80,7 +72,6 @@ class Syc extends Base
      {
          return $this->fetch('productdetail');
      }
->>>>>>> .merge_file_a10360
     // login
     public function login()
     {
