@@ -4,28 +4,34 @@
 <!-- 右侧内容 -->
 <div class="garr-container">
         <div class="pgc-private-letter-wrap garr-container-white">
-            <div class="title-tab-status-wrap">
-                <ul>
-                    <li class="category-item selected selected-line">我的订单</li>
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                  <li class="layui-this">我的订单</li>
+                  
                 </ul>
-            </div>
-            <div class="tui-tab-panel income-panel">
-                <div class="row clearfix">
-                    <div class="tui-rangepicker clearfix fl">
-                        <input type="text" class="tui-btn fl" placeholder="请输入订单名称">
-                        <input type="text" class="tui-btn fl" id="selTime" placeholder="请输入选择时间">
-                        <input type="submit" style="width:60px;padding-left: 0; cursor: pointer;" class="tui-btn active fl" value="查询">
-                        <input type="submit" style="width:60px;padding-left: 0; cursor: pointer;" class="tui-btn tui-btn1 active fl" value="添加">
-                    </div>
-                    <ul class="allPriceWrap fr clearfix">
-                        <li class="item fl">订单总金额：<span style="color:red;">1000</span>元</li>
-                        <li class="item fl">订单纯利润：<span style="color:red;">1000</span>元</li>
-                    </ul>
+               
+            </div> 
+
+            <div class="contianerBox" style="margin:0 30px;">
+                <blockquote class="layui-elem-quote"><span class="layui-badge-dot"></span> 订单总金额：<span class="layui-badge">10000</span> <span class="layui-badge-dot"></span> 订单纯利润：<span class="layui-badge">999999</span></blockquote>
+                <div class="layui-inline">
+                    <input type="text" name="title" required="" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
                 </div>
-            </div>				
-            
-            <div class="tui-table-container" style="margin-top:25px;">
-                <table>
+                <div class="layui-inline">
+                    <input type="text" name="title" required="" lay-verify="required" placeholder="请输入选择时间" autocomplete="on" class="layui-input" id="selTime">
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn">
+                        <i class="layui-icon">&#xe615;</i> 查询
+                    </button>
+                </div>
+                <button class="layui-btn ">
+                    <i class="layui-icon">&#xe608;</i> 添加
+                 </button>
+
+
+                 <table class="layui-table" lay-skin="line">
+                    
                     <thead>
                         <tr>
                             <th>订单名称</th>
@@ -34,37 +40,65 @@
                             <th>总价（元）</th>
                             <th>发布时间</th>
                             <th>查看</th>
-                        </tr>
+                        </tr> 
                     </thead>
                     <tbody>
                         <tr>
                             <td>苏州拟剥离呀公司</td>
-                            <td><span style="color:rgb(117, 231, 23);">进行中</span></td>
+                            <td><span class="layui-badge">进行中</span></td>
                             <td>200</td>
                             <td>400</td>
                             <td>2018-04-11</td>
-                            <td><a href="myOrderDetial.html">详细</a></td>
+                            <td>
+                                <a href="myOrderDetial.html" class="layui-icon">
+                                    &#xe641;
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td>苏州拟剥离呀公司</td>
-                            <td><span style="color:rgb(122, 122, 122);">已完成</span></td>
+                            <td><span class="layui-badge">进行中</span></td>
                             <td>200</td>
                             <td>400</td>
                             <td>2018-04-11</td>
-                            <td><a href="myOrderDetial.html">详细</a></td>
+                            <td>
+                                <a href="myOrderDetial.html" class="layui-icon">
+                                    &#xe641;
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td>苏州拟剥离呀公司</td>
-                            <td><span style="color:rgb(231, 89, 23);">未付款</span></td>
+                            <td><span class="layui-badge">进行中</span></td>
                             <td>200</td>
                             <td>400</td>
                             <td>2018-04-11</td>
-                            <td><a href="myOrderDetial.html">详细</a></td>
+                            <td>
+                                <a href="myOrderDetial.html" class="layui-icon">
+                                    &#xe641;
+                                </a>
+                            </td>
                         </tr>
-
+                        <tr>
+                            <td>苏州拟剥离呀公司</td>
+                            <td><span class="layui-badge">进行中</span></td>
+                            <td>200</td>
+                            <td>400</td>
+                            <td>2018-04-11</td>
+                            <td>
+                                <a href="myOrderDetial.html" class="layui-icon">
+                                    &#xe641;
+                                </a>
+                            </td>
+                        </tr>
+                       
                     </tbody>
-                </table>
-            </div>	
+                    </table>
+
+                    <div id="test1"></div>
+            </div>
+
+         	
 
         </div>
     </div>
@@ -99,20 +133,26 @@
             </div>
         </div>
 
-<script type="text/javascript" src="__JS__laydate/laydate.js"></script>
+
 <script type="text/javascript">
 	//执行一个laydate实例
-	laydate.render({
-	  elem: '#selTime' //指定元素
-	  ,type: 'datetime'
-	});
-
-	$('.popOutWrap .iconfont.icon-guanbi').click(function(){
-		
-		$('.popOutWrap2').hide();
-	})
-
-	$('.tui-btn1').click(function(){
-		$('.popOutWrap2').show();
-	})
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#selTime' //指定元素
+	        ,type: 'datetime'
+        });
+    });
+	
+    layui.use('laypage', function(){
+    var laypage = layui.laypage;
+    
+    //执行一个laypage实例
+    laypage.render({
+        elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+        ,count: 50 //数据总数，从服务端得到
+    });
+    });
 </script>

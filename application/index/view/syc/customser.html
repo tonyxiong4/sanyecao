@@ -4,54 +4,66 @@
     <!-- 右侧内容 -->
     <div class="garr-container">
         <div class="pgc-private-letter-wrap garr-container-white">
-            <div class="title-tab-status-wrap clearfix">
-                <ul class="">
-                    <li class="category-item selected selected-line">客户管理</li>
-                </ul>
-                <div class="addAll_btn addAll_btn1">添加客户
-                    <i class="iconfont icon-msnui-add-line"></i>
-                </div>
-            </div>
-            <div class="tui-tab-panel income-panel">
-                <div class="row clearfix">
-                    <div class="tui-rangepicker clearfix fl">
-                        <form method="POST" action="{:url('syc/customser')}">
-                            <input type="text" name="searchname" class="tui-btn fl" value="{:input('param.searchname')}" placeholder="请输入客户名称或销售员名称">
-                            <input type="submit" style="width:60px;padding-left: 0; cursor: pointer;" class="tui-btn active fl" value="查询">
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">客户管理</li>
+                        
+                    </ul>
+                    
+                </div> 
+
+
+        <div class="contianerBox" style="margin:0 30px;">
+                        <div  class="layui-inline">
+                        <form  method="POST" action="{:url('syc/customser')}">
+                            <div class="layui-inline">
+                                <input type="text" name="searchname" value="{:input('param.searchname')}" required="" lay-verify="required" placeholder="输入客户名或销售名" autocomplete="on" class="layui-input">
+                            </div>
+                            <div class="layui-inline">
+                                    <input class="layui-btn" type="submit" value="查询">
+                            </div>     
+                            
                         </form>
-                    </div>
-                </div>
-            </div>
-            <div class="tui-table-container" style="margin-top:25px;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>姓名</th>
-                            <th>公司名称</th>
-                            <th>电话</th>
-                            <th>所属人员</th>
-                            <th>添加时间</th>
-                            <th>删除</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {volist name='list' id='vo'}
-                        <tr>
-                            <td>{$vo.name}</td>
-                            <td>{$vo.company}</td>
-                            <td>{$vo.phone}</td>
-                            <td>{$vo.username}</td>
-                            <td>{$vo.addtime}</td>
-                            <td>
-                                <i class="iconfont icon-delete" onclick="delCustomser({$vo.id})"></i>
-                            </td>
-                        </tr>
-                        {/volist}
-                    </tbody>
-                </table>
-            </div>
-            {$list->render()}
-        </div>
+                        </div>
+                        <div class="layui-inline">
+                                <button class="layui-btn " id="tc">
+                                    <i class="layui-icon">&#xe608;</i> 添加
+                                </button>
+                        </div>
+
+                        <table class="layui-table" lay-skin="line">
+                    
+                                <thead>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>公司名称</th>
+                                        <th>电话</th>
+                                        <th>所属人员</th>
+                                        <th>添加时间</th>
+                                        <th>删除</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    {volist name='list' id='vo'}
+                                    <tr>
+                                        <td>{$vo.name}</td>
+                                        <td>{$vo.company}</td>
+                                        <td>{$vo.phone}</td>
+                                        <td>{$vo.username}</td>
+                                        <td>{$vo.addtime}</td>
+                                        <td>
+                                                <button class="layui-btn layui-btn-sm" onclick="delCustomser({$vo.id})">
+                                                <i class="layui-icon">&#xe640;</i>
+                                                </button>
+                                        </td>
+                                    </tr>
+                                    
+                                    {/volist}
+                                </tbody>
+                                </table>
+                                {$list->render()}
+                   
+          </div>      
     </div>
 </div>
 
@@ -88,7 +100,7 @@
         $('.popOutWrap2').hide();
     })
 
-    $('.addAll_btn1').click(function () {
+    $('#tc').click(function () {
         $('.popOutWrap2').show();
     })
 

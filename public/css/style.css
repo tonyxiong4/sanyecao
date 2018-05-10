@@ -371,7 +371,7 @@ li{
     background-color: #fff;
     min-height: 600px;
     padding-bottom: 32px;
-    padding-top: 32px;
+    padding-top: 10px;
 }
 
 /* 首页内容 */
@@ -1091,3 +1091,8 @@ color: #00A520;
 .imgBoxLIst .imgList .item>img{
     width:100%;
 }
+
+
+.clearfix:after {visibility: hidden;display: block;content:" ";clear: both;height: 0;} 
+.clearfix{*zoom:1;}
+.fl{float:left;}.fr{float:right;}
