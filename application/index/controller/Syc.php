@@ -40,6 +40,7 @@ class Syc extends Base
             //   ->where('username|phone','like','%'.$search.'%')
             //   ->where('departid',$departid)
               ->paginate(10,false,['query'=>$this->request->param()]);
+        
         $this->assign('list',$list);
         return $this->fetch('management');
      }

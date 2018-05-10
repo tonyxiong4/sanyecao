@@ -136,10 +136,12 @@
         })
         .done(function (data) {
             if (data && data.code == 200) {
-                alert(data.msg);
-                window.location.reload();
+                // alert(data.msg);
+                toastr["success"](data.msg);
+                setTimeout(function () { window.location.reload(); }, 2000);  
+                
             } else {
-                alert(data.msg);
+                toastr["error"](data.msg);
             }
         });
     }
