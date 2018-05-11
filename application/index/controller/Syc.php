@@ -87,6 +87,11 @@ class Syc extends Base
      {
          return $this->fetch('productdetail');
      }
+     //权限设置
+     public function privilege()
+     {
+         return $this->fetch('privilege');
+     }
     // login
     public function login()
     {   

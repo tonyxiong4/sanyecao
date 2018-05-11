@@ -1,31 +1,136 @@
 {include file="index/navleft"}
 <div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
-		<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
-			
-			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
-				<div class="layui-tab-item layui-show">
-                        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-                        <ul class="layui-tab-title">
-                            <li class="layui-this">订单详细</li>
-                            <li>订单图片</li>
+    <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+        <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">订单详细</li>
+                    <li>订单图片</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <blockquote class="layui-elem-quote">
+                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">地址：</span>史蒂夫纳斯达克粉丝大部分史蒂夫说的可能</span>
+                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">电话：</span>15262403011</span>
+                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">下单时间：</span>2018/04/08/10“43</span>
+                            <span  style="margin-right:20px;"><span class="layui-badge" style="margin-right:10px;">预计到达时间：</span>2018/04/08/10/43</span>
                             
-                        </ul>
-                        <div class="layui-tab-content" style="height: 100px;">
-                            <div class="layui-tab-item layui-show">
-                                    <blockquote class="layui-elem-quote">
-                                        <p>地址：史蒂夫纳斯达克粉丝大部分史蒂夫说的可能</p>
-                                        <p>下单时间：2018/04/08/10“43</p>
-                                    </blockquote>
-                            </div>
-                            <div class="layui-tab-item">内容2</div>
-                            
-                        </div>
-                        </div> 
-                            
-                
-                                   
+                        </blockquote>
 
+                        <div class="layui-inline" >
+                            <!-- layui 2.2.5 新增 -->
+                            <button class="layui-btn"><span  class="layui-icon layui-icon-add-1" style="font-size: 14px;"></span>添加</button>
+                        </div>
+                        
+
+                        <table class="layui-table" lay-skin="line">
+                            
+                            <thead>
+                              <tr>
+                                <th>产品名称</th>
+                                <th>单位</th>
+                                <th>数量</th>
+                                <th>单价（元）</th>
+                                <th>总价（元）</th>
+                               
+                              </tr> 
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>贤阿斯顿发生</td>
+                                <td>包</td>
+                                <td>111</td>
+                                <td>235</td>
+                                <td>2355</td>
+                              </tr>
+                              <tr>
+                                <td>贤阿斯顿发生</td>
+                                <td>包</td>
+                                <td>111</td>
+                                <td>235</td>
+                                <td>2355</td>
+                              </tr>
+                              <tr>
+                                <td>贤阿斯顿发生</td>
+                                <td>包</td>
+                                <td>111</td>
+                                <td>235</td>
+                                <td>2355</td>
+                              </tr>
+                             
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="layui-tab-item">
+                         <div class="layui-box" style="margin:20px 0;">
+                            <!-- layui 2.2.5 新增 -->
+                            <button class="layui-btn layui-btn-lg" id="uploadBtn"><i class="layui-icon">&#xe67c;</i>上传图片</button>
+                        </div>
+                        <div style="padding: 20px; background-color: #F2F2F2;">
+                            <div class="layui-row layui-col-space15">
+                            <div class="layui-col-md3">
+                                <div class="layui-card">
+                                    <img src="__IMG__img001.jpg" />
+                                    <i></i>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card">
+                                    <img src="__IMG__img002.jpg" />
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card">
+                                   <img src="__IMG__img001.jpg" />
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card">
+                                    <img src="__IMG__img002.jpg" />
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card">
+                                    <img src="__IMG__img002.jpg" />
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card">
+                                    <img src="__IMG__img001.jpg" />
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card">
+                                    <img src="__IMG__img002.jpg" />
+                                </div>
+                            </div>
+                           
+                            </div>
+                        </div> 
+                    </div>
                 </div>
+                </div> 
             </div>
         </div>
+    </div>
 </div>
+
+
+<script>
+    layui.use('upload', function(){
+      var upload = layui.upload;
+       
+      //执行实例
+      var uploadInst = upload.render({
+        elem: '#uploadBtn' //绑定元素
+        ,url: '/upload/' //上传接口
+        ,done: function(res){
+          //上传完毕回调
+        }
+        ,error: function(){
+          //请求异常回调
+        }
+      });
+    });
+    </script>
