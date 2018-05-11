@@ -1,7 +1,124 @@
 <!-- contnet -->
-<div class="garr-panel">
-    {include file="index/navleft"}
-    <!-- 右侧内容 -->
+{include file="index/navleft"}
+<div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
+		<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+			
+			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+				<div class="layui-tab-item layui-show">
+					<!-- <div class="layui-elem-quote">
+						<p>订单数据展示</p>
+					</div> -->
+					<fieldset class="layui-elem-field layui-field-title">
+						<legend>订单数据展示</legend>
+					</fieldset>
+					<div style="padding:20px; background-color:#f2f2f2;">
+						<div class="layui-row layui-col-space15">
+							<div class="layui-col-md6">
+								<div class="layui-card">
+									<div class="layui-card-header">订单数量</div>
+									<div class="layui-card-body countupNum">
+										82222
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-md6">
+								<div class="layui-card">
+									<div class="layui-card-header">已完成订单数量</div>
+									<div class="layui-card-body countupNum">
+										88
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-md12">
+									<div class="layui-card">
+										<div class="layui-card-header">一周折线图</div>
+										<div class="layui-card-body">
+											<div class="indexEchartsList" id="indexEchartsList"></div>
+										</div>
+									</div>
+								</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="__JS__echarts.min.js"></script>
+<script>
+	$('.countupNum').countUp();
+
+
+				var myChart = echarts.init(document.getElementById('indexEchartsList'));
+			option = {
+			    title: {
+			        text: '一周接单数据变化'
+			    },
+			    tooltip: {
+			        trigger: 'axis'
+			    },
+			    legend: {
+			        data:['建筑部','物流部','瓦工部','设计部','搬运部']
+			    },
+			    grid: {
+			        left: '3%',
+			        right: '4%',
+			        bottom: '3%',
+			        containLabel: true
+			    },
+			    toolbox: {
+			        feature: {
+			            saveAsImage: {}
+			        }
+			    },
+			    xAxis: {
+			        type: 'category',
+			        boundaryGap: false,
+			        data: ['周一','周二','周三','周四','周五','周六','周日']
+			    },
+			    yAxis: {
+			        type: 'value'
+			    },
+			    series: [
+			        {
+			            name:'建筑部',
+			            type:'line',
+			            stack: '总量',
+			            data:[120, 132, 101, 134, 90, 230, 210]
+			        },
+			        {
+			            name:'物流部',
+			            type:'line',
+			            stack: '总量',
+			            data:[220, 182, 191, 234, 290, 330, 310]
+			        },
+			        {
+			            name:'瓦工部',
+			            type:'line',
+			            stack: '总量',
+			            data:[150, 232, 201, 154, 190, 330, 410]
+			        },
+			        {
+			            name:'设计部',
+			            type:'line',
+			            stack: '总量',
+			            data:[320, 332, 301, 334, 390, 330, 320]
+			        },
+			        {
+			            name:'搬运部',
+			            type:'line',
+			            stack: '总量',
+			            data:[820, 932, 901, 934, 1290, 1330, 1320]
+			        }
+			    ]
+			};
+			
+        myChart.setOption(option);
+</script>
+
+<!-- <div class="garr-panel">
+   
+
 
     <div class="garr-container">
         <div class="pgc-home">
@@ -120,6 +237,6 @@
 			        }
 			    ]
 			};
-			// 使用刚指定的配置项和数据显示图表。
+			
         myChart.setOption(option);
-		</script>
+		</script> -->

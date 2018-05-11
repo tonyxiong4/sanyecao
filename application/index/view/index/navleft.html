@@ -1,68 +1,34 @@
-<ul class="tui-menu-container garr-menu" id="garr-menu">
-    <li class="tui-menu-item">
-        <a href="{:url('syc/sysindex')}" class="no-icon">
-            <div class="private-letter-menu">
-                <i class="iconfont icon-shouye"></i>
-                首页
-            </div>
-        </a>
-    </li>
-    <li class="tui-menu-item">
-        <a href="{:url('syc/myorder')}" class="no-icon">
-            <div class="private-letter-menu">
-                <i class="iconfont icon-dingdan"></i>
-                我的订单
-            </div>
-        </a>
-    </li>
-    <li class="tui-menu-item">
-        <a href="{:url('syc/sysindex')}" class="no-icon">
-            <div class="private-letter-menu">
-                <i class="iconfont icon-quanxianguanli"></i>
-                功能权限
-            </div>
-        </a>
-    </li>
-    <li class="tui-menu-item ">
-        <a href="{:url('syc/management')}" class="no-icon">
-            <div class="private-letter-menu">
-                <i class="iconfont icon-kehuzhongxin"></i>
-                人员管理
-            </div>
-        </a>
-    </li>
-    <li class="tui-menu-item ">
-        <a href="{:url('syc/customser')}" class="no-icon">
-            <div class="private-letter-menu">
-                <i class="iconfont icon-guanli"></i>
-                客户管理
-            </div>
-        </a>
-    </li>
-    <li class="tui-menu-item">
-        <a href="{:url('syc/product')}" class="no-icon">
-            <div class="private-letter-menu">
-                <i class="iconfont icon-weibiaoti35"></i>
-                产品管理
-            </div>
-        </a>
-    </li>
-    <li class="tui-menu-item">
-        <a href="{:url('syc/department')}" class="no-icon">
-            <div class="private-letter-menu">
-                <i class="iconfont icon-weibiaoti35"></i>
-                部门管理
-            </div>
-        </a>
-    </li>
-</ul>
+
+<div class="layui-side layui-bg-black" id="admin-side" style="margin-top:65px;">
+    <div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
+        <ul class="layui-nav layui-nav-tree layui-bg-cyan layui-inline" lay-filter="demo">
+            <li class="layui-nav-item"><a href="{:url('syc/sysindex')}"><i class="layui-icon layui-icon-home"></i>首页</a></li>
+
+            <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;"><i class="layui-icon layui-icon-template-1"></i>订单</a>
+                <dl class="layui-nav-child">          
+                    <dd><a href="{:url('syc/myorder')}"><i class="layui-icon layui-icon-list"></i>我的订单</a></dd>
+                    <dd><a href="{:url('syc/myorderdetail')}"><i class="layui-icon layui-icon-template"></i>订单详细</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="{:url('syc/management')}"><i class="layui-icon 
+                layui-icon-user"></i>人员管理</a></li>
+            <li class="layui-nav-item"><a href="{:url('syc/customser')}"><i class="layui-icon layui-icon-component"></i>客户管理</a></li>
+            <li class="layui-nav-item"><a href="{:url('syc/department')}"><i class="layui-icon layui-icon-chat"></i>部门管理</a></li>
+            <li class="layui-nav-item"><a href="{:url('syc/product')}"><i class="layui-icon layui-icon-cellphone"></i>产品管理</a></li>
+            <li class="layui-nav-item"><a href="{:url('syc/privilege')}"><i class="layui-icon layui-icon-set"></i>功能权限</a></li>
+        </ul>
+    </div>
+</div>
+
+
 
 <script>
     //tabs class
     $(document).ready(function(){
-        $('.tui-menu-container .tui-menu-item a').each(function(){
+        $('.layui-nav-tree a').each(function(){
             if($($(this))[0].href==String(window.location))
-            $(this).parent().addClass('tui-menu-item-active');
+            $(this).parent().addClass('layui-this');
         })
     })
   

@@ -1,0 +1,183 @@
+
+li{
+	display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+/* login */
+.login_wrap .content{
+	position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #eee;
+    background-image: url('../images/login_bg.png');
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+.error-msg>i{
+	font-size: 18px;
+    color: #f85959;
+    
+}
+.error-msg .icon-cha{
+	color: #666;
+    cursor: pointer;
+    float: right;
+}
+.icon-msnui-sub{
+	vertical-align: -2px;
+    
+}
+.logo-wrap>img{
+	width: 100%;
+	height: 100%;
+}
+.login-wrap{
+	display: inline-block;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    /* width: 110px; */
+    height: 27px;
+}
+.login-wrap img{
+    width: 80px;
+}
+.login-wrap .title{
+    height: 80px;
+    line-height: 80px;
+    margin-left: 20px;
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+}
+.loginBox{
+	position: absolute;
+    top: 230px;
+    left: 50%;
+    margin-left: -200px;
+    width: 300px;
+    padding: 28px 50px 38px;
+    background-color: #fff;
+    background-color: rgba(255,255,255,.9);
+}
+.baseLogin{
+	position: relative;
+}
+..y-wrap{
+	width: 100%;
+    height: 100%;
+	margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    z-index: 1;
+}
+.error-msg{
+	position: absolute;
+    top: -48px;
+    font-size: 14px;
+    line-height: 12px;
+    height: 14px;
+    color: #666;
+    width: 274px;
+    padding: 12px;
+    border: 1px solid #f85959;
+    background-color: #fff1f1;
+    z-index: 10;
+}
+.input-field{
+	position: relative;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #666;
+}
+.input-field>input{
+	width: 282px;
+    font-size: 16px;
+    line-height: 32px;
+    height: 32px;
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    z-index: 1;
+    outline: none;
+}
+.input-field>select{
+    width: 300px;
+    font-size: 16px;
+    line-height: 42px;
+    height: 42px;
+    /* padding: 4px 8px; */
+    border: 1px solid #ddd; 
+    outline: none;
+}
+.baseLogin .verification>input{
+	width: 170px;
+    padding-right: 120px;
+}
+.baseLogin .verification .captcha-wrap{
+	position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 102px;
+    height: 40px;
+}
+.baseLogin .verification .captcha-wrap .captcha{
+	display: block;
+    width: 102px;
+    height: 40px;
+    cursor: pointer;
+}
+.baseLogin .verification .captcha-wrap:hover .tips-bubble{
+	display: block;
+}
+.baseLogin .verification .captcha-wrap .tips-bubble{
+	display: none;
+    position: absolute;
+    top: -35px;
+    right: -9px;
+    background-color: #444;
+    width: 115px;
+    text-align: center;
+    font-size: 13px;
+    color: #fff;
+    line-height: 26px;
+    padding: 0 2px;
+}
+.action-btn{
+    display: block;
+	color: #fff;
+    font-size: 18px;
+    line-height: 42px;
+    width: 300px;
+    text-align: center;
+    background-color: #00A520;
+    cursor: pointer;
+}
+.baseLogin .sns-login{
+	font-size: 0;
+    text-align: center;
+}
+.baseLogin .verification .captcha-wrap .tips-bubble::after{
+	content: '';
+    position: absolute;
+    top: 22px;
+    width: 0;
+    left: 51px;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: #444;
+}
+.baseLogin .action{
+	font-size: 13px;
+    color: #222;
+    margin-top: 4px;
+    margin-bottom: 24px;
+}
+.baseLogin .action .forget{
+	float: right;
+    color: #406599;
+    line-height: 18px;
+}
+
+
+

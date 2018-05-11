@@ -1,108 +1,103 @@
-<!-- contnet -->
-<div class="garr-panel">
+
+
 {include file="index/navleft"}
-<!-- 右侧内容 -->
-<div class="garr-container">
-        <div class="pgc-private-letter-wrap garr-container-white">
-            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-                <ul class="layui-tab-title">
-                  <li class="layui-this">我的订单</li>
-                  
-                </ul>
-               
-            </div> 
-
-            <div class="contianerBox" style="margin:0 30px;">
-                <blockquote class="layui-elem-quote"><span class="layui-badge-dot"></span> 订单总金额：<span class="layui-badge">10000</span> <span class="layui-badge-dot"></span> 订单纯利润：<span class="layui-badge">999999</span></blockquote>
-                <div class="layui-inline">
-                    <input type="text" name="title" required="" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
-                </div>
-                <div class="layui-inline">
-                    <input type="text" name="title" required="" lay-verify="required" placeholder="请输入选择时间" autocomplete="on" class="layui-input" id="selTime">
-                </div>
-                <div class="layui-inline">
-                    <button class="layui-btn">
-                        <i class="layui-icon">&#xe615;</i> 查询
-                    </button>
-                </div>
-                <button class="layui-btn ">
-                    <i class="layui-icon">&#xe608;</i> 添加
-                 </button>
-
-
-                 <table class="layui-table" lay-skin="line">
+<div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
+		<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+			
+			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+				<div class="layui-tab-item layui-show">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>我的订单</legend>
+                        </fieldset>
+                        <blockquote class="layui-elem-quote"><span class="layui-badge-dot"></span> 订单总金额：<span class="layui-badge">10000</span> <span class="layui-badge-dot"></span> 订单纯利润：<span class="layui-badge">999999</span></blockquote>
+                        <div class="layui-inline">
+                                <input type="text" name="title" required="" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
+                            </div>
+                            <div class="layui-inline">
+                                <input type="text" name="title" required="" lay-verify="required" placeholder="请输入选择时间" autocomplete="on" class="layui-input" id="selTime">
+                            </div>
+                            <div class="layui-inline">
+                                <button class="layui-btn">
+                                    <i class="layui-icon">&#xe615;</i> 查询
+                                </button>
+                            </div>
+                            <button class="layui-btn ">
+                                <i class="layui-icon">&#xe608;</i> 添加
+                             </button>
+                             <!-- 表格 -->
+                             <table class="layui-table" lay-skin="line">
                     
-                    <thead>
-                        <tr>
-                            <th>订单名称</th>
-                            <th>状态</th>
-                            <th>成本（元）</th>
-                            <th>总价（元）</th>
-                            <th>发布时间</th>
-                            <th>查看</th>
-                        </tr> 
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>苏州拟剥离呀公司</td>
-                            <td><span class="layui-badge">进行中</span></td>
-                            <td>200</td>
-                            <td>400</td>
-                            <td>2018-04-11</td>
-                            <td>
-                                <a href="myOrderDetial.html" class="layui-icon">
-                                    &#xe641;
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>苏州拟剥离呀公司</td>
-                            <td><span class="layui-badge">进行中</span></td>
-                            <td>200</td>
-                            <td>400</td>
-                            <td>2018-04-11</td>
-                            <td>
-                                <a href="myOrderDetial.html" class="layui-icon">
-                                    &#xe641;
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>苏州拟剥离呀公司</td>
-                            <td><span class="layui-badge">进行中</span></td>
-                            <td>200</td>
-                            <td>400</td>
-                            <td>2018-04-11</td>
-                            <td>
-                                <a href="myOrderDetial.html" class="layui-icon">
-                                    &#xe641;
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>苏州拟剥离呀公司</td>
-                            <td><span class="layui-badge">进行中</span></td>
-                            <td>200</td>
-                            <td>400</td>
-                            <td>2018-04-11</td>
-                            <td>
-                                <a href="myOrderDetial.html" class="layui-icon">
-                                    &#xe641;
-                                </a>
-                            </td>
-                        </tr>
-                       
-                    </tbody>
-                    </table>
+                                    <thead>
+                                        <tr>
+                                            <th>订单名称</th>
+                                            <th>状态</th>
+                                            <th>成本（元）</th>
+                                            <th>总价（元）</th>
+                                            <th>发布时间</th>
+                                            <th>查看</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>苏州拟剥离呀公司</td>
+                                            <td><span class="layui-badge">进行中</span></td>
+                                            <td>200</td>
+                                            <td>400</td>
+                                            <td>2018-04-11</td>
+                                            <td>
+                                                <a href="myOrderDetail.html" class="layui-icon">
+                                                    &#xe641;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>苏州拟剥离呀公司</td>
+                                            <td><span class="layui-badge">进行中</span></td>
+                                            <td>200</td>
+                                            <td>400</td>
+                                            <td>2018-04-11</td>
+                                            <td>
+                                                <a href="myOrderDetail.html" class="layui-icon">
+                                                    &#xe641;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>苏州拟剥离呀公司</td>
+                                            <td><span class="layui-badge">进行中</span></td>
+                                            <td>200</td>
+                                            <td>400</td>
+                                            <td>2018-04-11</td>
+                                            <td>
+                                                <a href="myOrderDetail.html" class="layui-icon">
+                                                    &#xe641;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>苏州拟剥离呀公司</td>
+                                            <td><span class="layui-badge">进行中</span></td>
+                                            <td>200</td>
+                                            <td>400</td>
+                                            <td>2018-04-11</td>
+                                            <td>
+                                                <a href="myOrderDetail.html" class="layui-icon">
+                                                    &#xe641;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                    </table>
+                
+                                    <div id="test1"></div>
 
-                    <div id="test1"></div>
+                </div>
             </div>
-
-         	
-
         </div>
-    </div>
 </div>
+
+
 
 
 

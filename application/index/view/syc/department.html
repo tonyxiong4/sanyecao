@@ -1,54 +1,127 @@
-<!-- contnet -->
-<div class="garr-panel">
-        {include file="index/navleft"}
-        <!-- 右侧内容 -->
-        <div class="garr-container">
-                <div class="pgc-private-letter-wrap garr-container-white">
-                    <div class="title-tab-status-wrap">
-                        <ul>
-                            <li class="category-item selected selected-line">部门管理</li>
-                        </ul>
-                    </div>
-                    <div class="tui-tab-panel income-panel">
-                        <div class="row clearfix">
-                            <div class="tui-rangepicker clearfix fl">
-                                
-                                
-                                <input type="submit" style="width:60px;padding-left: 0; cursor: pointer;" class="tui-btn tui-btn1 active fl" value="添加部门">
+{include file="index/navleft"}
+<div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
+		<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+			
+			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+				<div class="layui-tab-item layui-show">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>部门管理</legend>
+                        </fieldset>
+                        
+                        <div class="layui-inline">
+                                <input type="text" name="title" required="" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
                             </div>
-                            
-                        </div>
-                    </div>				
+                            <div class="layui-inline">
+                                <input type="text" name="title" required="" lay-verify="required" placeholder="请输入选择时间" autocomplete="on" class="layui-input" id="selTime">
+                            </div>
+                            <div class="layui-inline">
+                                <button class="layui-btn">
+                                    <i class="layui-icon">&#xe615;</i> 查询
+                                </button>
+                            </div>
+                            <button class="layui-btn ">
+                                <i class="layui-icon">&#xe608;</i> 添加
+                             </button>
+                             <!-- 表格 -->
+                             <table class="layui-table" lay-skin="line">
                     
-                    <div class="tui-table-container" style="margin-top:25px;">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>部门名称</th>
-                                    
-                                    <th>查看</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>我是一个部门</td>
-                                    
-                                    <td>刪除</td>
-                                </tr>
-                              
-                                
-                            </tbody>
-                        </table>
-                    </div>	
-        
+                                    <thead>
+                                        <tr>
+                                            <th>订单名称</th>
+                                            <th>状态</th>
+                                            <th>成本（元）</th>
+                                            <th>总价（元）</th>
+                                            <th>发布时间</th>
+                                            <th>查看</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>苏州拟剥离呀公司</td>
+                                            <td><span class="layui-badge">进行中</span></td>
+                                            <td>200</td>
+                                            <td>400</td>
+                                            <td>2018-04-11</td>
+                                            <td>
+                                                <a href="myOrderDetail.html" class="layui-icon">
+                                                    &#xe641;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>苏州拟剥离呀公司</td>
+                                            <td><span class="layui-badge">进行中</span></td>
+                                            <td>200</td>
+                                            <td>400</td>
+                                            <td>2018-04-11</td>
+                                            <td>
+                                                <a href="myOrderDetail.html" class="layui-icon">
+                                                    &#xe641;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>苏州拟剥离呀公司</td>
+                                            <td><span class="layui-badge">进行中</span></td>
+                                            <td>200</td>
+                                            <td>400</td>
+                                            <td>2018-04-11</td>
+                                            <td>
+                                                <a href="myOrderDetail.html" class="layui-icon">
+                                                    &#xe641;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>苏州拟剥离呀公司</td>
+                                            <td><span class="layui-badge">进行中</span></td>
+                                            <td>200</td>
+                                            <td>400</td>
+                                            <td>2018-04-11</td>
+                                            <td>
+                                                <a href="myOrderDetail.html" class="layui-icon">
+                                                    &#xe641;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                    </table>
+                
+                                    <div id="test1"></div>
+
                 </div>
             </div>
         </div>
-        
-        
-        
+</div>
 
+
+
+
+
+		<!-- 添加订单 -->
+        <div class="popOutWrap popOutWrap2" style="display:none;">
+	
+            <div class="popOut">
+                <!-- 关闭按钮 -->
+                <i class="iconfont icon-guanbi"></i>
+                <div class="title">添加订单</div>
+                <div class="formList clearfix">				
+                    <div class="lineOne clearfix">
+                        <div class="name fl">客户姓名：</div>
+                        <input class="fl" type="text" placeholder="请输入客户信息" />
+                    </div>
+                    <div class="lineOne clearfix">
+                        <div class="name fl">所在公司：</div>
+                        <input class="fl" type="text" placeholder="请输入所在公司" />
+                    </div>
+                    <div class="lineOne clearfix">
+                        <div class="name fl">电话：</div>
+                        <input class="fl" type="text" placeholder="请输入客户电话" />
+                    </div>
+                    
+                </div>
         
-        <script type="text/javascript">
-            
-        </script>
+                <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
+            </div>
+        </div>

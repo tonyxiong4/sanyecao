@@ -4,8 +4,9 @@
 <head>
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" type="text/css" href="__CSS__reset.css">
-	<link rel="stylesheet" type="text/css" href="__CSS__style.css">
-	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_597444_wtp2se1d8pktke29.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__login.css">
+	<link rel="stylesheet" href="__LIBS__layui/css/layui.css">
+	<script src="__LIBS__layui/layui.js"></script>
 	<title>登录</title>
 </head>
 <body style="min-width: 1220px; overflow-x: hidden;">
@@ -17,11 +18,11 @@
 				</a>
 				<div class="loginBox loginBoxOne" style="display: block;">
 					<div class="baseLogin">
-						<div class="error-msg">
+						<!-- <div class="error-msg">
 							<i class="iconfont icon-msnui-sub"></i>
 							 您输入的信息不完整！
 							 <i class="iconfont icon-cha"></i>
-						</div>
+						</div> -->
 						<form action="{:url('syc/doLogin')}" method="post">
 							<div class="input-field"> 
 								<input type="text" name="account" autocomplete="off" spellcheck="false" placeholder="姓名/手机号">
@@ -46,11 +47,11 @@
 				<!-- 注册 -->
 				<div class="loginBox registerBox" style="display: none;">
 					<div class="baseLogin">
-						<div class="error-msg">
+						<!-- <div class="error-msg">
 							<i class="iconfont icon-msnui-sub"></i>
 							 您输入的信息不完整！
 							 <i class="iconfont icon-cha"></i>
-						</div>
+						</div> -->
 						<form action="{:url('syc/doRegister')}" method="post">
 							<div class="input-field"> 
 								<input  type="text" name="username" autocomplete="off" spellcheck="false" placeholder="请输入您的真实姓名">

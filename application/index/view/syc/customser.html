@@ -1,19 +1,17 @@
-<!-- contnet -->
-<div class="garr-panel">
+
+
     {include file="index/navleft"}
-    <!-- 右侧内容 -->
-    <div class="garr-container">
-        <div class="pgc-private-letter-wrap garr-container-white">
-                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-                    <ul class="layui-tab-title">
-                        <li class="layui-this">客户管理</li>
-                        
-                    </ul>
-                    
-                </div> 
+    <div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
+            <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+                
+                <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+                    <div class="layui-tab-item layui-show">
+                            <fieldset class="layui-elem-field layui-field-title">
+                                <legend>客户管理</legend>
+                            </fieldset>
 
 
-        <div class="contianerBox" style="margin:0 30px;">
+        
                         <div  class="layui-inline">
                         <form  method="POST" action="{:url('syc/customser')}">
                             <div class="layui-inline">
@@ -66,6 +64,8 @@
           </div>      
     </div>
 </div>
+</div>
+
 
 
 
@@ -95,7 +95,7 @@
 </div>
 
 <script>
-    $('.popOutWrap .iconfont.icon-guanbi').click(function () {
+    $('.iconfont.icon-guanbi').click(function () {
 
         $('.popOutWrap2').hide();
     })
