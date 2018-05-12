@@ -44,7 +44,7 @@
                                 <td>{$vo.addtime}</td>
                                 <td>
                                         <!-- 修改btn -->
-                                        <button class="layui-btn layui-btn-sm"  title="修改">
+                                        <button class="layui-btn layui-btn-sm changeCusBox"  title="修改">
                                         <i class="layui-icon">&#xe642;</i>
                                         </button>
                                         <!-- 删除btn -->
@@ -67,8 +67,52 @@
             </div>
         </div>
 </div>
-
-
+<!-- 添加 -->
+<div id="addCustomserBox" style="display: none;">
+    <div style="padding:20px 25px 10px 5px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户姓名：</label>
+            <div class="layui-input-block">
+            <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户信息" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所在公司：</label>
+            <div class="layui-input-block">
+            <input id="custcompany" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所在公司" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话：</label>
+            <div class="layui-input-block">
+            <input  id="custphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户电话" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改 -->
+<div id="changeCusBox" style="display: none;">
+        <div style="padding:20px 25px 10px 5px;">
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户姓名：</label>
+                <div class="layui-input-block">
+                <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户信息" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">所在公司：</label>
+                <div class="layui-input-block">
+                <input id="custcompany" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所在公司" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">电话：</label>
+                <div class="layui-input-block">
+                <input  id="custphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户电话" class="layui-input">
+                </div>
+            </div>
+        </div>
+</div>
 
 
 
@@ -118,6 +162,8 @@
         
     }
 
+
+
  /**
      * [添加客户]
      * @param  {String} 
@@ -125,8 +171,8 @@
      */
     // 添加弹出层
     layui.use('layer',function(){
-        function addcus(){
- 
+    
+            $('#addItem').click(function(){
       //示范一个公告层
       layer.open({
         type: 1
@@ -138,26 +184,7 @@
         ,btn: ['确定', '取消']
         ,btnAlign: 'c'
         ,moveType: 1 //拖拽模式，0或者1
-        ,content: '<div style="padding:20px 25px 10px 5px;">\
-                        <div class="layui-form-item">\
-                            <label class="layui-form-label">客户姓名：</label>\
-                            <div class="layui-input-block">\
-                            <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户信息" class="layui-input">\
-                            </div>\
-                        </div>\
-                        <div class="layui-form-item">\
-                            <label class="layui-form-label">所在公司：</label>\
-                            <div class="layui-input-block">\
-                            <input id="custcompany" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所在公司" class="layui-input">\
-                            </div>\
-                        </div>\
-                        <div class="layui-form-item">\
-                            <label class="layui-form-label">电话：</label>\
-                            <div class="layui-input-block">\
-                            <input  id="custphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户电话" class="layui-input">\
-                            </div>\
-                        </div>\
-                    </div>'
+        ,content: $('#addCustomserBox')
         ,success: function(layero){
           var btn = layero.find('.layui-layer-btn');
           btn.find('.layui-layer-btn0').click(function(){
@@ -191,10 +218,25 @@
           });
         }
       });
-    }
-
-        $('#addItem').click(function(){
-            addcus();
+        })
+    //修改信息
+        $('.changeCusBox').click(function(){
+      //示范一个公告层
+      layer.open({
+        type: 1
+        ,title: false //不显示标题栏
+        ,closeBtn: false
+        ,area: '300px;'
+        ,shade: 0.8
+        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+        ,btn: ['确定', '取消']
+        ,btnAlign: 'c'
+        ,moveType: 1 //拖拽模式，0或者1
+        ,content: $('#changeCusBox')
+        ,success: function(layero){
+          
+        }
+      });
         })
     })
 
