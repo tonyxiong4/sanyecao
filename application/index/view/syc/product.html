@@ -13,49 +13,32 @@
                             <thead>
                                 <tr>
                                     <th>部门名称</th>
+                                    <th>简介</th>
                                     <th>发布时间</th>
                                     <th>产品详细</th>
                                 </tr> 
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>苏州拟剥离呀公司</td>
-                                    <td>2018-04-11</td>
-                                    <td>
-                                        <a href="productdetail.html" class="layui-icon layui-btn layui-btn-sm">
-                                            &#xe602;
-                                        </a>
-                                    </td>  
-                                </tr>
-                                <tr>
-                                    <td>苏州拟剥离呀公司</td>
-                                    <td>2018-04-11</td>
-                                    <td>
-                                        <a href="productdetail.html" class="layui-icon layui-btn layui-btn-sm">
-                                            &#xe602;
-                                        </a>
-                                    </td>    
-                                </tr>
-                                <tr>
-                                    <td>苏州拟剥离呀公司</td>
-                                    <td>2018-04-11</td>
-                                    <td>
-                                        <a href="productdetail.html" class="layui-icon layui-btn layui-btn-sm">
-                                            &#xe602;
-                                        </a>
-                                    </td>    
-                                </tr>
-                                <tr>
-                                    <td>苏州拟剥离呀公司</td>
-                                    <td>2018-04-11</td>
-                                    <td>
-                                        <a href="productdetail.html" class="layui-icon layui-btn layui-btn-sm">
-                                            &#xe602;
-                                        </a> 
-                                    </td> 
-                                </tr>
+                                 {volist name='list' id='vo'}
+                                    <tr>
+                                        <td>{$vo.departname}</td>
+                                        <td>{$vo.intro}</td>
+                                        <td>{$vo.addtime}</td>
+                                        <td>
+                                            <a href="{:url('syc/productdetail',['departid'=>$vo['id']])}" class="layui-icon layui-btn layui-btn-sm">
+                                                &#xe602;
+                                            </a>                                            
+                                        </td>
+                                    </tr>
+                                {/volist}
+                                {if condition="count($list) elt 0"}
+                                    <tr>
+                                        <td colspan="4" style="text-align: center">没有您要查询的数据</td>
+                                    </tr>
+                                {/if}
                             </tbody>
                             </table>
+                            {$list->render()}
                         </div>
                 </div>
          </div>

@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 00:29:17
+ * @Last Modified time: 2018-05-13 01:55:01
  */
 
 namespace app\index\controller;
@@ -101,12 +101,25 @@ class Syc extends Base
       //產品
       public function product()
       {
-          return $this->fetch('product');
+        $list=Db::name('department')->where('status=0')->paginate(10);
+        $this->assign('list',$list);
+        return $this->fetch('product');
       }
      //产品详细
      public function productdetail()
      {
-         return $this->fetch('productdetail');
+        $departid=$this->request->param('departid');
+        $search=$this->request->param('searchname');
+        $list=Db::view('goods','id,goodsname,goodsattribute,goodsunit,goodscostprice,goodsprice,departid,uid,addtime,status')
+                      ->view('user','username','user.id=goods.uid','LEFT')
+                      ->where('status',0)
+                      ->where('departid',$departid)
+                      ->where('goodsname','like','%'.$search.'%')
+                      ->paginate(10,false,['query'=>$this->request->param()]);
+        $this->assign('list',$list);
+        $this->assign('departid',$departid);
+
+        return $this->fetch('productdetail');
      }
      //权限设置
      public function privilege()

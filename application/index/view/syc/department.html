@@ -43,11 +43,12 @@
                                         {/volist}
                                         {if condition="count($list) elt 0"}
                                             <tr>
-                                                <td colspan="6" style="text-align: center">没有您要查询的数据</td>
+                                                <td colspan="4" style="text-align: center">没有您要查询的数据</td>
                                             </tr>
                                         {/if}
                                     </tbody>
                                     </table>
+                                    {$list->render()}
 
                 </div>
             </div>

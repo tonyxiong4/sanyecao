@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 00:48:48
+ * @Last Modified time: 2018-05-13 02:22:13
  */
 
 namespace app\index\controller;
@@ -48,9 +48,9 @@ class Data extends Controller
 		$data=[];
 
 		if($param){
-			$data['name']=$param['custname'];
-			$data['phone']=$param['custphone'];
-			$data['company']=$param['custcompany'];
+			$data['name']=trim($param['custname']);
+			$data['phone']=trim($param['custphone']);
+			$data['company']=trim($param['custcompany']);
 			$data['belonguid']=session('userinfo.uid');
 		}
 		$isExist=$this->isExist('name',$data['name'],'customer');
@@ -72,7 +72,7 @@ class Data extends Controller
 	}
 
 	/**
-	 * [isExist 查询字段是否存在]
+	 * [isExist 查询数据是否存在]
 	 * @param  string  $fieldname [字段名称]
 	 * @param  string  $username  [字段值]
 	 * @param  string  $tablename [表名]
@@ -89,9 +89,24 @@ class Data extends Controller
 		}
 	}
 
-	public function getUserInfo()
+
+	/**
+	 * [getData 通用获取数据]
+	 * @param  int  $id [id]
+	 * @param  string  $tablename [表名]
+	 * @return boolean            [description]
+	 */
+	public function getData($id=0,$tablename="")
 	{
-		# code...
+		$data=Db::name($tablename)->where('status',0)->where('id',$id)->find();
+		if($data){
+			$mes['code']=200;
+			$mes['data']=$data;
+		}else{
+			$mes['code']=-1;
+			$mes['msg']="No Data";
+		}
+		return josn($mes);
 	}
 
 	/**
@@ -164,4 +179,40 @@ class Data extends Controller
 		return json($mes);
 	}
 
+	/**
+	 * [addGoods 添加客户]
+	 */
+	public function addGoods()
+	{
+		$param=$this->request->param();
+		dump($param);
+
+		// $data=[];
+
+		// if($param){
+		// 	$data['name']=trim($param['custname']);
+		// 	$data['phone']=trim($param['custphone']);
+		// 	$data['company']=trim($param['custcompany']);
+		// 	$data['belonguid']=session('userinfo.uid');
+		// }
+		$goodsname=$param['goodsname'];
+		$goodsattribute=$param['goodsattribute'];
+		$param['uid']=session('userinfo.uid');
+		
+		$isExist=Db::name('goods')->where('status',0)->where('goodsname',$goodsname)->where('goodsattribute',$goodsattribute)->find();
+		if($isExist){
+			$mes['code']=100;
+			$mes['msg']="该产品已经存在";
+		}else{
+			$result=Db::name('goods')->insert($param);
+			if($result){
+				$mes['code']=200;
+				$mes['msg']="添加成功";
+			}else{
+				$mes['code']=-1;
+				$mes['msg']="添加失败";
+			}
+		}
+		return json($mes);
+	}
 }
