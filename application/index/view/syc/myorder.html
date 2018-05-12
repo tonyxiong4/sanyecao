@@ -40,7 +40,7 @@
                                     <tbody>
                                         <tr>
                                             <td>苏州拟剥离呀公司</td>
-                                            <td><span class="layui-badge">未付款</span></td>
+                                            <td><span class="layui-badge oderPops">未付款</span></td>
                                             <td>200</td>
                                             <td>400</td>
                                             <td>2018-04-11</td>
@@ -56,7 +56,7 @@
                                         </tr>
                                         <tr>
                                             <td>苏州拟剥离呀公司</td>
-                                            <td><span class="layui-badge layui-bg-cyan">派单中</span></td>
+                                            <td><span class="layui-badge layui-bg-cyan oderPops">派单中</span></td>
                                             <td>200</td>
                                             <td>400</td>
                                             <td>2018-04-11</td>
@@ -72,7 +72,7 @@
                                         </tr>
                                         <tr>
                                             <td>苏州拟剥离呀公司</td>
-                                            <td><span class="layui-badge layui-bg-blue">已发货</span></td>
+                                            <td><span class="layui-badge layui-bg-blue oderPops">已发货</span></td>
                                             <td>200</td>
                                             <td>400</td>
                                             <td>2018-04-11</td>
@@ -88,7 +88,7 @@
                                         </tr>
                                         <tr>
                                             <td>苏州拟剥离呀公司</td>
-                                            <td><span class="layui-badge layui-bg-green">运输中</span></td>
+                                            <td><span class="layui-badge layui-bg-green oderPops">运输中</span></td>
                                             <td>200</td>
                                             <td>400</td>
                                             <td>2018-04-11</td>
@@ -155,6 +155,24 @@
         </div>
 </div>
 
+<!-- 弹框订单状态选择结构 -->
+<div id="orderpopBox" style="display: none;">
+        <div style="padding:20px 10px;">
+        <form id="sendOrderPartBox" class=""  method="" action="">
+            <div class="">
+                <select name="" style="width:100%;height: 36px;">
+                        <option value="0" >请选择状态</option>
+                        <option value="1">未发货</option>
+                        <option value="1">进行中</option>
+                        <option value="1">已完成</option>
+                        <option value="1">运输中</option>
+                        <option value="1">未付款</option>
+                </select>
+            </div>
+            </form>
+        </div>
+</div>
+
 <script type="text/javascript">
 	//执行一个laydate实例
     layui.use('laydate', function(){
@@ -206,7 +224,7 @@ layui.use('layer',function(){
                ,title: "派单给个人"
                ,area: ['300px;','200px;']
                ,shade: 0.8
-               ,id: 'LAY_layuipro1' //设定一个id，防止重复弹出
+               ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
                ,btn: ['确定', '取消']
                ,content: $('#sendOrderPersonBox').html()
                ,success: function(layero){
@@ -226,7 +244,7 @@ layui.use('layer',function(){
                ,title: "派单给个人"
                ,area: '300px;'
                ,shade: 0.8
-               ,id: 'LAY_layuipro1' //设定一个id，防止重复弹出
+               ,id: 'LAY_layuipro3' //设定一个id，防止重复弹出
                ,btn: ['确定', '取消']
                ,content: $('#addOderItemBox').html()
                ,success: function(layero){
@@ -238,7 +256,27 @@ layui.use('layer',function(){
                }
            });
 
-            })  
+            })
+           //订单状态选择
+$('.oderPops').click(function(){
+           layer.open({
+               type: 1
+               ,title: "订单状态选择"
+               ,area: '300px;'
+               ,shade: 0.8
+               ,id: 'LAY_layuipro4' //设定一个id，防止重复弹出
+               ,btn: ['确定', '取消']
+               ,content: $('#orderpopBox').html()
+               ,success: function(layero){
+               var btn = layero.find('.layui-layer-btn');
+               btn.find('.layui-layer-btn0').click(function(){
+                   //点击确定按钮后的时间
+   
+               });
+               }
+           });
+
+            }) 
 })
 
           

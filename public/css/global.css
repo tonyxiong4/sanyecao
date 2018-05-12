@@ -270,7 +270,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 	margin-top: 5px;
 }
 .admin-nav-card .layui-icon{
-	position: relative;
+	/* position: relative; */
 }
 .admin-nav-card .layui-tab-item iframe{
 	width: 100%;
@@ -454,4 +454,20 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 }
 .layui-form-radio div{
   display: inline;
+}
+.orderImg{
+  position: relative;
+  cursor: pointer;
+}
+.orderImg button{
+  display: none;
+  position: absolute;
+  top:10px;
+  right:10px;
+}
+.orderImg:hover button{
+  display: inline;
+}
+.oderPops{
+  cursor: pointer;
 }
