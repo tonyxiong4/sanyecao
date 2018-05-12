@@ -50,10 +50,10 @@
                                         <td>{$vo.jobname}</td>
                                         <td>{$vo.phone}</td>
                                         <td>
-                                            <span style="color:#FF9800;cursor: pointer;">点击转让</span>
+                                            <span class="Transfer" style="color:#FF9800;cursor: pointer;">点击转让</span>
                                         </td>
                                         <td>
-                                            <button class="layui-btn layui-btn-sm">
+                                            <button class="layui-btn layui-btn-sm repasswordF">
                                                 <i class="layui-icon">&#xe642;</i>
                                               </button>
                                         </td>
@@ -77,48 +77,92 @@
 </div>
 
 
-
-
-
-<!-- <div class="popOutWrap popOutWrap1" style="display:none;">
-
-    <div class="popOut">
-
-        <i class="iconfont icon-guanbi"></i>
-        <div class="title">转让客户</div>
-        <div class="formList clearfix">
-            <div class="lineOne clearfix">
-                <div class="name fl">转让人姓名：</div>
-                <input class="fl" type="text" placeholder="请输入真实姓名" />
-            </div>
-
-        </div>
-
-        <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
-    </div>
-</div>
-
-<div class="popOutWrap popOutWrap2" style="display:none;">
-
-    <div class="popOut">
-   
-        <i class="iconfont icon-guanbi"></i>
-        <div class="title">重置密码</div>
-        <div class="formList clearfix">
-            <div class="lineOne clearfix">
-                <div class="name fl">输入新密码：</div>
-                <input class="fl" type="text" placeholder="请输入输入密码" />
-            </div>
-            <div class="lineOne clearfix">
-                <div class="name fl">重复密码：</div>
-                <input class="fl" type="text" placeholder="请输入重复密码" />
-            </div>
-
-        </div>
-
-        <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
-    </div>
-</div> -->
 <script>
+    //选择框
      layui.use('form',function(){})
+     //转让客户
+    layui.use('layer',function(){
+        function Transfer(){
+ 
+      //示范一个公告层
+      layer.open({
+        type: 1
+        ,title: false //不显示标题栏
+        ,closeBtn: false
+        ,area: '300px;'
+        ,shade: 0.8
+        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+        ,btn: ['确定', '取消']
+        ,btnAlign: 'c'
+        ,moveType: 1 //拖拽模式，0或者1
+        ,content: '<div style="padding:20px 25px 10px 5px;">\
+                        <div class="layui-form-item">\
+                            <label class="layui-form-label">转让人：</label>\
+                            <div class="layui-input-block">\
+                            <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入转让人名称" class="layui-input">\
+                            </div>\
+                        </div>\
+                    </div>'
+        ,success: function(layero){
+          var btn = layero.find('.layui-layer-btn');
+          btn.find('.layui-layer-btn0').click(function(){
+            //点击确定按钮后的时间
+
+          });
+        }
+      });
+    }
+
+        $('.layui-table td span.Transfer').click(function(){
+            Transfer();
+        })
+    })
+
+     //重置密码
+ 
+     $('.repasswordF').on('click',function(){
+        
+     layui.use('layer',function(){
+        function repasswordF(){
+ 
+        //示范一个公告层
+        layer.open({
+            type: 1
+            ,title: false //不显示标题栏
+            ,closeBtn: false
+            ,area: '300px;'
+            ,shade: 0.8
+            ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+            ,btn: ['确定', '取消']
+            ,btnAlign: 'c'
+            ,moveType: 1 //拖拽模式，0或者1
+            ,content: '<div style="padding:20px 25px 10px 5px;">\
+                        <div class="layui-form-item">\
+                                <label class="layui-form-label">新密码：</label>\
+                                <div class="layui-input-block">\
+                                <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入新密码" class="layui-input">\
+                                </div>\
+                            </div>\
+                            <div class="layui-form-item">\
+                                <label class="layui-form-label">重复密码：</label>\
+                                <div class="layui-input-block">\
+                                <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请重复密码" class="layui-input">\
+                                </div>\
+                            </div>\
+                        </div>'
+            ,success: function(layero){
+            var btn = layero.find('.layui-layer-btn');
+            btn.find('.layui-layer-btn0').click(function(){
+                //点击确定按钮后的时间
+
+            });
+            }
+        });
+        
+    }
+    repasswordF()
+        
+    })
+       
+    })
 </script>
