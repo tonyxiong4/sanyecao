@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-08 00:59:45
+ * @Last Modified time: 2018-05-12 18:24:50
  */
 
 namespace app\index\controller;
@@ -53,15 +53,45 @@ class Data extends Controller
 			$data['company']=$param['custcompany'];
 			$data['belonguid']=session('userinfo.uid');
 		}
-		$result=Db::name('customer')->insert($data);
-		if($result){
-			$mes['code']=200;
-			$mes['msg']="添加成功";
+		$isExist=$this->isExist('name',$data['name'],'customer');
+		if($isExist){
+			$mes['code']=100;
+			$mes['msg']="该客户已经存在";
 		}else{
-			$mes['code']=-1;
-			$mes['msg']="添加失败";
+			$result=Db::name('customer')->insert($data);
+			if($result){
+				$mes['code']=200;
+				$mes['msg']="添加成功";
+			}else{
+				$mes['code']=-1;
+				$mes['msg']="添加失败";
+			}
 		}
+		
 		return json($mes);
+	}
+
+	/**
+	 * [isExist 查询字段是否存在]
+	 * @param  string  $fieldname [字段名称]
+	 * @param  string  $username  [字段值]
+	 * @param  string  $tablename [表名]
+	 * @return boolean            [description]
+	 */
+	public function isExist($fieldname="",$username="",$tablename="")
+	{
+
+		$isExist=Db::name($tablename)->where('status',0)->where($fieldname,$username)->find();
+		if($isExist){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function getUserInfo()
+	{
+		# code...
 	}
 
 	/**
@@ -114,12 +144,22 @@ class Data extends Controller
 	public function transferCustomer()
 	{
 		$username=$this->request->param('username');
-		$isExist=Db::name('user')->where('status',0)->where('username')->find();
+		$uid=$this->request->param('uid');//原拥有者id
+		// $isExist=Db::name('user')->where('status',0)->where('username',$username)->find();
+		$isExist=$this->isExist('username',$username,'user');
 		if(!empty($isExist)){
 			//TODO 转移客户
-			
+			$newuid=$isExist['id'];
+			$result=Db::name('customser')->where('belonguid',$uid)->setField('belonguid',$newuid);
+			if($result>0){
+				$mes['code']=200;
+				$mes['msg']='转移成功';
+			}else{
+				$mes['code']=-1;
+				$mes['msg']='转移失败';
+			}
 		}else{
-			$mes['code']=-2;
+			$mes['code']=100;
 			$mes['msg']="此客户不存在请确认";
 		}
 		return json($mes);

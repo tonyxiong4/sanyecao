@@ -54,8 +54,12 @@
                                         
                                 </td>
                             </tr>
-                            
                             {/volist}
+                            {if condition="$list eq ''"}
+                                <tr>
+                                    <td colspan="6" style="text-align: center">没有您要查询的数据</td>
+                                </tr>
+                            {/if}
                         </tbody>
                     </table>
                     {$list->render()}
@@ -170,14 +174,15 @@
             .done(function (data) {
                 if (data && data.code == 200) {
                     layui.use('layer', function(){
-                     
                         layer.msg(data.msg);
                     });
                     setTimeout(function () { window.location.reload(); }, 1000);  
-                    //window.location.reload();
+                }else if (data && data.code == 100) {
+                    layui.use('layer', function(){
+                        layer.msg(data.msg);
+                    });
                 }else {
                     layui.use('layer', function(){
-                   
                         layer.msg(data.msg);
                     });
                 }

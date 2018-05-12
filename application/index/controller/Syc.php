@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-08 00:57:12
+ * @Last Modified time: 2018-05-12 18:31:32
  */
 
 namespace app\index\controller;
@@ -75,7 +75,9 @@ class Syc extends Base
      //部门管理
      public function department()
      {
-         return $this->fetch('department');
+        $list=Db::name('department')->where('status=0')->paginate(10);
+        $this->assign('list',$list);
+        return $this->fetch('department');
      }
       //產品
       public function product()
