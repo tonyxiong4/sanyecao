@@ -1,7 +1,85 @@
-<!-- contnet -->
-<div class="garr-panel">
+{include file="index/navleft"}
+<div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
+		<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+			
+			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+				<div class="layui-tab-item layui-show">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>人员管理</legend>
+                        </fieldset>
+                        <form  method="POST" action="{:url('syc/management')}">
+                            <div class="layui-inline">
+                                <input type="text" name="searchname" value="{:input('param.searchname')}" required="" lay-verify="required" placeholder="输入客户名或销售名" autocomplete="on" class="layui-input">
+                            </div>
+                            <div class="layui-inline">
+                                <select name='depart' lay-filter="aihao">
+                                  <option value="0">===请选择部门===</option>
+                                      {volist name='depart' id="vo"}
+                                          <option value="{$vo.id}">{$vo.departname}</option>
+                                      {/volist}
+                                </select>
+                              </div>
+                            <div class="layui-inline">
+                                <input class="layui-btn" type="submit" value="查询">
+                            </div> 
+                            
+                           
+                               
+                        
+                            
+                        </form>
+                        <table class="layui-table" lay-skin="line">
+                            
+                            <thead>
+                              <tr>
+                                <th>姓名</th>
+                                <th>所属部门</th>
+                                <th>职位</th>
+                                <th>电话</th>
+                                <th>客户转让</th>
+                                <th>重置密码</th>
+                                <th>删除</th>
+                               
+                              </tr> 
+                            </thead>
+                            <tbody>
+                                {volist name='list' id='vo'}
+                                    <tr>
+                                        <td>{$vo.username}</td>
+                                        <td>{$vo.departname}</td>
+                                        <td>{$vo.jobname}</td>
+                                        <td>{$vo.phone}</td>
+                                        <td>
+                                            <span style="color:#FF9800;cursor: pointer;">点击转让</span>
+                                        </td>
+                                        <td>
+                                            <button class="layui-btn layui-btn-sm">
+                                                <i class="layui-icon">&#xe642;</i>
+                                              </button>
+                                        </td>
+                                        <td>
+                                            <button class="layui-btn layui-btn-sm">
+                                                <i class="layui-icon">&#xe640;</i>
+                                              </button>
+                                        </td>
+                                    </tr>
+                                {/volist}
+                            </tbody>
+                          </table>
+                          {$list->render()}
+                            
+                
+                                   
+
+                </div>
+            </div>
+        </div>
+</div>
+
+
+<!-- <div class="garr-panel">
     {include file="index/navleft"}
-    <!-- 右侧内容 -->
+
     <div class="garr-container">
         <div class="pgc-private-letter-wrap garr-container-white">
             <div class="title-tab-status-wrap">
@@ -63,13 +141,13 @@
             {$list->render()}
         </div>
     </div>
-</div>
+</div> -->
 
-<!-- 转让客户 -->
-<div class="popOutWrap popOutWrap1" style="display:none;">
+
+<!-- <div class="popOutWrap popOutWrap1" style="display:none;">
 
     <div class="popOut">
-        <!-- 关闭按钮 -->
+
         <i class="iconfont icon-guanbi"></i>
         <div class="title">转让客户</div>
         <div class="formList clearfix">
@@ -84,11 +162,10 @@
     </div>
 </div>
 
-<!-- 转让客户 -->
 <div class="popOutWrap popOutWrap2" style="display:none;">
 
     <div class="popOut">
-        <!-- 关闭按钮 -->
+   
         <i class="iconfont icon-guanbi"></i>
         <div class="title">重置密码</div>
         <div class="formList clearfix">
@@ -105,17 +182,7 @@
 
         <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
     </div>
-</div>
+</div> -->
 <script>
-    $('.popOutWrap .iconfont.icon-guanbi').click(function () {
-        $('.popOutWrap1').hide();
-        $('.popOutWrap2').hide();
-    })
-    $('.zr').click(function () {
-        $('.popOutWrap1').show();
-    })
-    $('.icon-shezhi').click(function () {
-        $('.popOutWrap2').show();
-    })
 
 </script>

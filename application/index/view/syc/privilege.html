@@ -9,22 +9,9 @@
                         <fieldset class="layui-elem-field layui-field-title">
                             <legend>权限设置</legend>
                         </fieldset>
-                        <blockquote class="layui-elem-quote"><span class="layui-badge-dot"></span> 订单总金额：<span class="layui-badge">10000</span> <span class="layui-badge-dot"></span> 订单纯利润：<span class="layui-badge">999999</span></blockquote>
-                        <div class="layui-inline">
-                                <input type="text" name="title" required="" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
-                            </div>
-                            <div class="layui-inline">
-                                <input type="text" name="title" required="" lay-verify="required" placeholder="请输入选择时间" autocomplete="on" class="layui-input" id="selTime">
-                            </div>
-                            <div class="layui-inline">
-                                <button class="layui-btn">
-                                    <i class="layui-icon">&#xe615;</i> 查询
-                                </button>
-                            </div>
-                            <button class="layui-btn ">
-                                <i class="layui-icon">&#xe608;</i> 添加
-                             </button>
-                             <!-- 表格 -->
+                        
+                        
+                         
                             
                 
                                    
@@ -33,50 +20,3 @@
             </div>
         </div>
 </div>
-
-
-
-
-
-		<!-- 添加订单 -->
-        <div class="popOutWrap popOutWrap2" style="display:none;">
-	
-            <div class="popOut">
-                <!-- 关闭按钮 -->
-                <i class="iconfont icon-guanbi"></i>
-                <div class="title">添加订单</div>
-                <div class="formList clearfix">				
-                    <div class="lineOne clearfix">
-                        <div class="name fl">客户姓名：</div>
-                        <input class="fl" type="text" placeholder="请输入客户信息" />
-                    </div>
-                    <div class="lineOne clearfix">
-                        <div class="name fl">所在公司：</div>
-                        <input class="fl" type="text" placeholder="请输入所在公司" />
-                    </div>
-                    <div class="lineOne clearfix">
-                        <div class="name fl">电话：</div>
-                        <input class="fl" type="text" placeholder="请输入客户电话" />
-                    </div>
-                    
-                </div>
-        
-                <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
-            </div>
-        </div>
-
-
-<script type="text/javascript">
-	//执行一个laydate实例
-    layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#selTime' //指定元素
-	        ,type: 'datetime'
-        });
-    });
-	
-   
-</script>
