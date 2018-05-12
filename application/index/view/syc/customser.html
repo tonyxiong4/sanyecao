@@ -62,29 +62,6 @@
 
 
 
-<!-- <div class="popOutWrap popOutWrap2" style="display:none;">
-
-    <div class="popOut">
- 
-        <i class="iconfont icon-guanbi"></i>
-        <div class="title">添加客户</div>
-        <div class="formList clearfix">
-            <div class="lineOne clearfix">
-                <div class="name fl">客户姓名：</div>
-                <input class="fl" id="custname" type="text" placeholder="请输入客户信息" />
-            </div>
-            <div class="lineOne clearfix">
-                <div class="name fl">所在公司：</div>
-                <input class="fl" id="custcompany" type="text" placeholder="请输入所在公司" />
-            </div>
-            <div class="lineOne clearfix">
-                <div class="name fl">电话：</div>
-                <input class="fl" id="custphone" type="text" placeholder="请输入客户电话" />
-            </div>
-        </div>
-        <button id='addCustomer' class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
-    </div>
-</div> -->
 
 <script>
   
@@ -105,35 +82,38 @@
 
 
     function delCustomser(id) {
-        // var c = layui.use('layer',function(){
-        //     layer.alert('您确认要删除吗？', {icon: 6});
-        // })
-        var c = confirm("您确认要删除吗？");
-        if (!c) return;
-        var url = "{:url('data/commonDel')}";
-        $.ajax({
-            url: url,
-            type: 'post',
-            dataType: 'json',
-            data: { id: id ,tablename:'customer'}
+        var c = layui.use('layer',function(){
+            layer.confirm('您确认要删除吗？', {
+            btn: ['确认','取消'] //按钮
+            }, function(){
+                var url = "{:url('data/commonDel')}";
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: { id: id ,tablename:'customer'}
+                    })
+                    .done(function (data) {
+                        if (data && data.code == 200) {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            }); 
+                            setTimeout(function () { window.location.reload(); }, 1000);  
+                            
+                        } else {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            });
+                        }
+                    });
+            });
         })
-        .done(function (data) {
-            if (data && data.code == 200) {
-                // alert(data.msg);
-                // toastr["success"](data.msg);
-                layui.use('layer', function(){
-                    var layer = layui.layer;
-                    layer.msg(data.msg);
-                }); 
-                //setTimeout(function () { window.location.reload(); }, 2000);  
-                
-            } else {
-                layui.use('layer', function(){
-                    var layer = layui.layer;
-                    layer.msg(data.msg);
-                });
-            }
-        });
+
+        //var c = confirm("您确认要删除吗？");
+        //if (!c) return;
+        
     }
 
 
@@ -193,7 +173,7 @@
                     });
                     setTimeout(function () { window.location.reload(); }, 1000);  
                     //window.location.reload();
-                } else {
+                }else {
                     layui.use('layer', function(){
                    
                         layer.msg(data.msg);
