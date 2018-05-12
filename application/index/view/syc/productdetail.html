@@ -77,7 +77,40 @@
     </div>
 </div>
 
-
+<div id="proudctAddBox" style="display: none;">
+    <div style="padding:20px 25px 10px 5px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称：</label>
+            <div class="layui-input-block">
+            <input id="goodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">\
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">属性：</label>
+            <div class="layui-input-block">
+            <input id="goodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品属性" class="layui-input">\
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">单位：</label>
+            <div class="layui-input-block">
+            <input id="goodsunit" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品单位" class="layui-input">\
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">成本价：</label>
+            <div class="layui-input-block">
+            <input  id="goodscostprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品成本价" class="layui-input">\
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">市场价：</label>
+            <div class="layui-input-block">
+            <input  id="goodsprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品市场价" class="layui-input">\
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     layui.use('upload', function(){
       var upload = layui.upload;
@@ -99,9 +132,8 @@
 
     //添加订单
     layui.use('layer',function(){
-        function addOrderD(){
- 
-      //示范一个公告层
+      
+    $('#addorderDetail').click(function(){
       layer.open({
         type: 1
         ,title: false //不显示标题栏
@@ -112,38 +144,7 @@
         ,btn: ['确定', '取消']
         ,btnAlign: 'c'
         ,moveType: 1 //拖拽模式，0或者1
-        ,content: '<div style="padding:20px 25px 10px 5px;">\
-                        <div class="layui-form-item">\
-                            <label class="layui-form-label">名称：</label>\
-                            <div class="layui-input-block">\
-                            <input id="goodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">\
-                            </div>\
-                        </div>\
-                        <div class="layui-form-item">\
-                            <label class="layui-form-label">属性：</label>\
-                            <div class="layui-input-block">\
-                            <input id="goodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品属性" class="layui-input">\
-                            </div>\
-                        </div>\
-                        <div class="layui-form-item">\
-                            <label class="layui-form-label">单位：</label>\
-                            <div class="layui-input-block">\
-                            <input id="goodsunit" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品单位" class="layui-input">\
-                            </div>\
-                        </div>\
-                        <div class="layui-form-item">\
-                            <label class="layui-form-label">成本价：</label>\
-                            <div class="layui-input-block">\
-                            <input  id="goodscostprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品成本价" class="layui-input">\
-                            </div>\
-                        </div>\
-                        <div class="layui-form-item">\
-                            <label class="layui-form-label">市场价：</label>\
-                            <div class="layui-input-block">\
-                            <input  id="goodsprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品市场价" class="layui-input">\
-                            </div>\
-                        </div>\
-                    </div>'
+        ,content: $('#proudctAddBox')
         ,success: function(layero){
           var btn = layero.find('.layui-layer-btn');
           btn.find('.layui-layer-btn0').click(function(){
@@ -180,10 +181,6 @@
           });
         }
       });
-    }
-
-        $('#addorderDetail').click(function(){
-            addOrderD();
-        })
     })
+})
     </script>
