@@ -123,6 +123,9 @@
 
 
     function delCustomser(id) {
+        // var c = layui.use('layer',function(){
+        //     layer.alert('您确认要删除吗？', {icon: 6});
+        // })
         var c = confirm("您确认要删除吗？");
         if (!c) return;
         var url = "{:url('data/commonDel')}";
@@ -152,43 +155,34 @@
     }
 
 
-    // 弹出层
-    layui.use('layer', function(){ 
-        //var $ = layui.jquery, layer = layui.layer;
-        var cont1 = '<div class="popOutWrap"><div class="popOut"></div></div>'
-
-        //输入信息弹框
-        function messageOne(){
-            layer.open({
-                type:1,
-                title:false,
-                closeBtn:false,
-                area:'300px',
-                shade:0.8,
-                id:'LAY_layuipro',
-                btn:["确定",'关闭'],
-                btnAlign:'c',
-                moveType:1, //拖拽模式，0或1.
-                content:cont1,
-                success:function(layero){
-                    var btn = layero.find('.layui-layer-btn');
-                    btn.find('.layui-layer-btn0').attr({
-                        href: '#'
-                        ,target: '_blank'
-                    });
-                }
-
-            });
+    // 添加弹出层
+    layui.use('layer',function(){
+        function addOrder(){
+ 
+      //示范一个公告层
+      layer.open({
+        type: 1
+        ,title: false //不显示标题栏
+        ,closeBtn: false
+        ,area: '300px;'
+        ,shade: 0.8
+        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+        ,btn: ['确定', '取消']
+        ,btnAlign: 'c'
+        ,moveType: 1 //拖拽模式，0或者1
+        ,content: '<div class=""></div>'
+        ,success: function(layero){
+          var btn = layero.find('.layui-layer-btn');
+          btn.find('.layui-layer-btn0').attr({
+           
+          });
         }
-        function tipMs(rs){
-            layer.msg(rs)
-        }
+      });
+    }
 
-        //调用弹框
         $('#addItem').click(function(){
-            messageOne();
+            addOrder();
         })
-        
     })
 
     
