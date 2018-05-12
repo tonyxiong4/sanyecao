@@ -1,168 +1,272 @@
 {include file="index/navleft"}
 <div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
-		<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
-			
-			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
-				<div class="layui-tab-item layui-show">
-                        <fieldset class="layui-elem-field layui-field-title">
-                            <legend>人员管理</legend>
-                        </fieldset>
-                        <form class="layui-form"  method="POST" action="{:url('syc/management')}">
-                            <div class="layui-inline">
-                                <input type="text" name="searchname" value="{:input('param.searchname')}" required="" lay-verify="required" placeholder="输入客户名或销售名" autocomplete="on" class="layui-input">
-                            </div>
-                            <div class="layui-inline">
-                                <select name='depart' lay-filter="aihao">
-                                  <option value="0" >请选择部门</option>
-                                      {volist name='depart' id="vo"}
-                                          <option value="{$vo.id}">{$vo.departname}</option>
-                                      {/volist}
-                                </select>
-                              </div>
-                            <div class="layui-inline">
-                                <input class="layui-btn" type="submit" value="查询">
-                            </div> 
-                            
-                           
-                               
-                        
-                            
-                        </form>
-                        <table class="layui-table" lay-skin="line">
-                            
-                            <thead>
-                              <tr>
-                                <th>姓名</th>
-                                <th>所属部门</th>
-                                <th>职位</th>
-                                <th>电话</th>
-                                <th>客户转让</th>
-                                <th>重置密码</th>
-                                <th>删除</th>
-                               
-                              </tr> 
-                            </thead>
-                            <tbody>
-                                {volist name='list' id='vo'}
-                                    <tr>
-                                        <td>{$vo.username}</td>
-                                        <td>{$vo.departname}</td>
-                                        <td>{$vo.jobname}</td>
-                                        <td>{$vo.phone}</td>
-                                        <td>
-                                            <span class="Transfer" style="color:#FF9800;cursor: pointer;">点击转让</span>
-                                        </td>
-                                        <td>
-                                            <button class="layui-btn layui-btn-sm repasswordF">
-                                                <i class="layui-icon">&#xe642;</i>
-                                              </button>
-                                        </td>
-                                        <td>
-                                            <button class="layui-btn layui-btn-sm">
-                                                <i class="layui-icon">&#xe640;</i>
-                                              </button>
-                                        </td>
-                                    </tr>
-                                {/volist}
-                            </tbody>
-                          </table>
-                          {$list->render()}
-                            
-                
-                                   
+    <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
 
-                </div>
+        <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+            <div class="layui-tab-item layui-show">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>人员管理</legend>
+                </fieldset>
+                <form class="layui-form" method="POST" action="{:url('syc/management')}">
+                    <div class="layui-inline">
+                        <input type="text" name="searchname" value="{:input('param.searchname')}" lay-verify="required" placeholder="输入客户名或销售名" autocomplete="on"
+                            class="layui-input">
+                    </div>
+                    <div class="layui-inline">
+                        <select name='depart' lay-filter="aihao">
+                            <option value="0">请选择部门</option>
+                            {volist name='depart' id="vo"}
+                            <option value="{$vo.id}" {if condition="$vo.id eq $departid" }selected='selected' {/if}>{$vo.departname}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-btn" type="submit" value="查询">
+                    </div>
+
+
+
+
+
+                </form>
+                <table class="layui-table" lay-skin="line">
+
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>所属部门</th>
+                            <th>职位</th>
+                            <th>电话</th>
+                            <th>客户转让</th>
+                            <th>重置密码</th>
+                            <th>删除</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {volist name='list' id='vo'}
+                        <tr>
+                            <td>{$vo.username}</td>
+                            <td>{$vo.departname}</td>
+                            <td>{$vo.jobname}</td>
+                            <td>{$vo.phone}</td>
+                            <td>
+                                <span class="Transfer" data-uid={$vo.id} style="color:#FF9800;cursor: pointer;">点击转让</span>
+                            </td>
+                            <td>
+                                <button class="layui-btn layui-btn-sm repasswordF" data-uid={$vo.id}>
+                                    <i class="layui-icon">&#xe642;</i>
+                                </button>
+                            </td>
+                            <td>
+                                {neq name="$vo.id" value="1"}
+                                <button class="layui-btn layui-btn-sm" onclick="delUser({$vo.id})" title="删除">
+                                    <i class="layui-icon">&#xe640;</i>
+                                </button>
+                                {/neq}
+                            </td>
+                        </tr>
+                        {/volist}
+                    </tbody>
+                </table>
+                {$list->render()}
+
+
+
+
             </div>
         </div>
+    </div>
 </div>
 
 
 <script>
+    function delUser(id) {
+        var c = layui.use('layer', function () {
+            layer.confirm('您确认要删除吗？', {
+                btn: ['确认', '取消'] //按钮
+            }, function () {
+                var url = "{:url('data/commonDel')}";
+                $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            id: id,
+                            tablename: 'user'
+                        }
+                    })
+                    .done(function (data) {
+                        if (data && data.code == 200) {
+                            layui.use('layer', function () {
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+
+                        } else {
+                            layui.use('layer', function () {
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            });
+                        }
+                    });
+            });
+        })
+    }
+
+
     //选择框
-     layui.use('form',function(){})
-     //转让客户
-    layui.use('layer',function(){
-        function Transfer(){
- 
-      //示范一个公告层
-      layer.open({
-        type: 1
-        ,title: false //不显示标题栏
-        ,closeBtn: false
-        ,area: '300px;'
-        ,shade: 0.8
-        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-        ,btn: ['确定', '取消']
-        ,btnAlign: 'c'
-        ,moveType: 1 //拖拽模式，0或者1
-        ,content: '<div style="padding:20px 25px 10px 5px;">\
+    layui.use('form', function () {})
+    //转让客户
+    layui.use('layer', function () {
+
+        $('.layui-table td span.Transfer').click(function () {
+            var olduid=$(this).attr('data-uid');
+            // Transfer(uid);
+             //示范一个公告层
+            layer.open({
+                type: 1,
+                title: false //不显示标题栏
+                    ,
+                closeBtn: false,
+                area: '300px;',
+                shade: 0.8,
+                id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                    ,
+                btn: ['确定', '取消'],
+                btnAlign: 'c',
+                moveType: 1 //拖拽模式，0或者1
+                    ,
+                content: '<div style="padding:20px 25px 10px 5px;">\
                         <div class="layui-form-item">\
                             <label class="layui-form-label">转让人：</label>\
                             <div class="layui-input-block">\
-                            <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入转让人名称" class="layui-input">\
+                            <input id="custname" type="text" data-uid="" name="title" lay-verify="title" autocomplete="off" placeholder="请输入转让人名称" class="layui-input">\
                             </div>\
                         </div>\
-                    </div>'
-        ,success: function(layero){
-          var btn = layero.find('.layui-layer-btn');
-          btn.find('.layui-layer-btn0').click(function(){
-            //点击确定按钮后的时间
+                    </div>',
+                success: function (layero) {
+                    var btn = layero.find('.layui-layer-btn');
+                    btn.find('.layui-layer-btn0').click(function () {
+                        //点击确定按钮后的事件
+                        var url = "{:url('data/transferCustomer')}";
+                        var custname = $("#custname").val();
+                        var uid=olduid;
+                        $.ajax({
+                            url: url,
+                            type: 'post',
+                            dataType: 'json',
+                            data: { username: custname,uid:uid}
+                        })
+                        .done(function (data) {
+                            if (data && data.code == 200) {
+                                layui.use('layer', function(){
+                                    layer.msg(data.msg);
+                                });
+                                setTimeout(function () { window.location.reload(); }, 1000);  
+                            }else if (data && data.code == 100) {
+                                layui.use('layer', function(){
+                                    layer.msg(data.msg);
+                                });
+                            }else {
+                                layui.use('layer', function(){
+                                    layer.msg(data.msg);
+                                });
+                            }
+                        });
+                    });
+                }
+            });
 
-          });
-        }
-      });
-    }
-
-        $('.layui-table td span.Transfer').click(function(){
-            Transfer();
         })
     })
 
-     //重置密码
- 
-     $('.repasswordF').on('click',function(){
+    //重置密码
+
+    $('.repasswordF').on('click', function () {
+        var uuid=$(this).attr('data-uid');
+        var curuid="{:session('userinfo.uid')}";
+        if((uuid ==1) && (curuid !=1)){
+            layui.use('layer', function(){
+                layer.msg("只有系统管理员可以修改此密码");
+            });
+            return;
+        }
         
-     layui.use('layer',function(){
-        function repasswordF(){
- 
-        //示范一个公告层
-        layer.open({
-            type: 1
-            ,title: false //不显示标题栏
-            ,closeBtn: false
-            ,area: '300px;'
-            ,shade: 0.8
-            ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-            ,btn: ['确定', '取消']
-            ,btnAlign: 'c'
-            ,moveType: 1 //拖拽模式，0或者1
-            ,content: '<div style="padding:20px 25px 10px 5px;">\
+        layui.use('layer', function () {
+            function repasswordF() {
+
+                //示范一个公告层
+                layer.open({
+                    type: 1,
+                    title: false //不显示标题栏
+                        ,
+                    closeBtn: false,
+                    area: '300px;',
+                    shade: 0.8,
+                    id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                        ,
+                    btn: ['确定', '取消'],
+                    btnAlign: 'c',
+                    moveType: 1 //拖拽模式，0或者1
+                        ,
+                    content: '<div style="padding:20px 25px 10px 5px;">\
                         <div class="layui-form-item">\
                                 <label class="layui-form-label">新密码：</label>\
                                 <div class="layui-input-block">\
-                                <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入新密码" class="layui-input">\
+                                <input id="upassword" type="password" name="upassword" lay-verify="title" autocomplete="off" placeholder="请输入新密码" class="layui-input">\
                                 </div>\
                             </div>\
                             <div class="layui-form-item">\
                                 <label class="layui-form-label">重复密码：</label>\
                                 <div class="layui-input-block">\
-                                <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请重复密码" class="layui-input">\
+                                <input id="reupassword" type="password" name="reupassword" lay-verify="title" autocomplete="off" placeholder="请重复密码" class="layui-input">\
                                 </div>\
                             </div>\
-                        </div>'
-            ,success: function(layero){
-            var btn = layero.find('.layui-layer-btn');
-            btn.find('.layui-layer-btn0').click(function(){
-                //点击确定按钮后的时间
+                        </div>',
+                    success: function (layero) {
+                        var btn = layero.find('.layui-layer-btn');
+                        btn.find('.layui-layer-btn0').click(function () {
+                            //点击确定按钮后的事件
+                            var url = "{:url('data/resetPassword')}";
+                            var upassword = $("#upassword").val();
+                            var reupassword = $("#reupassword").val();
+                            if(upassword!=reupassword){
+                                 layui.use('layer', function(){
+                                        layer.msg("两次输入密码不一致");
+                                 });
+                                 return;
+                            }
+                            var uid=uuid;
+                            $.ajax({
+                                url: url,
+                                type: 'post',
+                                dataType: 'json',
+                                data: { password: upassword,uid:uid}
+                            })
+                            .done(function (data) {
+                                if (data && data.code == 200) {
+                                    layui.use('layer', function(){
+                                        layer.msg(data.msg);
+                                    });
+                                    // setTimeout(function () { window.location.reload(); }, 1000);  
+                                }else {
+                                    layui.use('layer', function(){
+                                        layer.msg(data.msg);
+                                    });
+                                }
+                            });
+                        });
+                    }
+                });
 
-            });
             }
-        });
-        
-    }
-    repasswordF()
-        
-    })
-       
+            repasswordF()
+
+        })
+
     })
 </script>

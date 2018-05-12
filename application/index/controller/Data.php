@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-12 18:24:50
+ * @Last Modified time: 2018-05-13 00:48:48
  */
 
 namespace app\index\controller;
@@ -83,7 +83,7 @@ class Data extends Controller
 
 		$isExist=Db::name($tablename)->where('status',0)->where($fieldname,$username)->find();
 		if($isExist){
-			return true;
+			return $isExist;
 		}else{
 			return false;
 		}
@@ -127,7 +127,7 @@ class Data extends Controller
 		$uid=$param['uid'];
 		$password=$param['password'];
 		$password=md5(md5($password).config('passwordext'));
-		$result=Db::name('user')->where('id',$uid)->setField('passwrod',$password);
+		$result=Db::name('user')->where('id',$uid)->setField('password',$password);
 		if($result>0){
 			$mes['code']=200;
 			$mes['msg']="重置成功";
@@ -145,12 +145,11 @@ class Data extends Controller
 	{
 		$username=$this->request->param('username');
 		$uid=$this->request->param('uid');//原拥有者id
-		// $isExist=Db::name('user')->where('status',0)->where('username',$username)->find();
 		$isExist=$this->isExist('username',$username,'user');
+		
 		if(!empty($isExist)){
-			//TODO 转移客户
 			$newuid=$isExist['id'];
-			$result=Db::name('customser')->where('belonguid',$uid)->setField('belonguid',$newuid);
+			$result=Db::name('customer')->where('belonguid',$uid)->setField('belonguid',$newuid);
 			if($result>0){
 				$mes['code']=200;
 				$mes['msg']='转移成功';

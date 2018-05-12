@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-12 18:31:32
+ * @Last Modified time: 2018-05-13 00:29:17
  */
 
 namespace app\index\controller;
@@ -32,28 +32,47 @@ class Syc extends Base
         $departData=action('Data/getDepart');
         $this->assign('depart',$departData);
         $search=$this->request->param('searchname');
-        $departid=$this->request->param('depart');        
+        $departid=$this->request->param('depart'); 
+
+        $map['status']=0;
+        if($departid)$map['departid']=$departid;
+
         $list=Db::view('user','id,username,phone,departid,jobid,status')
               ->view('department','departname','department.id=user.departid','LEFT')
               ->view('job','jobname','job.id=user.jobid','LEFT')
-              ->where('status',0)
-            //   ->where('username|phone','like','%'.$search.'%')
-            //   ->where('departid',$departid)
+              ->where($map)
+              ->where(function($query) use($search){
+                if($search){
+                  $query->where('username|phone','like','%'.$search.'%');
+                }else{
+                  $query->where("");
+                }
+              })
               ->paginate(10,false,['query'=>$this->request->param()]);
         
         $this->assign('list',$list);
+        $this->assign('departid',$departid);
         return $this->fetch('management');
      }
     //客户管理
     public function customser()
     {
+        $uid=session('userinfo.uid');
         $search=$this->request->param('searchname');
         $list=Db::view('customer','id,name,company,phone,belonguid,addtime,status')
               ->view('user','username','user.id=customer.belonguid','LEFT')
               ->where('status',0)
               ->where('name|username','like','%'.$search.'%')
+              ->where(function($query) use($uid){
+                if($uid==1){
+                  $query->where("");
+                }else{
+                  $query->where('belonguid',$uid);
+                }
+              })
               ->paginate(10,false,['query'=>$this->request->param()]);
         $this->assign('list',$list);
+        // dump($list);
         return $this->fetch('customser');
     }
     //系统首页
