@@ -3,22 +3,21 @@
     <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
         <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
             <div class="layui-tab-item layui-show">
-                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-                <ul class="layui-tab-title">
-                    <li class="layui-this">产品详细</li>
-                </ul>
-                <div class="layui-tab-content">
-                    <div class="layui-tab-item layui-show">
-                        <form  method="POST" action="{:url('syc/productdetail',['departid'=>$departid])}">
-                            <div class="layui-inline">
-                                <input type="text" name="searchname" value="{:input('param.searchname')}"  lay-verify="required" placeholder="输入产品名称" autocomplete="on" class="layui-input">
-                            </div>
-                            <div class="layui-inline">
-                                <input class="layui-btn" type="submit" value="查询">
-                            </div>     
-                        </form>
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>产品详细</legend>
+                </fieldset>
+                
+                        <div  class="layui-inline">
+                            <form  method="POST" action="{:url('syc/productdetail',['departid'=>$departid])}">
+                                <div class="layui-inline">
+                                    <input type="text" name="searchname" value="{:input('param.searchname')}"  lay-verify="required" placeholder="输入产品名称" autocomplete="on" class="layui-input">
+                                </div>
+                                <div class="layui-inline">
+                                    <input class="layui-btn" type="submit" value="查询">
+                                </div>     
+                            </form>
+                        </div>
                         <div class="layui-inline" >
-                         
                             <button class="layui-btn" id="addorderDetail"><span  class="layui-icon layui-icon-add-1" style="font-size: 14px;"></span>添加</button>
                         </div>
                         
@@ -73,40 +72,40 @@
                 </div>
                 </div> 
             </div>
-        </div>
+     
     </div>
-</div>
+
 
 <div id="proudctAddBox" style="display: none;">
     <div style="padding:20px 25px 10px 5px;">
         <div class="layui-form-item">
             <label class="layui-form-label">名称：</label>
             <div class="layui-input-block">
-            <input id="goodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">\
+            <input id="goodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">属性：</label>
             <div class="layui-input-block">
-            <input id="goodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品属性" class="layui-input">\
+            <input id="goodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品属性" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">单位：</label>
             <div class="layui-input-block">
-            <input id="goodsunit" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品单位" class="layui-input">\
+            <input id="goodsunit" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品单位" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">成本价：</label>
             <div class="layui-input-block">
-            <input  id="goodscostprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品成本价" class="layui-input">\
+            <input  id="goodscostprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品成本价" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">市场价：</label>
             <div class="layui-input-block">
-            <input  id="goodsprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品市场价" class="layui-input">\
+            <input  id="goodsprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品市场价" class="layui-input">
             </div>
         </div>
     </div>
