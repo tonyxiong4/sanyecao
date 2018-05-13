@@ -433,8 +433,8 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 }
 
 
-.layui-icon{
-  margin-right:10px;
+.layui-iconright{
+  margin-right: 10px;
   font-size: 16px;
   vertical-align: -1px;
 }
