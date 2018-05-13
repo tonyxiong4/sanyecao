@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 01:55:01
+ * @Last Modified time: 2018-05-13 12:50:16
  */
 
 namespace app\index\controller;
@@ -97,6 +97,11 @@ class Syc extends Base
         $list=Db::name('department')->where('status=0')->paginate(10);
         $this->assign('list',$list);
         return $this->fetch('department');
+     }
+
+     public function setAuth()
+     {
+       return $this->fetch('setauth');
      }
       //產品
       public function product()
