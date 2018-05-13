@@ -23,7 +23,7 @@
                         <tr>
                             <td>{$vo.name}</td>
                             <td>
-                                <input class="checkauth" data-id="{$vo['id']}" type="checkbox" name="auth" value="{$vo['id']}" title="选中">
+                                <input class="checkauth" data-id="{$vo['id']}" {in name="$vo.id" value="$authlist" } checked="" {/in} type="checkbox" name="auth" value="{$vo['id']}" title="选中">
                             </td>
                         </tr>
                         {/volist} {if condition="count($list) elt 0"}
@@ -49,10 +49,6 @@
     layui.use('form', function () {
         
         var form = layui.form;
-        var jobid=$("#hidJobId").val();
-
-        $('.checkauth').attr('checked', false);
-
         $("#doSetAuth").on('click',function(event) {
            var ids=[];
            var jobid=$("#hidJobId").val();
@@ -83,10 +79,10 @@
                    });
                }
            });
-
-        });
+        
         form.render();
     })
+    
 
-
+    });
 </script>

@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 18:15:21
+ * @Last Modified time: 2018-05-13 19:29:32
  */
 
 namespace app\index\controller;
@@ -103,7 +103,33 @@ class Syc extends Base
     //订单
     public function myorder()
     {
-        $data=[];
+        $departData=action('Data/getDepart');
+        $this->assign('depart',$departData);
+        $search=$this->request->param('searchname');
+        $stime=$this->request->param('stime');
+        $etime=$this->request->param('etime');
+
+        // $departid=$this->request->param('depart'); 
+
+        $map['status']=0;
+        // if($departid)$map['departid']=$departid;
+
+        $list=Db::view('order','id,name,createtime,uid,orderstatus,cost,total,address,phone,picture,departid,principal,remark,status,predicttime')
+              ->view('department','departname','department.id=order.departid','LEFT')
+              ->view('user','username','user.id=order.uid','LEFT')
+              ->view(['syc_user'=>'fzuser'],['username'=>'fzname'],'fzuser.id=order.principal','LEFT')
+              ->where($map)
+              ->where(function($query) use($search){
+                if($search){
+                  $query->where('name','like','%'.$search.'%');
+                }else{
+                  $query->where("");
+                }
+              })
+              ->paginate(10,false,['query'=>$this->request->param()]);
+        
+        $this->assign('list',$list);
+        // $this->assign('departid',$departid);
         return $this->fetch('myorder');
     }
      //订单详细
@@ -123,6 +149,11 @@ class Syc extends Base
      {
         $jobid=$this->request->param('jobid');
         $list=Db::name('menu')->where('status',0)->order('pxsort')->paginate(10);
+        $authlist=Db::name('role_menu')->where('roleid',$jobid)->value('menuid');
+        if($authlist){
+          $authlist=json_decode($authlist);
+        }
+        $this->assign('authlist',$authlist);
         $this->assign('list',$list);
         $this->assign('jobid',$jobid);
         return $this->fetch('setauth');
