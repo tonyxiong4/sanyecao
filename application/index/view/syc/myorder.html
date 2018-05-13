@@ -1,7 +1,7 @@
 
 
 {include file="index/navleft"}
-<div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
+<div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; " id="admin-body">
 		<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
 			
 			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
@@ -14,7 +14,10 @@
                                 <input type="text" name="title" required="" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
                             </div>
                             <div class="layui-inline">
-                                <input type="text" name="title" required="" lay-verify="required" placeholder="请输入选择时间" autocomplete="on" class="layui-input" id="selTime">
+                                <input type="text" name="title" required="" lay-verify="required" placeholder="请输入选择开始时间" autocomplete="on" class="layui-input" id="selTime">
+                            </div>
+                            <div class="layui-inline">
+                                <input type="text" name="title" required="" lay-verify="required" placeholder="请输入选择结束时间" autocomplete="on" class="layui-input" id="selTime01">
                             </div>
                             <div class="layui-inline">
                                 <button class="layui-btn">
@@ -177,15 +180,13 @@
 
 <!-- 弹框引入个人结构 -->
 <div id="sendOrderPersonBox" style="display: none;">
-        <div style="padding:20px 10px;">
-        <form id="sendOrderPartBox" class=""  method="" action="">
-            <div class="">
-                <select name="" style="width:100%;height: 36px;">
-                        <option value="0" >请选择人员</option>
-                        <option value="0">1111</option>
-                </select>
-            </div>
-            </form>
+        <div style="padding:20px 25px 10px 5px;">
+                <div class="layui-form-item">
+                        <label class="layui-form-label">人员名称：</label>
+                        <div class="layui-input-block">
+                        <input  id="custphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入人员名称" class="layui-input">
+                        </div>
+                    </div>
         </div>
 </div>
 
@@ -215,6 +216,11 @@
         //执行一个laydate实例
         laydate.render({
             elem: '#selTime' //指定元素
+	        ,type: 'datetime'
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#selTime01' //指定元素
 	        ,type: 'datetime'
         });
     });

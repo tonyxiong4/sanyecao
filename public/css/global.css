@@ -368,6 +368,9 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 	background-color: #eee;
 	cursor: pointer;
 }
+.layui-body{
+  padding:10px 20px;
+}
 
 
 /* 适配多设备 */
@@ -430,6 +433,30 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
   
   .admin-side-toggle ,.admin-header-item{display: none;}
   .admin-header-item-mobile{ display: block; }
+  .layui-bg-black{
+    display: none;
+  }
+  .layui-side-scroll{
+    display: none;
+  }
+  .layui-badge{
+    height: auto;
+    line-height: auto;
+  }
+  .layui-body{
+    padding:0;
+  }
+  .layui-table td, .layui-table th{
+    padding:9px 2px;
+  }
+  .layui-btn+.layui-btn{
+    margin-top: 10px;
+    margin-left:0;
+  }
+  .layui-btn{
+    display: block;
+  }
+  
 }
 
 
