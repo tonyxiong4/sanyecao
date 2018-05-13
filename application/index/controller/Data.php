@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 12:10:23
+ * @Last Modified time: 2018-05-13 15:56:19
  */
 
 namespace app\index\controller;
@@ -157,7 +157,7 @@ class Data extends Controller
 	public function addCustomser()
 	{
 		$param=$this->request->param();
-		
+		$id=$this->request->param('id');
 		$data=[];
 		if($param){
 			$data['name']=trim($param['custname']);
@@ -165,8 +165,8 @@ class Data extends Controller
 			$data['company']=trim($param['custcompany']);
 			$data['belonguid']=session('userinfo.uid');
 		}
-		if($param['id']){
-			$result=Db::name('customer')->where('id',$param['id'])->update(['name'=>$data['name'],'phone'=>$data['phone'],'company'=>$data['company']]);
+		if($id){
+			$result=Db::name('customer')->where('id',$id)->update(['name'=>$data['name'],'phone'=>$data['phone'],'company'=>$data['company']]);
 			if($result>0){
 				$mes['code']=200;
 				$mes['msg']='更新成功';
@@ -200,15 +200,13 @@ class Data extends Controller
 	public function addGoods()
 	{
 		$param=$this->request->param();
+		$id=$this->request->param('id');
 		$goodsname=$param['goodsname'];
 		$goodsattribute=$param['goodsattribute'];
 		$param['uid']=session('userinfo.uid');
 		
-		if($param['id']){
-			$data=[
-				
-			];
-			$result=Db::name('goods')->where('id',$param['id'])->update(['departname'=>$departname,'intro'=>$intro]);
+		if($id){
+			$result=Db::name('goods')->where('id',$id)->update($param);
 			if($result>0){
 				$mes['code']=200;
 				$mes['msg']='更新成功';
@@ -241,11 +239,12 @@ class Data extends Controller
 	public function addDepart()
 	{
 		$param=$this->request->param();
+		$id=$this->request->param('id');
 		$departname=$param['departname'];
 		$intro=$param['intro'];
-
-		if($param['id']){
-			$result=Db::name('department')->where('id',$param['id'])->update(['departname'=>$departname,'intro'=>$intro]);
+		
+		if($id){
+			$result=Db::name('department')->where('id',$id)->update(['departname'=>$departname,'intro'=>$intro]);
 			if($result>0){
 				$mes['code']=200;
 				$mes['msg']='更新成功';
@@ -269,7 +268,75 @@ class Data extends Controller
 				}
 			}
 		}
+		return json($mes);
+	}
+
+
+	/**
+	 * [addDepart 添加职位]
+	 */
+	public function addjob()
+	{
+		$param=$this->request->param();
+		$id=$this->request->param('id');
+		$jobname=$param['jobname'];
 		
+		
+		if($id){
+			$result=Db::name('job')->where('id',$id)->update(['jobname'=>$jobname]);
+			if($result>0){
+				$mes['code']=200;
+				$mes['msg']='更新成功';
+			}else{
+				$mes['code']=-1;
+				$mes['msg']='更新失败';
+			}
+		}else{
+			$isExist=Db::name('job')->where('status',0)->where('jobname',$jobname)->find();
+			if($isExist){
+				$mes['code']=100;
+				$mes['msg']="该职位已经存在";
+			}else{
+				$result=Db::name('job')->insert($param);
+				if($result){
+					$mes['code']=200;
+					$mes['msg']="添加成功";
+				}else{
+					$mes['code']=-1;
+					$mes['msg']="添加失败";
+				}
+			}
+		}
+		return json($mes);
+	}
+
+	public function doSetAuth()
+	{
+		$param=$this->request->param();
+		
+		$data['roleid']=$param['jobid'];
+		$data['menuid']=json_encode($param['ids']);
+
+		$isExist=Db::name('role_menu')->where('status',0)->where('roleid',$data['roleid'])->find();
+		if($isExist){
+			$result=Db::name('role_menu')->where('roleid',$data['roleid'])->update(['menuid'=>$data['menuid']]);
+			if($result>0){
+				$mes['code']=200;
+				$mes['msg']='更新成功';
+			}else{
+				$mes['code']=-1;
+				$mes['msg']='更新失败';
+			}
+		}else{
+			$result=Db::name('role_menu')->insert($data);
+			if($result){
+				$mes['code']=200;
+				$mes['msg']="添加成功";
+			}else{
+				$mes['code']=-1;
+				$mes['msg']="添加失败";
+			}
+		}
 		return json($mes);
 	}
 }

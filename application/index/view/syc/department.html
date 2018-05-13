@@ -31,7 +31,7 @@
                                                 <td>{$vo.addtime}</td>
                                                 <td>
                                                     <!-- 修改btn -->
-                                                    <button class="layui-btn layui-btn-sm changedepartment"  title="修改">
+                                                    <button class="layui-btn layui-btn-sm changedepartment" data-uid="{$vo.id}"  title="修改">
                                                     <i class="layui-icon">&#xe642;</i>
                                                     </button>
                                                     <!-- 删除btn -->
@@ -60,13 +60,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">部门名称：</label>
                     <div class="layui-input-block">
-                    <input id="goodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入部门名称" class="layui-input">
+                    <input id="departname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入部门名称" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">简介：</label>
                     <div class="layui-input-block">
-                    <input id="goodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品属性" class="layui-input">
+                    <input id="intro" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品属性" class="layui-input">
                     </div>
                 </div>
                 
@@ -120,13 +120,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">部门名称：</label>
                     <div class="layui-input-block">
-                    <input id="goodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入部门名称" class="layui-input">
+                    <input id="udepartname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入部门名称" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">简介：</label>
                     <div class="layui-input-block">
-                    <input id="goodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入部门简介" class="layui-input">
+                    <input id="uintro" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入部门简介" class="layui-input">
                     </div>
                 </div>
               
@@ -152,7 +152,32 @@
                var btn = layero.find('.layui-layer-btn');
                btn.find('.layui-layer-btn0').click(function(){
                    //点击确定按钮后的时间
-
+                   var url = "{:url('data/addDepart')}";
+                   var departname = $("#departname").val();
+                   var intro = $("#intro").val();
+                   
+                   $.ajax({
+                       url: url,
+                       type: 'post',
+                       dataType: 'json',
+                       data: { departname: departname, intro: intro }
+                   })
+                   .done(function (data) {
+                       if (data && data.code == 200) {
+                           layui.use('layer', function(){
+                               layer.msg(data.msg);
+                           });
+                           setTimeout(function () { window.location.reload(); }, 1000);  
+                       }else if (data && data.code == 100) {
+                           layui.use('layer', function(){
+                               layer.msg(data.msg);
+                           });
+                       }else {
+                           layui.use('layer', function(){
+                               layer.msg(data.msg);
+                           });
+                       }
+                   });
                });
                }
              });
@@ -161,6 +186,7 @@
 
         //修改部门
         $('.changedepartment').click(function(){
+            var uid=$(this).attr('data-uid');
            layer.open({
                type: 1
                ,title: false
@@ -172,11 +198,47 @@
                ,btn: ['确定', '取消']
                ,content: $('#changedepartmentbox')
                ,success: function(layero){
-               var btn = layero.find('.layui-layer-btn');
-               btn.find('.layui-layer-btn0').click(function(){
                    //点击确定按钮后的时间
-
-               });
+                   var geturl="{:url('data/getData')}";
+                   
+                   $.ajax({
+                       url: geturl,
+                       type: 'post',
+                       dataType: 'json',
+                       data: {id: uid,tablename:'department'},
+                   })
+                   .done(function(data) {
+                       if(data && data.code==200){
+                           $("#udepartname").val(data.data['departname']);
+                           $("#uintro").val(data.data['intro']);
+                       }
+                   });
+                   
+                     var btn = layero.find('.layui-layer-btn');
+                     btn.find('.layui-layer-btn0').click(function(){
+                       var url = "{:url('data/addDepart')}";
+                       var departname = $("#udepartname").val();
+                       var intro = $("#uintro").val();
+                       
+                       $.ajax({
+                           url: url,
+                           type: 'post',
+                           dataType: 'json',
+                           data: { id:uid,departname: departname, intro: intro}
+                       })
+                       .done(function (data) {
+                           if (data && data.code == 200) {
+                               layui.use('layer', function(){
+                                   layer.msg(data.msg);
+                               });
+                               setTimeout(function () { window.location.reload(); }, 1000);  
+                           }else {
+                               layui.use('layer', function(){
+                                   layer.msg(data.msg);
+                               });
+                           }
+                       });
+                     });
                }
              });
 

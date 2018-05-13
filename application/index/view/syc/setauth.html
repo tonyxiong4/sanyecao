@@ -1,47 +1,92 @@
 {include file="index/navleft"}
 <div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
-		<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
-			
-			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
-				<div class="layui-tab-item layui-show">
-                        <fieldset class="layui-elem-field layui-field-title">
-                            <legend>产品管理</legend>
-                        </fieldset> 
-                        <!-- 表格 -->
-                        <form action="" class="layui-form">
-                            <table class="layui-table" lay-skin="line">
-            
-                                <thead>
-                                    <tr>
-                                        <th>菜单</th>
-                                        <th>勾选</th>
-                                        
-                                    </tr> 
-                                </thead>
-                                    <tr>
-                                        <td>我的订单</td>
-                                        <td>           
-                                            <input class="xxx" type="checkbox" name="like[write]" title="选中">                                   
-                                        </td>
-                                    </tr>
-                                <tbody>
-                                    
-                                </tbody>
-                            </table>
-                            </form>
-                        </div>
-                </div>
-         </div>
+    <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+
+        <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+            <div class="layui-tab-item layui-show">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>产品管理</legend>
+                </fieldset>
+                <!-- 表格 -->
+                <form action="" class="layui-form">
+                    <table class="layui-table" lay-skin="line">
+
+                        <thead>
+                            <tr>
+                                <th>菜单</th>
+                                <th>勾选</th>
+
+                            </tr>
+                        </thead>
+                        {volist name='list' id='vo'}
+
+                        <tr>
+                            <td>{$vo.name}</td>
+                            <td>
+                                <input class="checkauth" data-id="{$vo['id']}" type="checkbox" name="auth" value="{$vo['id']}" title="选中">
+                            </td>
+                        </tr>
+                        {/volist} {if condition="count($list) elt 0"}
+                        <tr>
+                            <td colspan="4" style="text-align: center">没有您要查询的数据</td>
+                        </tr>
+                        {/if}
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </form>
+
+                <button id='doSetAuth' class="layui-btn">提交</button>
+                <input type="hidden" id='hidJobId' name="hidJobId" value="{$jobid}"/>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <script type="text/javascript">
+    layui.use('form', function () {
+        
+        var form = layui.form;
+        var jobid=$("#hidJobId").val();
 
-layui.use('form',function(){
-    var form = layui.form;
-    $('.xxx').attr('checked', true);
-    form.render();
-     
-})
-    
+        $('.checkauth').attr('checked', false);
+
+        $("#doSetAuth").on('click',function(event) {
+           var ids=[];
+           var jobid=$("#hidJobId").val();
+           $.each($("input[name='auth']:checked"), function(index, val) {
+                ids.push($(val).val());
+           });
+           if(ids.length <= 0){
+            return;
+           }
+           var url="{:url('data/doSetAuth')}";
+           var ids=ids;
+           var jobid=jobid;
+           $.ajax({
+               url: url,
+               type: 'post',
+               dataType: 'json',
+               data: { jobid: jobid,ids:ids}
+           })
+           .done(function (data) {
+               if (data && data.code == 200) {
+                   layui.use('layer', function(){
+                       layer.msg(data.msg);
+                   });
+                   setTimeout(function () { window.location.reload(); }, 1000);  
+               }else {
+                   layui.use('layer', function(){
+                       layer.msg(data.msg);
+                   });
+               }
+           });
+
+        });
+        form.render();
+    })
+
+
 </script>

@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 12:50:16
+ * @Last Modified time: 2018-05-13 18:15:21
  */
 
 namespace app\index\controller;
@@ -11,21 +11,41 @@ use think\Db;
 use think\Controller;
 class Syc extends Base
 {
-    public function hello(Request $request, $name='linke')
+
+    public function _initialize()
     {
-        echo 'url'.$request->url()."<br>";
-        echo '请求参数：';
-        // 获取URL地址中的PATH_INFO信息
-        echo 'pathinfo: ' . $request->pathinfo() . '<br/>';
-        // 获取URL地址中的PATH_INFO信息 不含后缀
-        echo 'pathinfo: ' . $request->path() . '<br/>';
-        echo '模块：'.$request->module();
-        echo '<br/>控制器：'.$request->controller();
-        echo '<br/>操作：'.$request->action()."<br>";
-        $this->assign('name',$name);
+      $uid=session('userinfo.uid');
+      
+      $userjob=session('userinfo.jobid');
+
+      if($userjob){
+        $userjob=$userjob;
+      }else{
+        $userjob=0;
+      }
+
+      $menu='';
+      $menulist=Db::name('role_menu')->where('roleid',$userjob)->value('menuid');
+      
+      if($menulist){
         
-        return $this->fetch('hello');
+        $map['id']=['in',json_decode($menulist)];
+        $map['status']=0;
+        $menu=Db::name('menu')->where($map)->order('pxsort')->select();
+      }
+
+      //管理员看所有
+      if($uid==1){
+        $menu=Db::name('menu')->where('status',0)->order('pxsort')->select();
+      }
+
+      if($menu){
+        $this->assign('menu',$menu);
+      }else{
+        $this->success('管理员没有设置此职位权限，请联系管理员开通','Index/index');
+      }
     }
+
      //人员管理
      public function management()
      {
@@ -101,7 +121,11 @@ class Syc extends Base
 
      public function setAuth()
      {
-       return $this->fetch('setauth');
+        $jobid=$this->request->param('jobid');
+        $list=Db::name('menu')->where('status',0)->order('pxsort')->paginate(10);
+        $this->assign('list',$list);
+        $this->assign('jobid',$jobid);
+        return $this->fetch('setauth');
      }
       //產品
       public function product()
@@ -128,100 +152,102 @@ class Syc extends Base
      }
      //权限设置
      public function privilege()
-     {
-         return $this->fetch('privilege');
+     {  
+        $list=Db::name('job')->where('status=0')->paginate(10);
+        $this->assign('list',$list);
+        return $this->fetch('privilege');
      }
     // login
-    public function login()
-    {   
-        $departData=action('Data/getDepart');
-        $this->assign('depart',$departData);
-        $jobData=action('Data/getJob');
-        $this->assign('job',$jobData);
-        return $this->fetch('login');   
-    }
+    // public function login()
+    // {   
+    //     $departData=action('Data/getDepart');
+    //     $this->assign('depart',$departData);
+    //     $jobData=action('Data/getJob');
+    //     $this->assign('job',$jobData);
+    //     return $this->fetch('login');   
+    // }
 
     /**
      * [doLogin 处理登录]
      * @param  Request $request [description]
      * @return [type]           [description]
      */
-    public function doLogin()
-    {
-        $param=$this->request->param();
-        $account=$param['account'];
-        $userpassword=$param['password'];
-        $md5userpassword=md5(md5($userpassword).config('passwordext'));
-        $list=Db::name('user')->field('*')->where('username|phone',$account)->where('password',$md5userpassword)->where('status',0)->select();
-        if(count($list)>1){
-            $this->error('用户信息不明确，请与管理员联系！');
-        }
-        if($list){
-            $info=$list[0];
-            $userinfo=[
-                'uid'           =>      $info['id'],
-                'username'      =>      $info['username'],
-                'phone'         =>      $info['phone'],
-                'departid'      =>      $info['departid'],
-                'jobid'         =>      $info['jobid']
+    // public function doLogin()
+    // {
+    //     $param=$this->request->param();
+    //     $account=$param['account'];
+    //     $userpassword=$param['password'];
+    //     $md5userpassword=md5(md5($userpassword).config('passwordext'));
+    //     $list=Db::name('user')->field('*')->where('username|phone',$account)->where('password',$md5userpassword)->where('status',0)->select();
+    //     if(count($list)>1){
+    //         $this->error('用户信息不明确，请与管理员联系！');
+    //     }
+    //     if($list){
+    //         $info=$list[0];
+    //         $userinfo=[
+    //             'uid'           =>      $info['id'],
+    //             'username'      =>      $info['username'],
+    //             'phone'         =>      $info['phone'],
+    //             'departid'      =>      $info['departid'],
+    //             'jobid'         =>      $info['jobid']
 
-            ];
-            session('userinfo', $userinfo);
-            //设置7天自动登录
-            $expire = 3600 * 24 * 7;
-            //本站COOKIE
-            cookie(config('cookie_key'), config('secure_code').".{$info['id']}", $expire);
-            $this->success('登录成功！', url('Syc/sysindex'));
+    //         ];
+    //         session('userinfo', $userinfo);
+    //         //设置7天自动登录
+    //         $expire = 3600 * 24 * 7;
+    //         //本站COOKIE
+    //         cookie(config('cookie_key'), config('secure_code').".{$info['id']}", $expire);
+    //         $this->success('登录成功！', url('Syc/sysindex'));
 
-        }else {
-            $this->error('用户名或者密码错误！');
-        }
-    }
+    //     }else {
+    //         $this->error('用户名或者密码错误！');
+    //     }
+    // }
 
     /**
      * [doRegister 处理注册]
      * @param  string $value [description]
      * @return [type]        [description]
      */
-    public function doRegister()
-    {
-        $param=$this->request->param();
-        $data=[];
-        if($param){
-            $data['username']=$param['username'];
-            $account=$param['username'];
-            $data['phone']=$param['phone'];
-            $userpassword=$param['password'];
-            $userpass = md5(md5($userpassword).config('passwordext'));
-            $data['password']=$userpass;
-            $data['departid']=$param['depart'];
-            $data['jobid']=$param['job'];
-        }
-        $result=Db::name('user')->insert($data);
-        if($result){
-            $list=Db::name('user')->field('*')->where('username|phone',$account)->where('password',$userpass)->where('status',0)->select();
-            if(count($list)>1){
-                $this->error('用户信息不明确，请与管理员联系！');
-            }
-            if($list){
-                $info=$list[0];
-                $userinfo=[
-                    'uid'           =>      $info['id'],
-                    'username'      =>      $info['username'],
-                    'phone'         =>      $info['phone'],
-                    'departid'      =>      $info['departid'],
-                    'jobid'         =>      $info['jobid']
+    // public function doRegister()
+    // {
+    //     $param=$this->request->param();
+    //     $data=[];
+    //     if($param){
+    //         $data['username']=$param['username'];
+    //         $account=$param['username'];
+    //         $data['phone']=$param['phone'];
+    //         $userpassword=$param['password'];
+    //         $userpass = md5(md5($userpassword).config('passwordext'));
+    //         $data['password']=$userpass;
+    //         $data['departid']=$param['depart'];
+    //         $data['jobid']=$param['job'];
+    //     }
+    //     $result=Db::name('user')->insert($data);
+    //     if($result){
+    //         $list=Db::name('user')->field('*')->where('username|phone',$account)->where('password',$userpass)->where('status',0)->select();
+    //         if(count($list)>1){
+    //             $this->error('用户信息不明确，请与管理员联系！');
+    //         }
+    //         if($list){
+    //             $info=$list[0];
+    //             $userinfo=[
+    //                 'uid'           =>      $info['id'],
+    //                 'username'      =>      $info['username'],
+    //                 'phone'         =>      $info['phone'],
+    //                 'departid'      =>      $info['departid'],
+    //                 'jobid'         =>      $info['jobid']
 
-                ];
-                session('userinfo', $userinfo);
-                //设置7天自动登录
-                $expire = 3600 * 24 * 7;
-                //本站COOKIE
-                cookie(config('cookie_key'), config('secure_code').".{$info['id']}", $expire);
-            }
-            $this->success('注册成功', 'Syc/sysindex');
-        }else{
-            $this->error('注册失败');
-        }
-    }
+    //             ];
+    //             session('userinfo', $userinfo);
+    //             //设置7天自动登录
+    //             $expire = 3600 * 24 * 7;
+    //             //本站COOKIE
+    //             cookie(config('cookie_key'), config('secure_code').".{$info['id']}", $expire);
+    //         }
+    //         $this->success('注册成功', 'Syc/sysindex');
+    //     }else{
+    //         $this->error('注册失败');
+    //     }
+    // }
 }

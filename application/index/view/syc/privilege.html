@@ -25,28 +25,21 @@
                                 </tr> 
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>经理</td>
-                                    <td><a href="setauth.html">设置权限</a></td>
-                                    <td><button class="layui-btn layui-btn-xs changeorderInfo">删除</button></td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>主管</td>
-                                    <td><a href="setauth.html">设置权限</a></td>
-                                    <td><button class="layui-btn layui-btn-xs changeorderInfo">删除</button></td>
-                                </tr>
-                                <tr>
-                                    <td>员工</td>
-                                    <td><a href="setauth.html">设置权限</a></td>
-                                    <td><button class="layui-btn layui-btn-xs changeorderInfo">删除</button></td>
-                                </tr>
-
-                             
-                              
+                                   {volist name='list' id='vo'}
+                                      <tr>
+                                          <td>{$vo.jobname}</td>
+                                          <td><a href="{:url('syc/setauth',['jobid'=>$vo['id']])}">设置权限</a></td>
+                                          <td><button class="layui-btn layui-btn-xs changeorderInfo" onclick="delJob({$vo.id})">删除</button></td>
+                                      </tr>
+                                  {/volist}
+                                  {if condition="count($list) elt 0"}
+                                      <tr>
+                                          <td colspan="3" style="text-align: center">没有您要查询的数据</td>
+                                      </tr>
+                                  {/if}
                             </tbody>
                             </table>
-                          
+                          {$list->render()}
                         </div>
                 </div>
          </div>
@@ -57,13 +50,52 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">职位名称：</label>
                 <div class="layui-input-block">
-                <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入职位名称" class="layui-input">
+                <input id="job" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入职位名称" class="layui-input">
                 </div>
             </div>       
         </div>
         </div>
 
 <script>
+
+    /**
+     * [delJob 删除职位]
+     * @param  {[type]} id [description]
+     * @return {[type]}    [description]
+     */
+    function delJob(id) {
+        var c = layui.use('layer',function(){
+            layer.confirm('您确认要删除吗？', {
+            btn: ['确认','取消'] //按钮
+            }, function(){
+                var url = "{:url('data/commonDel')}";
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: { id: id ,tablename:'job'}
+                    })
+                    .done(function (data) {
+                        if (data && data.code == 200) {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            }); 
+                            setTimeout(function () { window.location.reload(); }, 1000);  
+                            
+                        } else {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            });
+                        }
+                    });
+            });
+        })
+
+     
+        
+    }
      //
    layui.use('layer',function(){
        //添加职位
@@ -80,7 +112,32 @@
                var btn = layero.find('.layui-layer-btn');
                btn.find('.layui-layer-btn0').click(function(){
                    //点击确定按钮后的时间
-   
+                  var url = "{:url('data/addjob')}";
+                  var job = $("#job").val();
+                  
+                  
+                  $.ajax({
+                      url: url,
+                      type: 'post',
+                      dataType: 'json',
+                      data: { jobname: job}
+                  })
+                  .done(function (data) {
+                      if (data && data.code == 200) {
+                          layui.use('layer', function(){
+                              layer.msg(data.msg);
+                          });
+                          setTimeout(function () { window.location.reload(); }, 1000);  
+                      }else if (data && data.code == 100) {
+                          layui.use('layer', function(){
+                              layer.msg(data.msg);
+                          });
+                      }else {
+                          layui.use('layer', function(){
+                              layer.msg(data.msg);
+                          });
+                      }
+                  });
                });
                }
            });

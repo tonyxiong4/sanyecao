@@ -50,11 +50,11 @@
                                         <td>{$vo.addtime}</td>
                                         <td>
                                             <!-- 修改btn -->
-                                                <button class="layui-btn layui-btn-sm changeProduct"  title="修改">
+                                                <button class="layui-btn layui-btn-sm changeProduct" data-uid="{$vo.id}" title="修改">
                                                 <i class="layui-icon">&#xe642;</i>
                                                 </button>
                                             <!-- 删除btn -->
-                                            <button class="layui-btn layui-btn-sm" title="删除">
+                                            <button class="layui-btn layui-btn-sm" onclick="delGoods({$vo.id})" title="删除">
                                             <i class="layui-icon">&#xe640;</i>
                                             </button>
                                         </td>
@@ -116,36 +116,79 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">名称：</label>
                     <div class="layui-input-block">
-                    <input id="goodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
+                    <input id="ugoodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">属性：</label>
                     <div class="layui-input-block">
-                    <input id="goodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品属性" class="layui-input">
+                    <input id="ugoodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品属性" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">单位：</label>
                     <div class="layui-input-block">
-                    <input id="goodsunit" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品单位" class="layui-input">
+                    <input id="ugoodsunit" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品单位" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">成本价：</label>
                     <div class="layui-input-block">
-                    <input  id="goodscostprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品成本价" class="layui-input">
+                    <input  id="ugoodscostprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品成本价" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">市场价：</label>
                     <div class="layui-input-block">
-                    <input  id="goodsprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品市场价" class="layui-input">
+                    <input  id="ugoodsprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品市场价" class="layui-input">
                     </div>
                 </div>
             </div>
 </div>
 <script>
+
+
+    /**
+     * [delGoods 删除客户]
+     * @param  {[type]} id [description]
+     * @return {[type]}    [description]
+     */
+
+
+    function delGoods(id) {
+        var c = layui.use('layer',function(){
+            layer.confirm('您确认要删除吗？', {
+            btn: ['确认','取消'] //按钮
+            }, function(){
+                var url = "{:url('data/commonDel')}";
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: { id: id ,tablename:'goods'}
+                    })
+                    .done(function (data) {
+                        if (data && data.code == 200) {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            }); 
+                            setTimeout(function () { window.location.reload(); }, 1000);  
+                            
+                        } else {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            });
+                        }
+                    });
+            });
+        })
+
+     
+        
+    }
+
     //添加产品
     layui.use('layer',function(){
       
@@ -200,6 +243,7 @@
     })
 //修改产品
     $('.changeProduct').click(function(){
+        var uid=$(this).attr('data-uid');
            layer.open({
                type: 1
                ,title: false
@@ -211,14 +255,56 @@
                ,btn: ['确定', '取消']
                ,content: $('#changeProduct')
                ,success: function(layero){
-               var btn = layero.find('.layui-layer-btn');
-               btn.find('.layui-layer-btn0').click(function(){
                    //点击确定按钮后的时间
+                   var geturl="{:url('data/getData')}";
+                   
+                   $.ajax({
+                       url: geturl,
+                       type: 'post',
+                       dataType: 'json',
+                       data: {id: uid,tablename:'goods'},
+                   })
+                   .done(function(data) {
+                       if(data && data.code==200){
+                           $("#ugoodsname").val(data.data['goodsname']);
+                           $("#ugoodsattribute").val(data.data['goodsattribute']);
+                           $("#ugoodsunit").val(data.data['goodsunit']);
+                           $("#ugoodscostprice").val(data.data['goodscostprice']);
+                           $("#ugoodsprice").val(data.data['goodsprice']);
+                       }
+                   });
+                   
+                     var btn = layero.find('.layui-layer-btn');
+                     btn.find('.layui-layer-btn0').click(function(){
+                       var url = "{:url('data/addGoods')}";
 
-               });
+                       var goodsname= $("#ugoodsname").val();
+                       var goodsattribute= $("#ugoodsattribute").val();
+                       var goodsunit= $("#ugoodsunit").val();
+                       var goodscostprice=$("#ugoodscostprice").val();
+                       var goodsprice=$("#ugoodsprice").val();
+                       $.ajax({
+                           url: url,
+                           type: 'post',
+                           dataType: 'json',
+                           data: { id:uid,goodsname: goodsname, goodsattribute: goodsattribute, goodsunit: goodsunit , goodscostprice: goodscostprice, goodsprice: goodsprice}
+                       })
+                       .done(function (data) {
+                           if (data && data.code == 200) {
+                               layui.use('layer', function(){
+                                   layer.msg(data.msg);
+                               });
+                               setTimeout(function () { window.location.reload(); }, 1000);  
+                           }else {
+                               layui.use('layer', function(){
+                                   layer.msg(data.msg);
+                               });
+                           }
+                       });
+                     });
+
                }
              });
-
             }) 
 })
     </script>
