@@ -9,7 +9,7 @@
                         </fieldset>
                         
                         
-                            <button class="layui-btn ">
+                            <button class="layui-btn " id="adddepaetmnet">
                                 <i class="layui-icon">&#xe608;</i> 添加部门
                              </button>
                              <!-- 表格 -->
@@ -31,7 +31,7 @@
                                                 <td>{$vo.addtime}</td>
                                                 <td>
                                                     <!-- 修改btn -->
-                                                    <button class="layui-btn layui-btn-sm"  title="修改">
+                                                    <button class="layui-btn layui-btn-sm changedepartment"  title="修改">
                                                     <i class="layui-icon">&#xe642;</i>
                                                     </button>
                                                     <!-- 删除btn -->
@@ -55,34 +55,21 @@
         </div>
 </div>
 
-
-
-
-
-		<!-- 添加订单 -->
-        <div class="popOutWrap popOutWrap2" style="display:none;">
-	
-            <div class="popOut">
-                <!-- 关闭按钮 -->
-                <i class="iconfont icon-guanbi"></i>
-                <div class="title">添加订单</div>
-                <div class="formList clearfix">				
-                    <div class="lineOne clearfix">
-                        <div class="name fl">客户姓名：</div>
-                        <input class="fl" type="text" placeholder="请输入客户信息" />
+<div id="adddepaetmnetBox" style="display: none;">
+        <div style="padding:20px 25px 10px 5px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">部门名称：</label>
+                    <div class="layui-input-block">
+                    <input id="goodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入部门名称" class="layui-input">
                     </div>
-                    <div class="lineOne clearfix">
-                        <div class="name fl">所在公司：</div>
-                        <input class="fl" type="text" placeholder="请输入所在公司" />
-                    </div>
-                    <div class="lineOne clearfix">
-                        <div class="name fl">电话：</div>
-                        <input class="fl" type="text" placeholder="请输入客户电话" />
-                    </div>
-                    
                 </div>
-        
-                <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">简介：</label>
+                    <div class="layui-input-block">
+                    <input id="goodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品属性" class="layui-input">
+                    </div>
+                </div>
+                
             </div>
         </div>
 
@@ -127,3 +114,72 @@
         
     }
 </script>
+</div>
+<div id="changedepartmentbox" style="display: none;">
+        <div style="padding:20px 25px 10px 5px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">部门名称：</label>
+                    <div class="layui-input-block">
+                    <input id="goodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入部门名称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">简介：</label>
+                    <div class="layui-input-block">
+                    <input id="goodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入部门简介" class="layui-input">
+                    </div>
+                </div>
+              
+</div>
+
+
+<script>
+   //添加
+   layui.use('layer',function(){
+       //添加部门
+    $('#adddepaetmnet').click(function(){
+           layer.open({
+               type: 1
+               ,title: false
+               ,closeBtn: false
+               ,area: '300px'
+               ,shade: 0.8
+               ,btnAlign: 'c'
+               ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
+               ,btn: ['确定', '取消']
+               ,content: $('#adddepaetmnetBox')
+               ,success: function(layero){
+               var btn = layero.find('.layui-layer-btn');
+               btn.find('.layui-layer-btn0').click(function(){
+                   //点击确定按钮后的时间
+
+               });
+               }
+             });
+
+            }) 
+
+        //修改部门
+        $('.changedepartment').click(function(){
+           layer.open({
+               type: 1
+               ,title: false
+               ,closeBtn: false
+               ,area: '300px'
+               ,shade: 0.8
+               ,btnAlign: 'c'
+               ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
+               ,btn: ['确定', '取消']
+               ,content: $('#changedepartmentbox')
+               ,success: function(layero){
+               var btn = layero.find('.layui-layer-btn');
+               btn.find('.layui-layer-btn0').click(function(){
+                   //点击确定按钮后的时间
+
+               });
+               }
+             });
+
+            }) 
+   })  
+</script>		

@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 12:04:09
+ * @Last Modified time: 2018-05-13 12:10:23
  */
 
 namespace app\index\controller;
@@ -206,7 +206,7 @@ class Data extends Controller
 		
 		if($param['id']){
 			$data=[
-				''
+				
 			];
 			$result=Db::name('goods')->where('id',$param['id'])->update(['departname'=>$departname,'intro'=>$intro]);
 			if($result>0){

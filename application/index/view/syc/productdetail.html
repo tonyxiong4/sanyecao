@@ -50,7 +50,7 @@
                                         <td>{$vo.addtime}</td>
                                         <td>
                                             <!-- 修改btn -->
-                                                <button class="layui-btn layui-btn-sm"  title="修改">
+                                                <button class="layui-btn layui-btn-sm changeProduct"  title="修改">
                                                 <i class="layui-icon">&#xe642;</i>
                                                 </button>
                                             <!-- 删除btn -->
@@ -110,26 +110,43 @@
         </div>
     </div>
 </div>
+
+<div id="changeProduct" style="display: none;">
+        <div style="padding:20px 25px 10px 5px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">名称：</label>
+                    <div class="layui-input-block">
+                    <input id="goodsname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">属性：</label>
+                    <div class="layui-input-block">
+                    <input id="goodsattribute" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品属性" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单位：</label>
+                    <div class="layui-input-block">
+                    <input id="goodsunit" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品单位" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">成本价：</label>
+                    <div class="layui-input-block">
+                    <input  id="goodscostprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品成本价" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">市场价：</label>
+                    <div class="layui-input-block">
+                    <input  id="goodsprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品市场价" class="layui-input">
+                    </div>
+                </div>
+            </div>
+</div>
 <script>
-    layui.use('upload', function(){
-      var upload = layui.upload;
-       
-      //执行实例
-      var uploadInst = upload.render({
-        elem: '#uploadBtn' //绑定元素
-        ,url: '/upload/' //上传接口
-        ,done: function(res){
-          //上传完毕回调
-        }
-        ,error: function(){
-          //请求异常回调
-        }
-      });
-    });
-
-
-
-    //添加订单
+    //添加产品
     layui.use('layer',function(){
       
     $('#addorderDetail').click(function(){
@@ -181,5 +198,27 @@
         }
       });
     })
+//修改产品
+    $('.changeProduct').click(function(){
+           layer.open({
+               type: 1
+               ,title: false
+               ,closeBtn: false
+               ,area: '300px'
+               ,shade: 0.8
+               ,btnAlign: 'c'
+               ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
+               ,btn: ['确定', '取消']
+               ,content: $('#changeProduct')
+               ,success: function(layero){
+               var btn = layero.find('.layui-layer-btn');
+               btn.find('.layui-layer-btn0').click(function(){
+                   //点击确定按钮后的时间
+
+               });
+               }
+             });
+
+            }) 
 })
     </script>
