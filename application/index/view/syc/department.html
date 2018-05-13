@@ -35,7 +35,7 @@
                                                     <i class="layui-icon">&#xe642;</i>
                                                     </button>
                                                     <!-- 删除btn -->
-                                                    <button class="layui-btn layui-btn-sm"  title="删除">
+                                                    <button class="layui-btn layui-btn-sm" onclick="delDepart({$vo.id})"  title="删除">
                                                     <i class="layui-icon">&#xe640;</i>
                                                     </button>
                                                 </td>
@@ -85,3 +85,45 @@
                 <button class="submitBtn" style="margin:20px auto 0 auto;">提交</button>
             </div>
         </div>
+
+<script type="text/javascript" charset="utf-8">
+
+    /**
+     * [delCustomser 删除客户]
+     * @param  {[type]} id [description]
+     * @return {[type]}    [description]
+     */
+    function delDepart(id) {
+        var c = layui.use('layer',function(){
+            layer.confirm('您确认要删除吗？', {
+            btn: ['确认','取消'] //按钮
+            }, function(){
+                var url = "{:url('data/commonDel')}";
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: { id: id ,tablename:'department'}
+                    })
+                    .done(function (data) {
+                        if (data && data.code == 200) {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            }); 
+                            setTimeout(function () { window.location.reload(); }, 1000);  
+                            
+                        } else {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            });
+                        }
+                    });
+            });
+        })
+
+     
+        
+    }
+</script>

@@ -44,7 +44,7 @@
                                 <td>{$vo.addtime}</td>
                                 <td>
                                         <!-- 修改btn -->
-                                        <button class="layui-btn layui-btn-sm changeCusBox"  title="修改">
+                                        <button class="layui-btn layui-btn-sm changeCusBox" data-uid="{$vo.id}"  title="修改">
                                         <i class="layui-icon">&#xe642;</i>
                                         </button>
                                         <!-- 删除btn -->
@@ -96,19 +96,19 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">客户姓名：</label>
                 <div class="layui-input-block">
-                <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户信息" class="layui-input">
+                <input id="ucustname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户信息" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">所在公司：</label>
                 <div class="layui-input-block">
-                <input id="custcompany" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所在公司" class="layui-input">
+                <input id="ucustcompany" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所在公司" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">电话：</label>
                 <div class="layui-input-block">
-                <input  id="custphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户电话" class="layui-input">
+                <input  id="ucustphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户电话" class="layui-input">
                 </div>
             </div>
         </div>
@@ -203,7 +203,7 @@
                     layui.use('layer', function(){
                         layer.msg(data.msg);
                     });
-                    setTimeout(function () { window.location.reload(); }, 1000);
+                    setTimeout(function () { window.location.reload(); }, 1000);  
                 }else if (data && data.code == 100) {
                     layui.use('layer', function(){
                         layer.msg(data.msg);
@@ -221,6 +221,7 @@
         })
     //修改信息
         $('.changeCusBox').click(function(){
+            var uid=$(this).attr('data-uid');
       //示范一个公告层
       layer.open({
         type: 1
@@ -234,7 +235,48 @@
         ,moveType: 1 //拖拽模式，0或者1
         ,content: $('#changeCusBox')
         ,success: function(layero){
-          
+            var geturl="{:url('data/getData')}";
+            
+            $.ajax({
+                url: geturl,
+                type: 'post',
+                dataType: 'json',
+                data: {id: uid,tablename:'customer'},
+            })
+            .done(function(data) {
+                if(data && data.code==200){
+                    $("#ucustname").val(data.data['name']);
+                    $("#ucustcompany").val(data.data['company']);
+                    $("#ucustphone").val(data.data['phone']);
+                }
+            });
+            
+              var btn = layero.find('.layui-layer-btn');
+              btn.find('.layui-layer-btn0').click(function(){
+                var url = "{:url('data/addCustomser')}";
+                var custname = $("#ucustname").val();
+                var custcompany = $("#ucustcompany").val();
+                var custphone = $("#ucustphone").val();
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    dataType: 'json',
+                    data: { id:uid,custname: custname, custcompany: custcompany, custphone: custphone }
+                })
+                .done(function (data) {
+                    if (data && data.code == 200) {
+                        layui.use('layer', function(){
+                            layer.msg(data.msg);
+                        });
+                        setTimeout(function () { window.location.reload(); }, 1000);  
+                    }else {
+                        layui.use('layer', function(){
+                            layer.msg(data.msg);
+                        });
+                    }
+                });
+              });
+
         }
       });
         })

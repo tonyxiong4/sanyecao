@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 03:08:25
+ * @Last Modified time: 2018-05-13 12:04:09
  */
 
 namespace app\index\controller;
@@ -39,39 +39,6 @@ class Data extends Controller
 		return [];
 	}
 
-	/**
-	 * [addCustomser 添加客户]
-	 */
-	public function addCustomser()
-	{
-		$param=$this->request->param();
-		$data=[];
-		if($param['id']){
-			
-		}
-		if($param){
-			$data['name']=trim($param['custname']);
-			$data['phone']=trim($param['custphone']);
-			$data['company']=trim($param['custcompany']);
-			$data['belonguid']=session('userinfo.uid');
-		}
-		$isExist=$this->isExist('name',$data['name'],'customer');
-		if($isExist){
-			$mes['code']=100;
-			$mes['msg']="该客户已经存在";
-		}else{
-			$result=Db::name('customer')->insert($data);
-			if($result){
-				$mes['code']=200;
-				$mes['msg']="添加成功";
-			}else{
-				$mes['code']=-1;
-				$mes['msg']="添加失败";
-			}
-		}
-		
-		return json($mes);
-	}
 
 	/**
 	 * [isExist 查询数据是否存在]
@@ -185,7 +152,50 @@ class Data extends Controller
 	}
 
 	/**
-	 * [addGoods 添加客户]
+	 * [addCustomser 添加客户]
+	 */
+	public function addCustomser()
+	{
+		$param=$this->request->param();
+		
+		$data=[];
+		if($param){
+			$data['name']=trim($param['custname']);
+			$data['phone']=trim($param['custphone']);
+			$data['company']=trim($param['custcompany']);
+			$data['belonguid']=session('userinfo.uid');
+		}
+		if($param['id']){
+			$result=Db::name('customer')->where('id',$param['id'])->update(['name'=>$data['name'],'phone'=>$data['phone'],'company'=>$data['company']]);
+			if($result>0){
+				$mes['code']=200;
+				$mes['msg']='更新成功';
+			}else{
+				$mes['code']=-1;
+				$mes['msg']='更新失败';
+			}
+		}else{
+			$isExist=$this->isExist('name',$data['name'],'customer');
+			if($isExist){
+				$mes['code']=100;
+				$mes['msg']="该客户已经存在";
+			}else{
+				$result=Db::name('customer')->insert($data);
+				if($result){
+					$mes['code']=200;
+					$mes['msg']="添加成功";
+				}else{
+					$mes['code']=-1;
+					$mes['msg']="添加失败";
+				}
+			}
+		}
+		
+		return json($mes);
+	}
+
+	/**
+	 * [addGoods 添加商品]
 	 */
 	public function addGoods()
 	{
@@ -194,20 +204,72 @@ class Data extends Controller
 		$goodsattribute=$param['goodsattribute'];
 		$param['uid']=session('userinfo.uid');
 		
-		$isExist=Db::name('goods')->where('status',0)->where('goodsname',$goodsname)->where('goodsattribute',$goodsattribute)->find();
-		if($isExist){
-			$mes['code']=100;
-			$mes['msg']="该产品已经存在";
-		}else{
-			$result=Db::name('goods')->insert($param);
-			if($result){
+		if($param['id']){
+			$data=[
+				''
+			];
+			$result=Db::name('goods')->where('id',$param['id'])->update(['departname'=>$departname,'intro'=>$intro]);
+			if($result>0){
 				$mes['code']=200;
-				$mes['msg']="添加成功";
+				$mes['msg']='更新成功';
 			}else{
 				$mes['code']=-1;
-				$mes['msg']="添加失败";
+				$mes['msg']='更新失败';
+			}
+		}else{
+			$isExist=Db::name('goods')->where('status',0)->where('goodsname',$goodsname)->where('goodsattribute',$goodsattribute)->find();
+			if($isExist){
+				$mes['code']=100;
+				$mes['msg']="该产品已经存在";
+			}else{
+				$result=Db::name('goods')->insert($param);
+				if($result){
+					$mes['code']=200;
+					$mes['msg']="添加成功";
+				}else{
+					$mes['code']=-1;
+					$mes['msg']="添加失败";
+				}
 			}
 		}
+		return json($mes);
+	}
+
+	/**
+	 * [addDepart 添加部門]
+	 */
+	public function addDepart()
+	{
+		$param=$this->request->param();
+		$departname=$param['departname'];
+		$intro=$param['intro'];
+
+		if($param['id']){
+			$result=Db::name('department')->where('id',$param['id'])->update(['departname'=>$departname,'intro'=>$intro]);
+			if($result>0){
+				$mes['code']=200;
+				$mes['msg']='更新成功';
+			}else{
+				$mes['code']=-1;
+				$mes['msg']='更新失败';
+			}
+		}else{
+			$isExist=Db::name('department')->where('status',0)->where('departname',$departname)->find();
+			if($isExist){
+				$mes['code']=100;
+				$mes['msg']="该部门已经存在";
+			}else{
+				$result=Db::name('department')->insert($param);
+				if($result){
+					$mes['code']=200;
+					$mes['msg']="添加成功";
+				}else{
+					$mes['code']=-1;
+					$mes['msg']="添加失败";
+				}
+			}
+		}
+		
 		return json($mes);
 	}
 }
