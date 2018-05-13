@@ -15,7 +15,7 @@ img{width:100%;}
 /* 头部 */admin-side-toggle
 .header{height: 65px; border-bottom: 1px solid #404553;  background-color: #393D49; color: #fff;}
 .logo{position: absolute; left: 0; top: 18px;}
-.logo img{width: 82px; height: 31px;}
+.logo img{width: 30px; height: 30px;    vertical-align: -8px;}
 
 .header .layui-nav{position: absolute; right: 0; top: 0; padding: 0; background: none;}
 .header .layui-nav .layui-nav-item{margin: 0 20px; line-height: 66px;}
@@ -348,7 +348,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 	left: 240px;
 }
 .admin-login-box{
-	width: 185px; height: 70px; position: relative;
+  width: 240px; height: 70px; position: relative;
 }
 
 .beg-navbar .layui-nav-child dd a{
