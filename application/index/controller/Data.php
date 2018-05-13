@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 02:22:13
+ * @Last Modified time: 2018-05-13 03:08:25
  */
 
 namespace app\index\controller;
@@ -46,7 +46,9 @@ class Data extends Controller
 	{
 		$param=$this->request->param();
 		$data=[];
-
+		if($param['id']){
+			
+		}
 		if($param){
 			$data['name']=trim($param['custname']);
 			$data['phone']=trim($param['custphone']);
@@ -96,8 +98,11 @@ class Data extends Controller
 	 * @param  string  $tablename [表名]
 	 * @return boolean            [description]
 	 */
-	public function getData($id=0,$tablename="")
+	public function getData()
 	{
+		$id=$this->request->param('id');
+		$tablename=$this->request->param('tablename');
+		
 		$data=Db::name($tablename)->where('status',0)->where('id',$id)->find();
 		if($data){
 			$mes['code']=200;
@@ -106,7 +111,7 @@ class Data extends Controller
 			$mes['code']=-1;
 			$mes['msg']="No Data";
 		}
-		return josn($mes);
+		return json($mes);
 	}
 
 	/**
@@ -185,16 +190,6 @@ class Data extends Controller
 	public function addGoods()
 	{
 		$param=$this->request->param();
-		dump($param);
-
-		// $data=[];
-
-		// if($param){
-		// 	$data['name']=trim($param['custname']);
-		// 	$data['phone']=trim($param['custphone']);
-		// 	$data['company']=trim($param['custcompany']);
-		// 	$data['belonguid']=session('userinfo.uid');
-		// }
 		$goodsname=$param['goodsname'];
 		$goodsattribute=$param['goodsattribute'];
 		$param['uid']=session('userinfo.uid');
