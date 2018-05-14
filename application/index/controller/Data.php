@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-15 01:39:45
+ * @Last Modified time: 2018-05-15 02:12:54
  */
 
 namespace app\index\controller;
@@ -91,7 +91,6 @@ class Data extends Controller
 		$id=$param['id'];//id
 		$tablename=$param['tablename'];
 		$where['id']=$id;
-		dump($param);
 		$result=Db::name($tablename)->where($where)->setField('status',9);
 		if($result>0){
 			$mes['code']=200;
