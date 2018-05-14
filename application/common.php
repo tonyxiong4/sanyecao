@@ -10,3 +10,24 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+function getOrderStatus($orderstatus=0)
+{
+	$strstatus='';
+	switch ($orderstatus) {
+		case '1':
+			return '<span class="layui-badge oderPops" title="设置订单状态">已形成</span>';
+			break;
+		case '2':
+			return '<span class="layui-badge layui-bg-blue oderPops"  title="设置订单状态">派单中</span>';
+			break;
+		case '3':
+			return '<span class="layui-badge layui-bg-black oderPops"  title="设置订单状态">配送中</span>';
+			break;
+		case '4':
+			return '<span class="layui-badge layui-bg-green oderPops" title="设置订单状态">待付款</span>';
+			break;
+		case '5':
+			return '<span class="layui-badge layui-bg-green oderPops" title="设置订单状态">已完成</span>';
+			break;
+	}
+}

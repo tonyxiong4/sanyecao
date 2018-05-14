@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 19:08:27
+ * @Last Modified time: 2018-05-14 23:15:11
  */
 
 namespace app\index\controller;
@@ -340,8 +340,42 @@ class Data extends Controller
 		return json($mes);
 	}
 
+	/**
+	 * [addOrder 添加订单]
+	 */
 	public function addOrder()
 	{
+		$param=$this->request->param();
+		$id=$this->request->param('id');
+		$goodsname=$param['goodsname'];
+		$goodsattribute=$param['goodsattribute'];
+		$param['uid']=session('userinfo.uid');
 		
+		if($id){
+			$result=Db::name('goods')->where('id',$id)->update($param);
+			if($result>0){
+				$mes['code']=200;
+				$mes['msg']='更新成功';
+			}else{
+				$mes['code']=-1;
+				$mes['msg']='更新失败';
+			}
+		}else{
+			$isExist=Db::name('goods')->where('status',0)->where('goodsname',$goodsname)->where('goodsattribute',$goodsattribute)->find();
+			if($isExist){
+				$mes['code']=100;
+				$mes['msg']="该产品已经存在";
+			}else{
+				$result=Db::name('goods')->insert($param);
+				if($result){
+					$mes['code']=200;
+					$mes['msg']="添加成功";
+				}else{
+					$mes['code']=-1;
+					$mes['msg']="添加失败";
+				}
+			}
+		}
+		return json($mes);
 	}
 }

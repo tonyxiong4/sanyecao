@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-13 19:29:32
+ * @Last Modified time: 2018-05-14 23:42:18
  */
 
 namespace app\index\controller;
@@ -103,6 +103,7 @@ class Syc extends Base
     //订单
     public function myorder()
     {
+
         $departData=action('Data/getDepart');
         $this->assign('depart',$departData);
         $search=$this->request->param('searchname');
@@ -127,8 +128,8 @@ class Syc extends Base
                 }
               })
               ->paginate(10,false,['query'=>$this->request->param()]);
-        
         $this->assign('list',$list);
+        
         // $this->assign('departid',$departid);
         return $this->fetch('myorder');
     }
