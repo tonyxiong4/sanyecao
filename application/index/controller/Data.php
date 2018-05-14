@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-14 23:15:11
+ * @Last Modified time: 2018-05-15 01:39:45
  */
 
 namespace app\index\controller;
@@ -91,6 +91,7 @@ class Data extends Controller
 		$id=$param['id'];//id
 		$tablename=$param['tablename'];
 		$where['id']=$id;
+		dump($param);
 		$result=Db::name($tablename)->where($where)->setField('status',9);
 		if($result>0){
 			$mes['code']=200;
@@ -103,6 +104,28 @@ class Data extends Controller
 	}
 
 
+	/**
+	 * [commonUpdate 通过更新]
+	 * @return [type] [description]
+	 */
+	public function commonUpdate()
+	{
+		$param=$this->request->param();
+		$id=$param['id'];//id
+		$tablename=$param['tablename'];
+		$field=$param['field'];
+		$fieldvalue=$param['fieldvalue'];
+		$where['id']=$id;
+		$result=Db::name($tablename)->where($where)->setField($field,$fieldvalue);
+		if($result>0){
+			$mes['code']=200;
+			$mes['msg']="设置成功";
+		}else{
+			$mes['code']=-1;
+			$mes['msg']="设置失败";
+		}
+		return json($mes);
+	}
 
 	/**
 	 * [resetPassword 重置密码]
@@ -347,12 +370,10 @@ class Data extends Controller
 	{
 		$param=$this->request->param();
 		$id=$this->request->param('id');
-		$goodsname=$param['goodsname'];
-		$goodsattribute=$param['goodsattribute'];
-		$param['uid']=session('userinfo.uid');
+		$ordername=$param['name'];
 		
 		if($id){
-			$result=Db::name('goods')->where('id',$id)->update($param);
+			$result=Db::name('order')->where('id',$id)->update($param);
 			if($result>0){
 				$mes['code']=200;
 				$mes['msg']='更新成功';
@@ -361,12 +382,13 @@ class Data extends Controller
 				$mes['msg']='更新失败';
 			}
 		}else{
-			$isExist=Db::name('goods')->where('status',0)->where('goodsname',$goodsname)->where('goodsattribute',$goodsattribute)->find();
+			$param['uid']=session('userinfo.uid');
+			$isExist=Db::name('order')->where('status',0)->where('name',$ordername)->find();
 			if($isExist){
 				$mes['code']=100;
-				$mes['msg']="该产品已经存在";
+				$mes['msg']="该订单已经存在";
 			}else{
-				$result=Db::name('goods')->insert($param);
+				$result=Db::name('order')->insert($param);
 				if($result){
 					$mes['code']=200;
 					$mes['msg']="添加成功";
