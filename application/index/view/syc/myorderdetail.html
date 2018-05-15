@@ -10,12 +10,12 @@
                 </ul>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
-                            <blockquote class="layui-elem-quote"><span class="layui-badge-dot"></span> 订单总金额：<span class="layui-badge">10000</span> <span class="layui-badge-dot"></span> 订单纯利润：<span class="layui-badge">999999</span></blockquote>
+                            <blockquote class="layui-elem-quote"><span class="layui-badge-dot"></span> 订单总金额：<span class="layui-badge">{$orderInfo['total']}</span> <span class="layui-badge-dot"></span> 订单纯利润：<span class="layui-badge">{$orderInfo['profit']}</span></blockquote>
                         <blockquote class="layui-elem-quote">
-                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">地址：</span>史蒂夫纳斯达克粉丝大部分史蒂夫说的可能</span>
-                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">电话：</span>15262403011</span>
-                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">下单时间：</span>2018/04/08/10“43</span>
-                            <span  style="margin-right:20px;"><span class="layui-badge" style="margin-right:10px;">预计到达时间：</span>2018/04/08/10/43</span>
+                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">地址：</span>{$orderInfo['address']}</span>
+                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">电话：</span>{$orderInfo['phone']}</span>
+                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">下单时间：</span>{$orderInfo['createtime']}</span>
+                            <span  style="margin-right:20px;"><span class="layui-badge" style="margin-right:10px;">预计到达时间：</span>{$orderInfo['predicttime']}</span>
                             
                         </blockquote>
 

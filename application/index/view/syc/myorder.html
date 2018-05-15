@@ -9,20 +9,31 @@
                         <fieldset class="layui-elem-field layui-field-title">
                             <legend>我的订单</legend>
                         </fieldset>
-                        <div class="layui-inline">
-                                <input type="text" name="searchname" required="" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
+                        <form  method="POST" action="{:url('syc/myorder',['departid'=>$departid])}">
+                          <div class="layui-inline">
+                                <input type="text" name="searchname"  value="{:input('param.searchname')}" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
                             </div>
                             <div class="layui-inline">
-                                <input type="text" name="stime" required="" lay-verify="required" placeholder="请输入选择开始时间" autocomplete="on" class="layui-input" id="selTime">
+                                <input type="text" name="stime" value="{:input('param.stime')}"  lay-verify="required" placeholder="请输入选择开始时间" autocomplete="on" class="layui-input" id="selTime">
                             </div>
                             <div class="layui-inline">
-                                <input type="text" name="etime" required="" lay-verify="required" placeholder="请输入选择结束时间" autocomplete="on" class="layui-input" id="selTime01">
+                                <input type="text" name="etime" value="{:input('param.etime')}" lay-verify="required" placeholder="请输入选择结束时间" autocomplete="on" class="layui-input" id="selTime01">
+                            </div>
+                            <div class="layui-inline">
+                                <select name='depart' lay-filter="aihao">
+                                    <option value="0">请选择部门</option>
+                                    {volist name='depart' id="vo"}
+                                    <option value="{$vo.id}" {if condition="$vo.id eq $departid" }selected='selected' {/if}>{$vo.departname}</option>
+                                    {/volist}
+                                </select>
                             </div>
                             <div class="layui-inline">
                                 <button class="layui-btn">
                                     <i class="layui-icon">&#xe615;</i> 查询
                                 </button>
                             </div>
+                        </form>
+                        
                             <button class="layui-btn " id="addOderItem">
                                 <i class="layui-icon">&#xe608;</i> 添加
                              </button>
@@ -73,12 +84,17 @@
                                                 <button class="layui-btn layui-btn-xs changeorderInfo" data-uid="{$vo.id}" data-userid="{$vo.uid}">修改</button>
                                             </td>
                                             <td>
-                                                <a href="myOrderDetail.html" class="layui-icon layui-btn layui-btn-sm">
+                                                <a href="{:url('syc/myOrderDetail',['orderid'=>$vo['id']])}" class="layui-icon layui-btn layui-btn-sm" title="查看详细">
                                                    &#xe602;
                                                 </a>
                                             </td>
                                         </tr>
                                         {/volist}
+                                        {if condition="count($list) elt 0"}
+                                            <tr>
+                                                <td colspan="10" style="text-align: center">没有您要查询的数据</td>
+                                            </tr>
+                                        {/if}
                                     </tbody>
                                     </table>
                                      {$list->render()}
@@ -116,6 +132,12 @@
         <input id="ordermark" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input">
         </div>
     </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">预计送达时间：</label>
+        <div class="layui-input-block">
+        <input id="selTime02" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input" >
+        </div>
+    </div>
 
 </div>
 </div>
@@ -145,6 +167,12 @@
         <label class="layui-form-label">修改备注：</label>
         <div class="layui-input-block">
         <input id="uordermark" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">预计送达时间：</label>
+        <div class="layui-input-block">
+        <input id="selTime03" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input">
         </div>
     </div>
 
@@ -212,6 +240,14 @@
             elem: '#selTime01' //指定元素
 	        ,type: 'datetime'
         });
+        laydate.render({
+            elem: '#selTime02' //指定元素
+          ,type: 'datetime'
+        });
+        laydate.render({
+            elem: '#selTime03' //指定元素
+          ,type: 'datetime'
+        });
     });
 	
     layui.use('laypage', function(){
@@ -278,7 +314,7 @@ layui.use('layer',function(){
                ,shade: 0.8
                ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
                ,btn: ['确定', '取消']
-               ,content: $('#sendOrderPersonBox').html()
+               ,content: $('#sendOrderPersonBox')
                ,success: function(layero){
                var btn = layero.find('.layui-layer-btn');
                btn.find('.layui-layer-btn0').click(function(){
@@ -297,6 +333,10 @@ layui.use('layer',function(){
                               layer.msg(data.msg);
                           });
                           setTimeout(function () { window.location.reload(); }, 1000);  
+                      }else if (data && data.code == 100) {
+                          layui.use('layer', function(){
+                              layer.msg(data.msg);
+                          });
                       }else {
                           layui.use('layer', function(){
                               layer.msg(data.msg);
@@ -327,11 +367,12 @@ layui.use('layer',function(){
                   var remark = $("#ordermark").val();
                   var address = $("#orderaddress").val();
                   var phone = $("#orderphone").val();
+                  var predicttime = $("#selTime02").val();
                   $.ajax({
                       url: url,
                       type: 'post',
                       dataType: 'json',
-                      data: { name: name, remark: remark, address: address,phone: phone}
+                      data: { name: name, remark: remark, address: address,phone: phone,predicttime:predicttime}
                   })
                   .done(function (data) {
                       if (data && data.code == 200) {
@@ -422,6 +463,7 @@ $('.changeorderInfo').click(function(){
                            $("#uordermark").val(data.data['remark']);
                            $("#uorderaddress").val(data.data['address']);
                            $("#uorderphone").val(data.data['phone']);
+                           $("#selTime03").val(data.data['predicttime']);
                        }
                    });
                var btn = layero.find('.layui-layer-btn');
@@ -433,23 +475,23 @@ $('.changeorderInfo').click(function(){
                   var remark= $("#uordermark").val();
                   var address= $("#uorderaddress").val();
                   var phone=$("#uorderphone").val();
-                  
+                  var predicttime = $("#selTime03").val();
                   $.ajax({
                       url: url,
                       type: 'post',
                       dataType: 'json',
-                      data: { id:uid,name: name, remark: remark, address: address , phone: phone}
+                      data: { id:uid,name: name, remark: remark, address: address , phone: phone,predicttime:predicttime}
                   })
                   .done(function (data) {
                       if (data && data.code == 200) {
-                          layui.use('layer', function(){
+                       
                               layer.msg(data.msg);
-                          });
+                  
                           setTimeout(function () { window.location.reload(); }, 1000);  
                       }else {
-                          layui.use('layer', function(){
+                         
                               layer.msg(data.msg);
-                          });
+                         
                       }
                   });
                });

@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-15 02:12:54
+ * @Last Modified time: 2018-05-15 20:52:07
  */
 
 namespace app\index\controller;
@@ -114,15 +114,37 @@ class Data extends Controller
 		$tablename=$param['tablename'];
 		$field=$param['field'];
 		$fieldvalue=$param['fieldvalue'];
-		$where['id']=$id;
-		$result=Db::name($tablename)->where($where)->setField($field,$fieldvalue);
-		if($result>0){
-			$mes['code']=200;
-			$mes['msg']="设置成功";
+		$isSelect=$this->request->param('isSelect');
+		if($isSelect==2){
+			$list=Db::name('user')->where('username',$fieldvalue)->where('status',0)->value('id');
+
+			if($list){
+				$fieldvalue=$list;
+				$where['id']=$id;
+				$result=Db::name($tablename)->where($where)->setField($field,$fieldvalue);
+				if($result>0){
+					$mes['code']=200;
+					$mes['msg']="设置成功";
+				}else{
+					$mes['code']=-1;
+					$mes['msg']="设置失败";
+				}
+			}else{
+				$mes['code']=100;
+				$mes['msg']="此用户不存在";
+			}
 		}else{
-			$mes['code']=-1;
-			$mes['msg']="设置失败";
+			$where['id']=$id;
+			$result=Db::name($tablename)->where($where)->setField($field,$fieldvalue);
+			if($result>0){
+				$mes['code']=200;
+				$mes['msg']="设置成功";
+			}else{
+				$mes['code']=-1;
+				$mes['msg']="设置失败";
+			}
 		}
+		
 		return json($mes);
 	}
 

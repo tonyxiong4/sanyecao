@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-14 23:42:18
+ * @Last Modified time: 2018-05-15 21:47:12
  */
 
 namespace app\index\controller;
@@ -92,7 +92,7 @@ class Syc extends Base
               })
               ->paginate(10,false,['query'=>$this->request->param()]);
         $this->assign('list',$list);
-        // dump($list);
+        
         return $this->fetch('customser');
     }
     //系统首页
@@ -110,33 +110,41 @@ class Syc extends Base
         $stime=$this->request->param('stime');
         $etime=$this->request->param('etime');
 
-        // $departid=$this->request->param('depart'); 
+        $departid=$this->request->param('depart'); 
 
         $map['status']=0;
-        // if($departid)$map['departid']=$departid;
+        if($departid)$map['departid']=$departid;
+        if($search)$map['name']=['like','%'.$search.'%'];
+        if($stime)$map['createtime']=['>= time',$stime];
+        if($etime)$map['createtime']=['<= time',$etime];
 
         $list=Db::view('order','id,name,createtime,uid,orderstatus,cost,total,address,phone,picture,departid,principal,remark,status,predicttime')
               ->view('department','departname','department.id=order.departid','LEFT')
               ->view('user','username','user.id=order.uid','LEFT')
               ->view(['syc_user'=>'fzuser'],['username'=>'fzname'],'fzuser.id=order.principal','LEFT')
               ->where($map)
-              ->where(function($query) use($search){
-                if($search){
-                  $query->where('name','like','%'.$search.'%');
-                }else{
-                  $query->where("");
-                }
-              })
               ->paginate(10,false,['query'=>$this->request->param()]);
         $this->assign('list',$list);
         
-        // $this->assign('departid',$departid);
+        $this->assign('departid',$departid);
         return $this->fetch('myorder');
     }
      //订单详细
      public function myorderdetail()
      {
-         return $this->fetch('myorderdetail');
+
+        $orderid=$this->request->param('orderid');
+        $orderInfo=Db::name('order')->where('status',0)->where('id',$orderid)->find();
+        $orderInfo['profit']=$orderInfo['total']-$orderInfo['cost'];
+        $list=Db::view('orderdetail','id,goodsid,count,total,orderid,status')
+                      ->view('user','username','user.id=goods.uid','LEFT')
+                      ->where('status',0)
+                      ->where('departid',$orderid)
+                      ->paginate(10,false,['query'=>$this->request->param()]);
+        $this->assign('list',$list);
+        $this->assign('orderid',$orderid);
+        $this->assign('orderInfo',$orderInfo);
+        return $this->fetch('myorderdetail');
      }
      //部门管理
      public function department()
