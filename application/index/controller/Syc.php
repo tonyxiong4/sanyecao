@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-15 22:36:41
+ * @Last Modified time: 2018-05-16 01:53:23
  */
 
 namespace app\index\controller;
@@ -98,7 +98,12 @@ class Syc extends Base
     //系统首页
     public function sysindex()
     {   
-        return $this->fetch('sysindex');
+      $ordercount=Db::name('order')->where('status',0)->wheretime('createtime','week')->count();
+      $wcordercount=Db::name('order')->where('status',0)->where('orderstatus',5)->wheretime('createtime','week')->count();
+      $this->assign('ordercount',$ordercount);
+      $this->assign('wcordercount',$wcordercount);
+
+      return $this->fetch('sysindex');
     }
     //订单
     public function myorder()
@@ -132,6 +137,11 @@ class Syc extends Base
      //订单详细
      public function myorderdetail()
      {
+
+        //部门
+        $departData=action('Data/getDepart');
+        $this->assign('depart',$departData);
+
 
         $orderid=$this->request->param('orderid');
         $orderInfo=Db::name('order')->where('status',0)->where('id',$orderid)->find();

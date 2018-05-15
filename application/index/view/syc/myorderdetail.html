@@ -4,152 +4,132 @@
         <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
             <div class="layui-tab-item layui-show">
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-                    <ul class="layui-tab-title">
-                        <li class="layui-this">订单详细</li>
-                        <li>订单图片</li>
-                    </ul>
-                    <div class="layui-tab-content">
-                        <div class="layui-tab-item layui-show">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">订单详细</li>
+                    <li>订单图片</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
                             <blockquote class="layui-elem-quote"><span class="layui-badge-dot"></span> 订单总金额：<span class="layui-badge">{$orderInfo['total']}</span> <span class="layui-badge-dot"></span> 订单纯利润：<span class="layui-badge">{$orderInfo['profit']}</span></blockquote>
-                            <blockquote class="layui-elem-quote">
-                                <span style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">地址：</span>{$orderInfo['address']}</span>
-                                <span style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">电话：</span>{$orderInfo['phone']}</span>
-                                <span style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">下单时间：</span>{$orderInfo['createtime']}</span>
-                                <span style="margin-right:20px;"><span class="layui-badge" style="margin-right:10px;">预计到达时间：</span>{$orderInfo['predicttime']}</span>
+                        <blockquote class="layui-elem-quote">
+                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">地址：</span>{$orderInfo['address']}</span>
+                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">电话：</span>{$orderInfo['phone']}</span>
+                            <span  style="margin-right:20px;"><span class="layui-badge layui-bg-green" style="margin-right:10px;">下单时间：</span>{$orderInfo['createtime']}</span>
+                            <span  style="margin-right:20px;"><span class="layui-badge" style="margin-right:10px;">预计到达时间：</span>{$orderInfo['predicttime']}</span>
+                            
+                        </blockquote>
 
-                            </blockquote>
-
-                            <div class="layui-inline">
-
-                                <button class="layui-btn" id="addorderDetail"><span  class="layui-icon layui-icon-add-1" style="font-size: 14px;"></span>添加</button>
-                            </div>
-
-
-                            <table class="layui-table" lay-skin="line">
-
-                                <thead>
-                                    <tr>
-                                        <th>产品名称</th>
-                                        <th>单位</th>
-                                        <th>数量</th>
-                                        <th>单价（元）</th>
-                                        <th>总价（元）</th>
-                                        <th>操作</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>贤阿斯顿发生</td>
-                                        <td>包</td>
-                                        <td>111</td>
-                                        <td>235</td>
-                                        <td>2355</td>
-                                        <td>
-                                            <!-- 修改btn -->
-                                            <button class="layui-btn layui-btn-sm chengeproduct01" title="修改">
-                                        <i class="layui-icon">&#xe642;</i>
-                                        </button>
-                                            <!-- 删除btn -->
-                                            <button class="layui-btn layui-btn-sm" title="删除">
-                                    <i class="layui-icon">&#xe640;</i>
-                                    </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>贤阿斯顿发生</td>
-                                        <td>包</td>
-                                        <td>111</td>
-                                        <td>235</td>
-                                        <td>2355</td>
-                                        <td>
-                                            <!-- 修改btn -->
-                                            <button class="layui-btn layui-btn-sm chengeproduct01" title="修改">
-                                        <i class="layui-icon">&#xe642;</i>
-                                        </button>
-                                            <!-- 删除btn -->
-                                            <button class="layui-btn layui-btn-sm" title="删除">
-                                    <i class="layui-icon">&#xe640;</i>
-                                    </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>贤阿斯顿发生</td>
-                                        <td>包</td>
-                                        <td>111</td>
-                                        <td>235</td>
-                                        <td>2355</td>
-                                        <td>
-                                            <!-- 修改btn -->
-                                            <button class="layui-btn layui-btn-sm chengeproduct01" title="修改">
-                                        <i class="layui-icon">&#xe642;</i>
-                                        </button>
-                                            <!-- 删除btn -->
-                                            <button class="layui-btn layui-btn-sm" title="删除">
-                                    <i class="layui-icon">&#xe640;</i>
-                                    </button>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
+                        <div class="layui-inline" >
+                         
+                            <button class="layui-btn" id="addorderDetail"><span  class="layui-icon layui-icon-add-1" style="font-size: 14px;"></span>添加</button>
                         </div>
-                        <div class="layui-tab-item">
-                            <div class="layui-box" style="margin:20px 0;">
+                        
 
-                                <button class="layui-btn layui-btn-lg" id="uploadBtn"><i class="layui-icon">&#xe67c;</i>上传图片</button>
-                            </div>
-                            <div style="padding: 20px; background-color: #F2F2F2;">
-                                <div class="layui-row layui-col-space15">
-                                    <div class="layui-col-md3">
-                                        <div class="layui-card orderImg">
-                                            <img src="__IMG__img001.jpg" />
-                                            <i></i>
-                                            <button class="layui-btn layui-icon">&#xe640;</button>
-                                        </div>
-                                    </div>
-                                    <div class="layui-col-md3">
-                                        <div class="layui-card orderImg">
-                                            <img src="__IMG__img002.jpg" />
-                                            <button class="layui-btn layui-icon">&#xe640;</button>
-                                        </div>
-                                    </div>
-                                    <div class="layui-col-md3">
-                                        <div class="layui-card orderImg">
-                                            <img src="__IMG__img001.jpg" />
-                                            <button class="layui-btn layui-icon">&#xe640;</button>
-                                        </div>
-                                    </div>
-                                    <div class="layui-col-md3">
-                                        <div class="layui-card orderImg">
-                                            <img src="__IMG__img002.jpg" />
-                                            <button class="layui-btn layui-icon">&#xe640;</button>
-                                        </div>
-                                    </div>
-                                    <div class="layui-col-md3">
-                                        <div class="layui-card orderImg">
-                                            <img src="__IMG__img002.jpg" />
-                                            <button class="layui-btn layui-icon">&#xe640;</button>
-                                        </div>
-                                    </div>
-                                    <div class="layui-col-md3">
-                                        <div class="layui-card orderImg">
-                                            <img src="__IMG__img001.jpg" />
-                                            <button class="layui-btn layui-icon">&#xe640;</button>
-                                        </div>
-                                    </div>
-                                    <div class="layui-col-md3">
-                                        <div class="layui-card orderImg">
-                                            <img src="__IMG__img002.jpg" />
-                                            <button class="layui-btn layui-icon">&#xe640;</button>
-                                        </div>
-                                    </div>
-
+                        <table class="layui-table" lay-skin="line">
+                            
+                            <thead>
+                              <tr>
+                                <th>产品名称</th>
+                                <th>属性</th>
+                                <th>单位</th>
+                                <th>数量</th>
+                                <th>单价（元）</th>
+                                <th>搬运费（元）</th>
+                                <th>成本（元）</th>
+                                <th>总价（元）</th>
+                                <th>操作</th>
+                               
+                              </tr> 
+                            </thead>
+                            <tbody>
+                                {volist name='list' id='vo'}
+                                    <tr>
+                                      <td>{$vo.goodsname}</td>
+                                      <td>{$vo.goodsattribute}</td>
+                                      <td>{$vo.goodsunit}</td>
+                                      <td>{$vo.count}</td>
+                                      <td>{$vo.goodsprice}</td>
+                                      <td>{$vo.truckage}</td>
+                                      <td>{$vo.sumcost}</td>
+                                      <td>{$vo.total}</td>
+                                      <td>
+                                          <!-- 修改btn -->
+                                              <!-- <button class="layui-btn layui-btn-sm chengeproduct01" data-id={$vo.id} title="修改">
+                                              <i class="layui-icon">&#xe642;</i>
+                                              </button> -->
+                                          <!-- 删除btn -->
+                                          <button class="layui-btn layui-btn-sm" onclick="delOrderDetail({$vo.id})" title="删除">
+                                          <i class="layui-icon">&#xe640;</i>
+                                          </button>
+                                      </td>
+                                    </tr>
+                                {/volist}
+                                {if condition="count($list) elt 0"}
+                                    <tr>
+                                        <td colspan="10" style="text-align: center">没有您要查询的数据</td>
+                                    </tr>
+                                {/if}
+                            </tbody>
+                          </table>
+                          {$list->render()}
+                          <input type="hidden" id='hidOrderid' name="hidOrderid" value="{$orderid}"/>
+                    </div>
+                    <div class="layui-tab-item">
+                         <div class="layui-box" style="margin:20px 0;">
+                            
+                            <button class="layui-btn layui-btn-lg" id="uploadBtn"><i class="layui-icon">&#xe67c;</i>上传图片</button>
+                        </div>
+                        <div style="padding: 20px; background-color: #F2F2F2;">
+                            <div class="layui-row layui-col-space15">
+                            <div class="layui-col-md3">
+                                <div class="layui-card orderImg">
+                                    <img src="__IMG__img001.jpg" />
+                                    <i></i>
+                                    <button class="layui-btn layui-icon">&#xe640;</button>
                                 </div>
                             </div>
-                        </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card orderImg">
+                                    <img src="__IMG__img002.jpg" />
+                                     <button class="layui-btn layui-icon">&#xe640;</button>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card orderImg">
+                                   <img src="__IMG__img001.jpg" />
+                                    <button class="layui-btn layui-icon">&#xe640;</button>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card orderImg">
+                                    <img src="__IMG__img002.jpg" />
+                                     <button class="layui-btn layui-icon">&#xe640;</button>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card orderImg">
+                                    <img src="__IMG__img002.jpg" />
+                                     <button class="layui-btn layui-icon">&#xe640;</button>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card orderImg">
+                                    <img src="__IMG__img001.jpg" />
+                                     <button class="layui-btn layui-icon">&#xe640;</button>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="layui-card orderImg">
+                                    <img src="__IMG__img002.jpg" />
+                                     <button class="layui-btn layui-icon">&#xe640;</button>
+                                </div>
+                            </div>
+                           
+                            </div>
+                        </div> 
                     </div>
                 </div>
+                </div> 
             </div>
         </div>
     </div>
@@ -158,44 +138,45 @@
 <!-- 添加 -->
 <div id="addProductBox" style="display: none;">
     <div style="padding:20px 25px 10px 5px;">
-        <form action="" class="layui-form">
+        <form action="" >
             <div class="layui-form-item">
                 <label class="layui-form-label">部门：</label>
                 <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao">
-                            <option value="0">aa</option>
-                            <option value="1">1</option>
-                            </select>
+                    
+                    <select id="depart" name="depart" lay-filter="aihao">
+                        <option value="0">请选择部门</option>
+                        {volist name='depart' id="vo"}
+                            <option value="{$vo.id}">{$vo.departname}</option>
+                        {/volist}
+                    </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">商品名称：</label>
                 <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao">
-                                <option value="0">aa</option>
-                                <option value="1">1</option>
+                    <select id="goodsname" name="interest" lay-filter="aihao">
+
                                 </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">属性：</label>
                 <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao">
-                                    <option value="0">aa</option>
-                                    <option value="1">1</option>
+                    <select id="attribute" name="interest" lay-filter="aihao">
+                                    
                                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">数量：</label>
                 <div class="layui-input-block">
-                    <input id="custphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入数量" class="layui-input">
+                    <input id="count" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入数量" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">楼层：</label>
                 <div class="layui-input-block">
-                    <input id="custphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入楼层" class="layui-input">
+                    <input id="floors" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入楼层" class="layui-input">
                 </div>
             </div>
         </form>
@@ -205,7 +186,7 @@
 <!-- 修改 -->
 <div id="changeProductBox" style="display: none;">
     <div style="padding:20px 25px 10px 5px;">
-        <form action="" class="layui-form">
+        <form action="" >
             <div class="layui-form-item">
                 <label class="layui-form-label">部门：</label>
                 <div class="layui-input-block">
@@ -250,80 +231,196 @@
 </div>
 
 <script>
-    layui.use('upload', function() {
-        var upload = layui.upload;
-
-        //执行实例
-        var uploadInst = upload.render({
-            elem: '#uploadBtn' //绑定元素
-                ,
-            url: '/upload/' //上传接口
-                ,
-            done: function(res) {
-                //上传完毕回调
-            },
-            error: function() {
-                //请求异常回调
-            }
+    $(document).ready(function() {
+        $("#depart").on('change',  function(event) {
+            var departid=$(this).val();
+            getGoodsName(departid);
+            getGoodsAttribute(departid);
         });
+        
+        function getGoodsName(departid) {
+            var dourl = "{:url('data/getDatas')}"
+                $.ajax({
+                        url: dourl,
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            departid: departid
+                        }
+                    })
+                    .done(function(data) {
+                        var list = "<option value=''>=请选择=</option>";
+                        if (data && data.code==200) {
+                            $.each(data.data, function(index, val) {
+                                list += "<option value=" + val.id + ">" + val.goodsname + "</option>"
+                            });
+
+                        }
+                        $("#goodsname").html(list);
+                    })
+                    .always(function() {
+                        // $("#goodsname").val(classid);
+                    });
+        }
+
+        function getGoodsAttribute(departid) {
+            var dourl = "{:url('data/getDatas')}"
+                $.ajax({
+                        url: dourl,
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            departid: departid
+                        }
+                    })
+                    .done(function(data) {
+                        var list = "<option value=''>=请选择=</option>";
+                        if (data && data.code==200) {
+                            $.each(data.data, function(index, val) {
+                                list += "<option value=" + val.id + ">" + val.goodsattribute + "</option>"
+                            });
+
+                        }
+                        $("#attribute").html(list);
+                    })
+                    .always(function() {
+                        
+                    });
+        }
     });
 
+    layui.use('upload', function(){
+      var upload = layui.upload;
+       
+      //执行实例
+      var uploadInst = upload.render({
+        elem: '#uploadBtn' //绑定元素
+        ,url: '/upload/' //上传接口
+        ,done: function(res){
+          //上传完毕回调
+        }
+        ,error: function(){
+          //请求异常回调
+        }
+      });
+    });
+
+    /**
+     * [delOrderDetail 删除订单详细]
+     * @param  {[type]} id [description]
+     * @return {[type]}    [description]
+     */
 
 
-
-    layui.use(['layer', 'form'], function() {
-        //添加订单
-        $('#addorderDetail').click(function() {
-            //示范一个公告层
-            layer.open({
-                type: 1,
-                title: false //不显示标题栏
-                    ,
-                closeBtn: false,
-                area: '300px;',
-                shade: 0.8,
-                id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                    ,
-                btn: ['确定', '取消'],
-                btnAlign: 'c',
-                moveType: 1 //拖拽模式，0或者1
-                    ,
-                content: $('#addProductBox'),
-                success: function(layero) {
-                    var btn = layero.find('.layui-layer-btn');
-                    btn.find('.layui-layer-btn0').click(function() {
-                        //点击确定按钮后的时间
-
+    function delOrderDetail(id) {
+        var c = layui.use('layer',function(){
+            layer.confirm('您确认要删除吗？', {
+            btn: ['确认','取消'] //按钮
+            }, function(){
+                var url = "{:url('data/commonDel')}";
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: { id: id ,tablename:'orderdetail'}
+                    })
+                    .done(function (data) {
+                        if (data && data.code == 200) {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            }); 
+                            setTimeout(function () { window.location.reload(); }, 1000);  
+                            
+                        } else {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            });
+                        }
                     });
-                }
             });
         })
 
-        //修改
-        $('.chengeproduct01').click(function() {
-            //示范一个公告层
-            layer.open({
-                type: 1,
-                title: false //不显示标题栏
-                    ,
-                closeBtn: false,
-                area: '300px;',
-                shade: 0.8,
-                id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                    ,
-                btn: ['确定', '取消'],
-                btnAlign: 'c',
-                moveType: 1 //拖拽模式，0或者1
-                    ,
-                content: $('#changeProductBox'),
-                success: function(layero) {
-                    var btn = layero.find('.layui-layer-btn');
-                    btn.find('.layui-layer-btn0').click(function() {
-                        //点击确定按钮后的时间
+     
+        
+    }
 
+
+    
+    layui.use(['layer'],function(){
+//添加订单
+ $('#addorderDetail').click(function(){
+      //示范一个公告层
+      layer.open({
+        type: 1
+        ,title: false //不显示标题栏
+        ,closeBtn: false
+        ,area: '300px;'
+        ,shade: 0.8
+        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+        ,btn: ['确定', '取消']
+        ,btnAlign: 'c'
+        ,moveType: 1 //拖拽模式，0或者1
+        ,content: $('#addProductBox')
+        ,success: function(layero){
+          var btn = layero.find('.layui-layer-btn');
+          btn.find('.layui-layer-btn0').click(function(){
+            //点击确定按钮后的时间
+            var url = "{:url('data/addOrderDetail')}";
+            var goodsid = $("#goodsname").val();
+            var goodsname = $("#goodsname").find("option:selected").text();
+            var goodsattribute = $("#attribute").find("option:selected").text();
+            var count = $("#count").val();
+            var floors = $("#floors").val();
+            var orderid="{$orderid}";
+            
+            
+            $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                data: { goodsid: goodsid,goodsname: goodsname, goodsattribute: goodsattribute, count: count,floors: floors,orderid: orderid}
+            })
+            .done(function (data) {
+                if (data && data.code == 200) {
+                    layui.use('layer', function(){
+                        layer.msg(data.msg);
+                    });
+                    setTimeout(function () { window.location.reload(); }, 1000);  
+                }else {
+                    layui.use('layer', function(){
+                        layer.msg(data.msg);
                     });
                 }
             });
+          });
+        }
+      });
+        })
+    
+    //修改
+ $('.chengeproduct01').click(function(){
+      //示范一个公告层
+      layer.open({
+        type: 1
+        ,title: false //不显示标题栏
+        ,closeBtn: false
+        ,area: '300px;'
+        ,shade: 0.8
+        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+        ,btn: ['确定', '取消']
+        ,btnAlign: 'c'
+        ,moveType: 1 //拖拽模式，0或者1
+        ,content: $('#changeProductBox')
+        ,success: function(layero){
+          var btn = layero.find('.layui-layer-btn');
+          btn.find('.layui-layer-btn0').click(function(){
+            //点击确定按钮后的时间
+
+          });
+        }
+      });
         })
     })
-</script>
+    </script>

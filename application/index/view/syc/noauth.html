@@ -1,11 +1,21 @@
-{__NOLAYOUT__}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-	nimeiyouquanxian
+	<select id="depart" name="interest" lay-filter="aihao">
+                                    <option value="0">aa</option>
+                                    <option value="1">1</option>
+                                    </select>
 </body>
+<script type="text/javascript" charset="utf-8">
+	$("#depart").change(function(event) {
+           console.log('1');
+           alert("ddd");
+        });
+</script>
 </html>

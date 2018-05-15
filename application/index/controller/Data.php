@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-15 20:52:07
+ * @Last Modified time: 2018-05-16 01:44:43
  */
 
 namespace app\index\controller;
@@ -81,6 +81,20 @@ class Data extends Controller
 		return json($mes);
 	}
 
+	public function getDatas()
+	{
+		$id=$this->request->param('departid');
+		$data=Db::name('goods')->field('id,goodsname,goodsattribute,goodsunit')->where('status',0)->where('departid',$id)->select();
+		if($data){
+			$mes['code']=200;
+			$mes['data']=$data;
+		}else{
+			$mes['code']=-1;
+			$mes['msg']="No Data";
+		}
+		return json($mes);
+	}
+
 	/**
 	 * [commonDel 通用删除]
 	 * @return [type] [description]
@@ -92,13 +106,32 @@ class Data extends Controller
 		$tablename=$param['tablename'];
 		$where['id']=$id;
 		$result=Db::name($tablename)->where($where)->setField('status',9);
-		if($result>0){
-			$mes['code']=200;
-			$mes['msg']="删除成功";
+		if($tablename=='orderdetail'){
+			$detailinfo=Db::name('orderdetail')->where('id',$id)->find();
+			$orderid=$detailinfo['orderid'];
+			$dcost=$detailinfo['sumcost'];
+			$dtotal=$detailinfo['total'];
+			$orderinfo=Db::name('order')->where('id',$orderid)->find();
+			$cost=$orderinfo['cost']-$dcost;
+			$total=$orderinfo['total']-$dtotal;
+			$jieguo=Db::name('order')->where('id',$orderid)->where('status',0)->update(['cost'=>$cost,'total'=>$total]);
+			if($jieguo>0){
+				$mes['code']=200;
+				$mes['msg']="删除成功";
+			}else{
+				$mes['code']=-1;
+				$mes['msg']="删除失败";
+			}
 		}else{
-			$mes['code']=-1;
-			$mes['msg']="删除失败";
+			if($result>0){
+				$mes['code']=200;
+				$mes['msg']="删除成功";
+			}else{
+				$mes['code']=-1;
+				$mes['msg']="删除失败";
+			}
 		}
+		
 		return json($mes);
 	}
 
@@ -419,6 +452,63 @@ class Data extends Controller
 				}
 			}
 		}
+		return json($mes);
+	}
+
+
+	public function addOrderDetail()
+	{
+		$param=$this->request->param();
+		$id=$this->request->param('id');
+		
+		
+		$data['goodsid']=trim($param['goodsid']);
+		$data['goodsname']=trim($param['goodsname']);
+		$data['goodsattribute']=trim($param['goodsattribute']);
+		$data['count']=trim($param['count']);
+		$data['orderid']=trim($param['orderid']);
+		$goodsinfo=Db::name('goods')->where('status',0)->where('goodsname',$data['goodsname'])->where('goodsattribute',$data['goodsattribute'])->find();
+		if($goodsinfo){
+			$data['goodsunit']=$goodsinfo['goodsunit'];
+			$data['goodscostprice']=$goodsinfo['goodscostprice'];
+			$data['goodsprice']=$goodsinfo['goodsprice'];
+			$data['sumcost']=$data['goodscostprice']*$data['count'];
+			if($goodsinfo['truckage']&&$param['floors']){
+				//搬运费
+				$data['truckage']=$goodsinfo['truckage']*$param['floors'];
+				//总价
+				$data['total']=$data['truckage']+$data['goodsprice']*$data['count'];
+			}else{
+				$data['total']=$data['goodsprice']*$data['count'];
+				
+			}
+		}
+		// dump($data);
+		$isExist=Db::name('orderdetail')->where('status',0)->where('goodsid',$data['goodsid'])->where('orderid',$data['orderid'])->find();
+		if($isExist){
+			$mes['code']=100;
+			$mes['msg']="该商品已经添加过了";
+		}else{
+			$result=Db::name('orderdetail')->insert($data);
+			if($result){
+				$sumcost=Db::name('orderdetail')->where('status',0)->where('orderid',$data['orderid'])->sum('sumcost');
+				$sumtotal=Db::name('orderdetail')->where('status',0)->where('orderid',$data['orderid'])->sum('total');
+				$orderresult=Db::name('order')->where('id',$data['orderid'])->where('status',0)->update(['cost'=>$sumcost,'total'=>$sumtotal]);
+				if($orderresult){
+					$mes['code']=200;
+					$mes['msg']="添加成功";
+				}else{
+					$mes['code']=-1;
+					$mes['msg']="添加失败";
+				}
+				
+			}else{
+				$mes['code']=-1;
+				$mes['msg']="添加失败";
+			}
+		}
+
+		
 		return json($mes);
 	}
 }
