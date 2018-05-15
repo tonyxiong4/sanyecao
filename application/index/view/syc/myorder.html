@@ -1,188 +1,190 @@
-
-
-{include file="index/navleft"}
+ {include file="index/navleft"}
 <div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; " id="admin-body">
-		<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
-			
-			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
-				<div class="layui-tab-item layui-show">
-                        <fieldset class="layui-elem-field layui-field-title">
-                            <legend>我的订单</legend>
-                        </fieldset>
-                        <form  method="POST" action="{:url('syc/myorder',['departid'=>$departid])}">
-                          <div class="layui-inline">
-                                <input type="text" name="searchname"  value="{:input('param.searchname')}" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
-                            </div>
-                            <div class="layui-inline">
-                                <input type="text" name="stime" value="{:input('param.stime')}"  lay-verify="required" placeholder="请输入选择开始时间" autocomplete="on" class="layui-input" id="selTime">
-                            </div>
-                            <div class="layui-inline">
-                                <input type="text" name="etime" value="{:input('param.etime')}" lay-verify="required" placeholder="请输入选择结束时间" autocomplete="on" class="layui-input" id="selTime01">
-                            </div>
-                            <div class="layui-inline">
-                                <select name='depart' lay-filter="aihao">
-                                    <option value="0">请选择部门</option>
-                                    {volist name='depart' id="vo"}
-                                    <option value="{$vo.id}" {if condition="$vo.id eq $departid" }selected='selected' {/if}>{$vo.departname}</option>
-                                    {/volist}
-                                </select>
-                            </div>
-                            <div class="layui-inline">
-                                <button class="layui-btn">
+    <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+
+        <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+            <div class="layui-tab-item layui-show">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>我的订单</legend>
+                </fieldset>
+                <div class="layui-inline">
+                    <form method="POST" action="{:url('syc/myorder',['departid'=>$departid])}" class="layui-form">
+                        <div class="layui-inline">
+                            <input type="text" name="searchname" value="{:input('param.searchname')}" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
+                        </div>
+                        <div class="layui-inline">
+                            <input type="text" name="stime" value="{:input('param.stime')}" lay-verify="required" placeholder="请输入选择开始时间" autocomplete="on" class="layui-input" id="selTime">
+                        </div>
+                        <div class="layui-inline">
+                            <input type="text" name="etime" value="{:input('param.etime')}" lay-verify="required" placeholder="请输入选择结束时间" autocomplete="on" class="layui-input" id="selTime01">
+                        </div>
+                        <div class="layui-inline">
+                            <select name="depart" lay-filter="aihao">
+                            <option value="0">请选择部门</option>
+                            {volist name='depart' id="vo"}
+                            <option value="{$vo.id}" {if condition="$vo.id eq $departid" }selected='selected' {/if}>{$vo.departname}</option>
+                            {/volist}
+                            </select>
+
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn">
                                     <i class="layui-icon">&#xe615;</i> 查询
                                 </button>
-                            </div>
-                        </form>
-                        
-                            <button class="layui-btn " id="addOderItem">
-                                <i class="layui-icon">&#xe608;</i> 添加
-                             </button>
-                             <!-- 表格 -->
-                             <table class="layui-table" lay-skin="line">
-                                    <thead>
-                                        <tr>
-                                            <th>订单名称</th>
-                                            <th>状态</th>
-                                            <th>成本（元）</th>
-                                            <th>总价（元）</th>
-                                            <th>发布时间</th>
-                                            <th>备注</th>
-                                            <th>部门</th>
-                                            <th>负责人</th>
-                                            <th>编辑</th>
-                                            <th>查看</th>
-                                        </tr> 
-                                    </thead>
-                                    <tbody>
-                                        {volist name='list' id='vo'}
-                                        <tr>
-                                            <td>{$vo.name}</td>
-                                            <td>{:getOrderStatus($vo.orderstatus,$vo.id)}</td>
-                                            <td>{$vo.cost}</td>
-                                            <td>{$vo.total}</td>
-                                            <td>{$vo.createtime}</td>
-                                            <td>{$vo.remark}</td>
-                                            <td>
-                                                <button class="layui-btn layui-btn-xs sendOrderpart" data-uid="{$vo.id}" title="派单给部门">
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn " id="addOderItem">
+                                        <i class="layui-icon">&#xe608;</i> 添加
+                                     </button>
+                </div>
+
+                <!-- 表格 -->
+                <table class="layui-table" lay-skin="line">
+                    <thead>
+                        <tr>
+                            <th>订单名称</th>
+                            <th>状态</th>
+                            <th>成本（元）</th>
+                            <th>总价（元）</th>
+                            <th>发布时间</th>
+                            <th>备注</th>
+                            <th>部门</th>
+                            <th>负责人</th>
+                            <th>编辑</th>
+                            <th>查看</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {volist name='list' id='vo'}
+                        <tr>
+                            <td>{$vo.name}</td>
+                            <td>{:getOrderStatus($vo.orderstatus,$vo.id)}</td>
+                            <td>{$vo.cost}</td>
+                            <td>{$vo.total}</td>
+                            <td>{$vo.createtime}</td>
+                            <td>{$vo.remark}</td>
+                            <td>
+                                <button class="layui-btn layui-btn-xs sendOrderpart" data-uid="{$vo.id}" title="派单给部门">
                                                   {gt name="vo['departid']" value="0"}
                                                   {$vo.departname}
                                                   {else/}
                                                   派单给部门
                                                   {/gt}
                                                 </button>
-                                            </td>
-                                            <td>
-                                                <button class="layui-btn layui-btn-xs sendOrderperson" data-uid="{$vo.id}" title="派单给个人">
+                            </td>
+                            <td>
+                                <button class="layui-btn layui-btn-xs sendOrderperson" data-uid="{$vo.id}" title="派单给个人">
                                                   {gt name="vo['principal']" value="0"}
                                                   {$vo.fzname}
                                                   {else/}
                                                   派单给个人
                                                   {/gt}
                                                 </button>
-                                            </td>
-                                            <td>
-                                                <button class="layui-btn layui-btn-xs changeorderInfo" data-uid="{$vo.id}" data-userid="{$vo.uid}">修改</button>
-                                            </td>
-                                            <td>
-                                                <a href="{:url('syc/myOrderDetail',['orderid'=>$vo['id']])}" class="layui-icon layui-btn layui-btn-sm" title="查看详细">
+                            </td>
+                            <td>
+                                <button class="layui-btn layui-btn-xs changeorderInfo" data-uid="{$vo.id}" data-userid="{$vo.uid}">修改</button>
+                            </td>
+                            <td>
+                                <a href="{:url('syc/myOrderDetail',['orderid'=>$vo['id']])}" class="layui-icon layui-btn layui-btn-sm" title="查看详细">
                                                    &#xe602;
                                                 </a>
-                                            </td>
-                                        </tr>
-                                        {/volist}
-                                        {if condition="count($list) elt 0"}
-                                            <tr>
-                                                <td colspan="10" style="text-align: center">没有您要查询的数据</td>
-                                            </tr>
-                                        {/if}
-                                    </tbody>
-                                    </table>
-                                     {$list->render()}
+                            </td>
+                        </tr>
+                        {/volist} {if condition="count($list) elt 0"}
+                        <tr>
+                            <td colspan="10" style="text-align: center">没有您要查询的数据</td>
+                        </tr>
+                        {/if}
+                    </tbody>
+                </table>
+                {$list->render()}
 
-                </div>
             </div>
         </div>
+    </div>
 </div>
 
 
 <!-- 弹框添加结构 -->
 <div id="addOderItemBox" style="display: none;">
-<div style="padding:20px 25px 10px 5px;">
-    <div class="layui-form-item">
-        <label class="layui-form-label">订单名称：</label>
-        <div class="layui-input-block">
-        <input id="ordername" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+    <div style="padding:20px 25px 10px 5px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单名称：</label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <input id="ordername" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">订单地址：</label>
-        <div class="layui-input-block">
-        <input id="orderaddress" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单地址：</label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <input id="orderaddress" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">电话：</label>
-        <div class="layui-input-block">
-        <input id="orderphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话：</label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <input id="orderphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">订单备注：</label>
-        <div class="layui-input-block">
-        <input id="ordermark" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单备注：</label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <input id="ordermark" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">预计送达时间：</label>
-        <div class="layui-input-block">
-        <input id="selTime02" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input" >
+        <div class="layui-form-item">
+            <label class="layui-form-label">预计送达时间：</label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <input id="selTime02" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input">
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 </div>
 
 <!-- 修改结构 -->
 <div id="changederItemBox" style="display: none;">
-<div style="padding:20px 25px 10px 5px;">
-    <div class="layui-form-item">
-        <label class="layui-form-label">订单名称：</label>
-        <div class="layui-input-block">
-        <input id="uordername" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+    <div style="padding:20px 25px 10px 5px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单名称：</label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <input id="uordername" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">订单地址：</label>
-        <div class="layui-input-block">
-        <input id="uorderaddress" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单地址：</label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <input id="uorderaddress" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">电话：</label>
-        <div class="layui-input-block">
-        <input id="uorderphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话：</label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <input id="uorderphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入订单名称" class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">修改备注：</label>
-        <div class="layui-input-block">
-        <input id="uordermark" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">修改备注：</label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <input id="uordermark" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">预计送达时间：</label>
-        <div class="layui-input-block">
-        <input id="selTime03" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">预计送达时间：</label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <input id="selTime03" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入备注内容" class="layui-input">
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 </div>
 
 <!-- 弹框引入部门结构 -->
 <div id="sendOrderPartBox" style="display: none;">
-        <div style="padding:20px 10px;">
-        <form id="sendOrderPartBox" class=""  method="" action="">
+    <div style="padding:20px 10px;">
+        <form id="sendOrderPartBox" class="" method="" action="">
             <div class="">
                 <select id="depart" name="depart" style="width:100%;height: 36px;">
                         <option value="0" >请选择部门</option>
@@ -191,26 +193,26 @@
                         {/volist}
                 </select>
             </div>
-            </form>
-        </div>
-</div> 
+        </form>
+    </div>
+</div>
 
 <!-- 弹框引入个人结构 -->
 <div id="sendOrderPersonBox" style="display: none;">
-        <div style="padding:20px 25px 10px 5px;">
-                <div class="layui-form-item">
-                        <label class="layui-form-label">人员名称：</label>
-                        <div class="layui-input-block">
-                        <input  id="uuusername" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入人员名称" class="layui-input">
-                        </div>
-                    </div>
+    <div style="padding:20px 25px 10px 5px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">人员名称：</label>
+            <div class="layui-input-block">
+                <input id="uuusername" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入人员名称" class="layui-input">
+            </div>
         </div>
+    </div>
 </div>
 
 <!-- 弹框订单状态选择结构 -->
 <div id="orderpopBox" style="display: none;">
-        <div style="padding:20px 10px;">
-        <form id="sendOrderPartBox" class=""  method="" action="">
+    <div style="padding:20px 10px;">
+        <form id="sendOrderPartBox" class="" method="" action="">
             <div class="">
                 <select id="orderstatus" name="orderstatus" style="width:100%;height: 36px;">
                         <option value="0" >请选择状态</option>
@@ -221,286 +223,335 @@
                         <option value="5">已完成</option>
                 </select>
             </div>
-            </form>
-        </div>
+        </form>
+    </div>
 </div>
 
 <script type="text/javascript">
-	//执行一个laydate实例
-    layui.use('laydate', function(){
+    //执行一个laydate实例
+    layui.use('laydate', function() {
         var laydate = layui.laydate;
-        
+
         //执行一个laydate实例
         laydate.render({
             elem: '#selTime' //指定元素
-	        ,type: 'datetime'
+                ,
+            type: 'datetime'
         });
         //执行一个laydate实例
         laydate.render({
             elem: '#selTime01' //指定元素
-	        ,type: 'datetime'
+                ,
+            type: 'datetime'
         });
         laydate.render({
             elem: '#selTime02' //指定元素
-          ,type: 'datetime'
+                ,
+            type: 'datetime'
         });
         laydate.render({
             elem: '#selTime03' //指定元素
-          ,type: 'datetime'
+                ,
+            type: 'datetime'
         });
     });
-	
-    layui.use('laypage', function(){
-    var laypage = layui.laypage;
-    
-    //执行一个laypage实例
-    laypage.render({
-        elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
-        ,count: 50 //数据总数，从服务端得到
+
+    layui.use('laypage', function() {
+        var laypage = layui.laypage;
+
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+                ,
+            count: 50 //数据总数，从服务端得到
+        });
     });
-    });
 
- 
-     //派单给部门   
-layui.use('layer',function(){
-  
-    $('.sendOrderpart').click(function(){
-      var uidss=$(this).attr('data-uid');
 
-        layer.open({
-               type: 1
-               ,title: "派单给部门"
-               ,area: ['300px;','200px;']
-               ,shade: 0.8
-               ,id: 'LAY_layuipro12' //设定一个id，防止重复弹出
-               ,btn: ['确定', '取消']
-               ,content: $('#sendOrderPartBox')
-               ,success: function(layero){
-               var btn = layero.find('.layui-layer-btn');
-               btn.find('.layui-layer-btn0').click(function(){
-                   //点击确定按钮后的时间
-                    var url = "{:url('data/commonUpdate')}";
-                    var fieldvalue = $("#depart").val();
-                    $.ajax({
-                        url: url,
-                        type: 'post',
-                        dataType: 'json',
-                        data: {id:uidss ,tablename: 'order', field: 'departid', fieldvalue: fieldvalue}
-                    })
-                    .done(function (data) {
-                        if (data && data.code == 200) {
-                            layui.use('layer', function(){
-                                layer.msg(data.msg);
-                            });
-                            setTimeout(function () { window.location.reload(); }, 1000);  
-                        }else {
-                            layui.use('layer', function(){
-                                layer.msg(data.msg);
-                            });
-                        }
-                    });
-               });
-               }
-           });
+    //派单给部门   
+    layui.use(['layer', 'form'], function() {
 
-             }) 
-             //派单给个人
- $('.sendOrderperson').click(function(){
-  var uidss=$(this).attr('data-uid');
-           layer.open({
-               type: 1
-               ,title: "派单给个人"
-               ,area: ['300px;','200px;']
-               ,shade: 0.8
-               ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
-               ,btn: ['确定', '取消']
-               ,content: $('#sendOrderPersonBox')
-               ,success: function(layero){
-               var btn = layero.find('.layui-layer-btn');
-               btn.find('.layui-layer-btn0').click(function(){
-                   //点击确定按钮后的时间
-                  var url = "{:url('data/commonUpdate')}";
-                  var fieldvalue = $("#uuusername").val();
-                  $.ajax({
-                      url: url,
-                      type: 'post',
-                      dataType: 'json',
-                      data: {id:uidss ,tablename: 'order', field: 'principal', fieldvalue: fieldvalue,isSelect:"2"}
-                  })
-                  .done(function (data) {
-                      if (data && data.code == 200) {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                          setTimeout(function () { window.location.reload(); }, 1000);  
-                      }else if (data && data.code == 100) {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                      }else {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                      }
-                  });
-               });
-               }
-             });
+        $('.sendOrderpart').click(function() {
+                var uidss = $(this).attr('data-uid');
 
-            }) 
+                layer.open({
+                    type: 1,
+                    title: "派单给部门",
+                    area: ['300px;', '200px;'],
+                    shade: 0.8,
+                    id: 'LAY_layuipro12' //设定一个id，防止重复弹出
+                        ,
+                    btn: ['确定', '取消'],
+                    content: $('#sendOrderPartBox'),
+                    success: function(layero) {
+                        var btn = layero.find('.layui-layer-btn');
+                        btn.find('.layui-layer-btn0').click(function() {
+                            //点击确定按钮后的时间
+                            var url = "{:url('data/commonUpdate')}";
+                            var fieldvalue = $("#depart").val();
+                            $.ajax({
+                                    url: url,
+                                    type: 'post',
+                                    dataType: 'json',
+                                    data: {
+                                        id: uidss,
+                                        tablename: 'order',
+                                        field: 'departid',
+                                        fieldvalue: fieldvalue
+                                    }
+                                })
+                                .done(function(data) {
+                                    if (data && data.code == 200) {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                        setTimeout(function() {
+                                            window.location.reload();
+                                        }, 1000);
+                                    } else {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                    }
+                                });
+                        });
+                    }
+                });
+
+            })
+            //派单给个人
+        $('.sendOrderperson').click(function() {
+                var uidss = $(this).attr('data-uid');
+                layer.open({
+                    type: 1,
+                    title: "派单给个人",
+                    area: ['300px;', '200px;'],
+                    shade: 0.8,
+                    id: 'LAY_layuipro2' //设定一个id，防止重复弹出
+                        ,
+                    btn: ['确定', '取消'],
+                    content: $('#sendOrderPersonBox'),
+                    success: function(layero) {
+                        var btn = layero.find('.layui-layer-btn');
+                        btn.find('.layui-layer-btn0').click(function() {
+                            //点击确定按钮后的时间
+                            var url = "{:url('data/commonUpdate')}";
+                            var fieldvalue = $("#uuusername").val();
+                            $.ajax({
+                                    url: url,
+                                    type: 'post',
+                                    dataType: 'json',
+                                    data: {
+                                        id: uidss,
+                                        tablename: 'order',
+                                        field: 'principal',
+                                        fieldvalue: fieldvalue,
+                                        isSelect: "2"
+                                    }
+                                })
+                                .done(function(data) {
+                                    if (data && data.code == 200) {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                        setTimeout(function() {
+                                            window.location.reload();
+                                        }, 1000);
+                                    } else if (data && data.code == 100) {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                    } else {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                    }
+                                });
+                        });
+                    }
+                });
+
+            })
             //添加订单
- $('#addOderItem').click(function(){
-           layer.open({
-               type: 1
-               ,title: "新增订单"
-               ,area: '300px;'
-               ,shade: 0.8
-               ,id: 'LAY_layuipro3' //设定一个id，防止重复弹出
-               ,btn: ['确定', '取消']
-               ,content: $('#addOderItemBox')
-               ,success: function(layero){
-               var btn = layero.find('.layui-layer-btn');
-               btn.find('.layui-layer-btn0').click(function(){
-                   //点击确定按钮后的时间
-                  var url = "{:url('data/addOrder')}";
-                  var name = $("#ordername").val();
-                  var remark = $("#ordermark").val();
-                  var address = $("#orderaddress").val();
-                  var phone = $("#orderphone").val();
-                  var predicttime = $("#selTime02").val();
-                  $.ajax({
-                      url: url,
-                      type: 'post',
-                      dataType: 'json',
-                      data: { name: name, remark: remark, address: address,phone: phone,predicttime:predicttime}
-                  })
-                  .done(function (data) {
-                      if (data && data.code == 200) {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                          setTimeout(function () { window.location.reload(); }, 1000);  
-                      }else if (data && data.code == 100) {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                      }else {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                      }
-                  });
-               });
-               }
-           });
+        $('#addOderItem').click(function() {
+                layer.open({
+                    type: 1,
+                    title: "新增订单",
+                    area: '380px;',
+                    shade: 0.8,
+                    id: 'LAY_layuipro3' //设定一个id，防止重复弹出
+                        ,
+                    btn: ['确定', '取消'],
+                    content: $('#addOderItemBox'),
+                    success: function(layero) {
+                        var btn = layero.find('.layui-layer-btn');
+                        btn.find('.layui-layer-btn0').click(function() {
+                            //点击确定按钮后的时间
+                            var url = "{:url('data/addOrder')}";
+                            var name = $("#ordername").val();
+                            var remark = $("#ordermark").val();
+                            var address = $("#orderaddress").val();
+                            var phone = $("#orderphone").val();
+                            var predicttime = $("#selTime02").val();
+                            $.ajax({
+                                    url: url,
+                                    type: 'post',
+                                    dataType: 'json',
+                                    data: {
+                                        name: name,
+                                        remark: remark,
+                                        address: address,
+                                        phone: phone,
+                                        predicttime: predicttime
+                                    }
+                                })
+                                .done(function(data) {
+                                    if (data && data.code == 200) {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                        setTimeout(function() {
+                                            window.location.reload();
+                                        }, 1000);
+                                    } else if (data && data.code == 100) {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                    } else {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                    }
+                                });
+                        });
+                    }
+                });
 
             })
-           //订单状态选择
-$('.oderPops').click(function(){
-  var uidss=$(this).attr('data-uid');
-           layer.open({
-               type: 1
-               ,title: "订单状态选择"
-               ,area: '300px;'
-               ,shade: 0.8
-               ,id: 'LAY_layuipro4' //设定一个id，防止重复弹出
-               ,btn: ['确定', '取消']
-               ,content: $('#orderpopBox')
-               ,success: function(layero){
-               var btn = layero.find('.layui-layer-btn');
-               btn.find('.layui-layer-btn0').click(function(){
-                   //点击确定按钮后的时间
-                  var url = "{:url('data/commonUpdate')}";
-                  var fieldvalue = $("#orderstatus").val();
-                  $.ajax({
-                      url: url,
-                      type: 'post',
-                      dataType: 'json',
-                      data: {id:uidss ,tablename: 'order', field: 'orderstatus', fieldvalue: fieldvalue}
-                  })
-                  .done(function (data) {
-                      if (data && data.code == 200) {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                          setTimeout(function () { window.location.reload(); }, 1000);  
-                      }else {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                      }
-                  });
-               });
-               }
-           });
-
-            }) 
-           //修改
-$('.changeorderInfo').click(function(){
-  var uid=$(this).attr('data-uid');
-  
-           layer.open({
-               type: 1
-               ,title: "修改"
-               ,area: '300px;'
-               ,shade: 0.8
-               ,id: 'LAY_layuipro4' //设定一个id，防止重复弹出
-               ,btn: ['确定', '取消']
-               ,content: $('#changederItemBox')
-               ,success: function(layero){
-
-                 var geturl="{:url('data/getData')}";
-                   
-                   $.ajax({
-                       url: geturl,
-                       type: 'post',
-                       dataType: 'json',
-                       data: {id: uid,tablename:'order'},
-                   })
-                   .done(function(data) {
-                       if(data && data.code==200){
-                           $("#uordername").val(data.data['name']);
-                           $("#uordermark").val(data.data['remark']);
-                           $("#uorderaddress").val(data.data['address']);
-                           $("#uorderphone").val(data.data['phone']);
-                           $("#selTime03").val(data.data['predicttime']);
-                       }
-                   });
-               var btn = layero.find('.layui-layer-btn');
-               btn.find('.layui-layer-btn0').click(function(){
-                   //点击确定按钮后的时间
-                  var url = "{:url('data/addOrder')}";
-
-                  var name= $("#uordername").val();
-                  var remark= $("#uordermark").val();
-                  var address= $("#uorderaddress").val();
-                  var phone=$("#uorderphone").val();
-                  var predicttime = $("#selTime03").val();
-                  $.ajax({
-                      url: url,
-                      type: 'post',
-                      dataType: 'json',
-                      data: { id:uid,name: name, remark: remark, address: address , phone: phone,predicttime:predicttime}
-                  })
-                  .done(function (data) {
-                      if (data && data.code == 200) {
-                       
-                              layer.msg(data.msg);
-                  
-                          setTimeout(function () { window.location.reload(); }, 1000);  
-                      }else {
-                         
-                              layer.msg(data.msg);
-                         
-                      }
-                  });
-               });
-               }
-           });
+            //订单状态选择
+        $('.oderPops').click(function() {
+                var uidss = $(this).attr('data-uid');
+                layer.open({
+                    type: 1,
+                    title: "订单状态选择",
+                    area: '300px;',
+                    shade: 0.8,
+                    id: 'LAY_layuipro4' //设定一个id，防止重复弹出
+                        ,
+                    btn: ['确定', '取消'],
+                    content: $('#orderpopBox'),
+                    success: function(layero) {
+                        var btn = layero.find('.layui-layer-btn');
+                        btn.find('.layui-layer-btn0').click(function() {
+                            //点击确定按钮后的时间
+                            var url = "{:url('data/commonUpdate')}";
+                            var fieldvalue = $("#orderstatus").val();
+                            $.ajax({
+                                    url: url,
+                                    type: 'post',
+                                    dataType: 'json',
+                                    data: {
+                                        id: uidss,
+                                        tablename: 'order',
+                                        field: 'orderstatus',
+                                        fieldvalue: fieldvalue
+                                    }
+                                })
+                                .done(function(data) {
+                                    if (data && data.code == 200) {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                        setTimeout(function() {
+                                            window.location.reload();
+                                        }, 1000);
+                                    } else {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                    }
+                                });
+                        });
+                    }
+                });
 
             })
-})
+            //修改
+        $('.changeorderInfo').click(function() {
+            var uid = $(this).attr('data-uid');
 
-          
-  
+            layer.open({
+                type: 1,
+                title: "修改",
+                area: '380px;',
+                shade: 0.8,
+                id: 'LAY_layuipro4' //设定一个id，防止重复弹出
+                    ,
+                btn: ['确定', '取消'],
+                content: $('#changederItemBox'),
+                success: function(layero) {
+
+                    var geturl = "{:url('data/getData')}";
+
+                    $.ajax({
+                            url: geturl,
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                id: uid,
+                                tablename: 'order'
+                            },
+                        })
+                        .done(function(data) {
+                            if (data && data.code == 200) {
+                                $("#uordername").val(data.data['name']);
+                                $("#uordermark").val(data.data['remark']);
+                                $("#uorderaddress").val(data.data['address']);
+                                $("#uorderphone").val(data.data['phone']);
+                                $("#selTime03").val(data.data['predicttime']);
+                            }
+                        });
+                    var btn = layero.find('.layui-layer-btn');
+                    btn.find('.layui-layer-btn0').click(function() {
+                        //点击确定按钮后的时间
+                        var url = "{:url('data/addOrder')}";
+
+                        var name = $("#uordername").val();
+                        var remark = $("#uordermark").val();
+                        var address = $("#uorderaddress").val();
+                        var phone = $("#uorderphone").val();
+                        var predicttime = $("#selTime03").val();
+                        $.ajax({
+                                url: url,
+                                type: 'post',
+                                dataType: 'json',
+                                data: {
+                                    id: uid,
+                                    name: name,
+                                    remark: remark,
+                                    address: address,
+                                    phone: phone,
+                                    predicttime: predicttime
+                                }
+                            })
+                            .done(function(data) {
+                                if (data && data.code == 200) {
+
+                                    layer.msg(data.msg);
+
+                                    setTimeout(function() {
+                                        window.location.reload();
+                                    }, 1000);
+                                } else {
+
+                                    layer.msg(data.msg);
+
+                                }
+                            });
+                    });
+                }
+            });
+
+        })
+    })
 </script>
