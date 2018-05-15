@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-15 21:47:12
+ * @Last Modified time: 2018-05-15 22:29:51
  */
 
 namespace app\index\controller;
@@ -136,7 +136,7 @@ class Syc extends Base
         $orderid=$this->request->param('orderid');
         $orderInfo=Db::name('order')->where('status',0)->where('id',$orderid)->find();
         $orderInfo['profit']=$orderInfo['total']-$orderInfo['cost'];
-        $list=Db::view('orderdetail','id,goodsid,count,total,orderid,status')
+        $list=Db::view('goods','id,goodsname,goodsattribute,goodsunit,goodscostprice,goodsprice,departid,uid,addtime,status')
                       ->view('user','username','user.id=goods.uid','LEFT')
                       ->where('status',0)
                       ->where('departid',$orderid)
@@ -179,7 +179,7 @@ class Syc extends Base
      {
         $departid=$this->request->param('departid');
         $search=$this->request->param('searchname');
-        $list=Db::view('goods','id,goodsname,goodsattribute,goodsunit,goodscostprice,goodsprice,departid,uid,addtime,status')
+        $list=Db::view('goods','id,goodsname,goodsattribute,goodsunit,goodscostprice,goodsprice,truckage,departid,uid,addtime,status')
                       ->view('user','username','user.id=goods.uid','LEFT')
                       ->where('status',0)
                       ->where('departid',$departid)

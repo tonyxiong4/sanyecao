@@ -31,6 +31,7 @@
                                 <th>单位</th>
                                 <th>成本价格（元）</th>
                                 <th>市场价格（元）</th>
+                                <th>搬运费（元）</th>
                                 <th>添加人</th>
                                 <th>添加时间</th>
                                 <th>操作</th>
@@ -46,6 +47,7 @@
                                         <td>{$vo.goodsunit}</td>
                                         <td>{$vo.goodscostprice}</td>
                                         <td>{$vo.goodsprice}</td>
+                                        <td>{$vo.truckage}</td>
                                         <td>{$vo.username}</td>
                                         <td>{$vo.addtime}</td>
                                         <td>
@@ -108,6 +110,12 @@
             <input  id="goodsprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品市场价" class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">搬运费：</label>
+            <div class="layui-input-block">
+            <input  id="truckage" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="没有可以不用填写" class="layui-input">
+            </div>
+        </div>
     </div>
 </div>
 
@@ -141,6 +149,12 @@
                     <label class="layui-form-label">市场价：</label>
                     <div class="layui-input-block">
                     <input  id="ugoodsprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产品市场价" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">搬运费：</label>
+                    <div class="layui-input-block">
+                    <input  id="utruckage" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="没有可以不用填写" class="layui-input">
                     </div>
                 </div>
             </div>
@@ -214,12 +228,13 @@
             var goodsunit = $("#goodsunit").val();
             var goodscostprice = $("#goodscostprice").val();
             var goodsprice = $("#goodsprice").val();
+            var truckage = $("#truckage").val();
             var departid="{$departid}";
             $.ajax({
                 url: url,
                 type: 'post',
                 dataType: 'json',
-                data: { goodsname: goodsname, goodsattribute: goodsattribute, goodsunit: goodsunit,goodscostprice: goodscostprice,goodsprice: goodsprice, departid:departid}
+                data: { goodsname: goodsname, goodsattribute: goodsattribute, goodsunit: goodsunit,goodscostprice: goodscostprice,goodsprice: goodsprice, truckage:truckage,departid:departid}
             })
             .done(function (data) {
                 if (data && data.code == 200) {
@@ -271,6 +286,7 @@
                            $("#ugoodsunit").val(data.data['goodsunit']);
                            $("#ugoodscostprice").val(data.data['goodscostprice']);
                            $("#ugoodsprice").val(data.data['goodsprice']);
+                           $("#utruckage").val(data.data['truckage']);
                        }
                    });
                    
@@ -283,11 +299,12 @@
                        var goodsunit= $("#ugoodsunit").val();
                        var goodscostprice=$("#ugoodscostprice").val();
                        var goodsprice=$("#ugoodsprice").val();
+                       var truckage=$("#utruckage").val();
                        $.ajax({
                            url: url,
                            type: 'post',
                            dataType: 'json',
-                           data: { id:uid,goodsname: goodsname, goodsattribute: goodsattribute, goodsunit: goodsunit , goodscostprice: goodscostprice, goodsprice: goodsprice}
+                           data: { id:uid,goodsname: goodsname, goodsattribute: goodsattribute, goodsunit: goodsunit , goodscostprice: goodscostprice, truckage:truckage,goodsprice: goodsprice}
                        })
                        .done(function (data) {
                            if (data && data.code == 200) {
