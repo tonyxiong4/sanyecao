@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-15 22:29:51
+ * @Last Modified time: 2018-05-15 22:36:41
  */
 
 namespace app\index\controller;
@@ -136,11 +136,10 @@ class Syc extends Base
         $orderid=$this->request->param('orderid');
         $orderInfo=Db::name('order')->where('status',0)->where('id',$orderid)->find();
         $orderInfo['profit']=$orderInfo['total']-$orderInfo['cost'];
-        $list=Db::view('goods','id,goodsname,goodsattribute,goodsunit,goodscostprice,goodsprice,departid,uid,addtime,status')
-                      ->view('user','username','user.id=goods.uid','LEFT')
-                      ->where('status',0)
-                      ->where('departid',$orderid)
-                      ->paginate(10,false,['query'=>$this->request->param()]);
+        $list=Db::name('orderdetail')
+                ->where('status',0)
+                ->where('orderid',$orderid)
+                ->paginate(10,false,['query'=>$this->request->param()]);
         $this->assign('list',$list);
         $this->assign('orderid',$orderid);
         $this->assign('orderInfo',$orderInfo);
