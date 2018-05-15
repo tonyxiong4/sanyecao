@@ -33,7 +33,7 @@ CREATE TABLE `syc_customer` (
 
 /*Data for the table `syc_customer` */
 
-insert  into `syc_customer`(`id`,`name`,`company`,`phone`,`belonguid`,`addtime`,`status`) values (1,'唐门','剑三','18761653009',2,'2018-05-07 20:15:14',0),(2,'五毒','剑三','18761653009',2,'2018-05-07 20:15:21',0),(3,'纯阳','剑三','18761653006',2,'2018-05-07 20:15:23',0),(4,'七秀','剑三','18761653009',2,'2018-05-07 20:15:24',0),(5,'少林','剑三','18761653009',1,'2018-05-07 20:15:28',0),(6,'丐帮','剑三','18761653009',1,'2018-05-07 20:15:32',0),(7,'万花','剑三','18761653009',1,'2018-05-07 20:15:30',0),(8,'仓云','剑三','18761653009',1,'2018-05-07 20:15:33',0),(9,'长歌','剑三','18761653009',1,'2018-05-07 20:15:36',0),(12,'霸刀','剑三','18761653008',2,'2018-05-08 00:36:23',0),(13,'天水','剑三','18761653099',2,'2018-05-08 00:38:46',0),(14,'天水0','剑三','18761653099',1,'2018-05-08 00:38:46',0),(15,'天水1','剑三','18761653099',1,'2018-05-08 00:38:46',9);
+insert  into `syc_customer`(`id`,`name`,`company`,`phone`,`belonguid`,`addtime`,`status`) values (1,'唐门','剑三','18761653009',2,'2018-05-07 20:15:14',0),(2,'五毒','剑三','18761653009',2,'2018-05-07 20:15:21',0),(3,'纯阳','剑三','18761653006',2,'2018-05-07 20:15:23',0),(4,'七秀','剑三','18761653009',2,'2018-05-07 20:15:24',0),(5,'少林','剑三','18761653009',1,'2018-05-07 20:15:28',0),(6,'丐帮','剑三','18761653009',1,'2018-05-07 20:15:32',0),(7,'万花','剑三','18761653009',1,'2018-05-07 20:15:30',0),(8,'仓云','剑三','18761653009',1,'2018-05-07 20:15:33',0),(9,'长歌','剑三','18761653009',1,'2018-05-07 20:15:36',0),(12,'霸刀','剑三','18761653008',2,'2018-05-08 00:36:23',0),(13,'天水','剑三','18761653099',2,'2018-05-08 00:38:46',0),(14,'天水是的','剑三','18761653099',1,'2018-05-08 00:38:46',0),(15,'天水1','剑三','18761653099',1,'2018-05-08 00:38:46',9);
 
 /*Table structure for table `syc_department` */
 
@@ -64,15 +64,16 @@ CREATE TABLE `syc_goods` (
   `goodscostprice` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '商品成本价',
   `goodsprice` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '商品市场价',
   `departid` int(11) NOT NULL DEFAULT '0' COMMENT '部门id',
+  `truckage` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '搬运费',
   `uid` int(11) NOT NULL DEFAULT '0' COMMENT '添加人',
   `addtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '时间',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态0正常，9删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='部门商品';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='部门商品';
 
 /*Data for the table `syc_goods` */
 
-insert  into `syc_goods`(`id`,`goodsname`,`goodsattribute`,`goodsunit`,`goodscostprice`,`goodsprice`,`departid`,`uid`,`addtime`,`status`) values (1,'325水泥','32mm','克','39.00','0.00',1,1,'2018-05-03 01:50:04',0),(2,'斯蒂芬','是地方1','是','3.30','3.30',1,2,'2018-05-13 02:19:57',0),(3,'色粉','斯蒂芬森','55','3.30','9.60',1,1,'2018-05-13 02:22:38',0),(4,'阿斯頓是df','啊第三方 范德萨','啊s斯蒂芬','6.60','5.60',1,2,'2018-05-13 02:41:52',0),(5,'阿斯頓','啊收到',' 啊s','0.00','0.00',1,1,'2018-05-13 02:44:04',0),(6,'士大夫','是f','發','0.00','0.00',1,1,'2018-05-13 02:45:45',0),(7,'红楼','单丝','爱你','3.60','5.60',1,2,'2018-05-13 14:03:52',0);
+insert  into `syc_goods`(`id`,`goodsname`,`goodsattribute`,`goodsunit`,`goodscostprice`,`goodsprice`,`departid`,`truckage`,`uid`,`addtime`,`status`) values (1,'325水泥','32mm','克','5.00','10.00',1,'6.00',1,'2018-05-03 01:50:04',0),(2,'斯蒂芬','是地方1','是','5.00','10.00',1,'0.00',2,'2018-05-13 02:19:57',0),(3,'色粉','斯蒂芬森','55','5.00','10.00',1,'0.00',1,'2018-05-13 02:22:38',0),(4,'阿斯頓是df','啊第三方 范德萨','啊s斯蒂芬','6.60','5.60',1,'0.00',2,'2018-05-13 02:41:52',0),(5,'阿斯頓','啊收到',' 啊s','0.00','0.00',1,'0.00',1,'2018-05-13 02:44:04',0),(6,'士大夫','是f','發','0.00','0.00',1,'0.00',1,'2018-05-13 02:45:45',0),(7,'红楼','单丝','爱你','3.60','5.60',1,'0.00',2,'2018-05-13 14:03:52',0),(8,'砖头','13','123','12.00','123.00',1,'565.00',1,'2018-05-15 22:27:35',0);
 
 /*Table structure for table `syc_job` */
 
@@ -129,9 +130,11 @@ CREATE TABLE `syc_order` (
   `remark` varchar(500) NOT NULL DEFAULT '' COMMENT '备注',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态0正常，9删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 /*Data for the table `syc_order` */
+
+insert  into `syc_order`(`id`,`name`,`createtime`,`uid`,`orderstatus`,`cost`,`total`,`address`,`phone`,`predicttime`,`picture`,`departid`,`principal`,`remark`,`status`) values (10,'漫河国际','2018-05-16 01:15:30',1,5,'25.00','80.00','北京朝阳','18888888888','2018-05-24 00:00:00','',3,2,'漫心屋',0);
 
 /*Table structure for table `syc_orderdetail` */
 
@@ -142,12 +145,21 @@ CREATE TABLE `syc_orderdetail` (
   `goodsid` int(11) NOT NULL DEFAULT '0' COMMENT '商品id',
   `count` int(4) NOT NULL DEFAULT '0' COMMENT '数量',
   `total` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '总价',
+  `sumcost` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '总成本',
   `orderid` int(11) NOT NULL DEFAULT '0' COMMENT '订单id',
+  `goodsname` varchar(30) NOT NULL DEFAULT '' COMMENT '商品名称',
+  `goodsattribute` varchar(50) NOT NULL DEFAULT '' COMMENT '商品属性',
+  `goodsunit` char(10) NOT NULL DEFAULT '' COMMENT '商品单位',
+  `goodscostprice` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '成本价',
+  `goodsprice` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '市场价',
+  `truckage` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '搬运费',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态0正常，9删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单明细';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='订单明细';
 
 /*Data for the table `syc_orderdetail` */
+
+insert  into `syc_orderdetail`(`id`,`goodsid`,`count`,`total`,`sumcost`,`orderid`,`goodsname`,`goodsattribute`,`goodsunit`,`goodscostprice`,`goodsprice`,`truckage`,`status`) values (14,1,5,'80.00','25.00',10,'325水泥','32mm','克','5.00','10.00','30.00',9),(15,2,5,'50.00','25.00',10,'斯蒂芬','是地方1','是','5.00','10.00','0.00',9),(16,1,5,'80.00','25.00',10,'325水泥','32mm','克','5.00','10.00','30.00',0),(17,2,5,'50.00','25.00',10,'斯蒂芬','是地方1','是','5.00','10.00','0.00',9);
 
 /*Table structure for table `syc_role` */
 
@@ -176,7 +188,7 @@ CREATE TABLE `syc_role_menu` (
 
 /*Data for the table `syc_role_menu` */
 
-insert  into `syc_role_menu`(`id`,`roleid`,`menuid`,`status`) values (1,4,'[\"3\",\"4\",\"5\"]',0),(2,5,'[\"2\",\"3\",\"4\",\"5\"]',0),(3,9,'[\"1\"]',0),(4,7,'[\"1\",\"2\",\"5\"]',0),(5,6,'[\"3\"]',0),(6,1,'[\"7\",\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"]',0),(7,3,'[\"1\"]',0),(8,2,'[\"1\",\"3\",\"5\"]',0);
+insert  into `syc_role_menu`(`id`,`roleid`,`menuid`,`status`) values (1,4,'[\"3\",\"4\",\"5\"]',0),(2,5,'[\"7\",\"2\",\"3\",\"4\",\"5\"]',0),(3,9,'[\"1\"]',0),(4,7,'[\"1\",\"2\",\"5\"]',0),(5,6,'[\"3\"]',0),(6,1,'[\"7\",\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"]',0),(7,3,'[\"1\"]',0),(8,2,'[\"1\",\"3\",\"5\"]',0);
 
 /*Table structure for table `syc_test` */
 
