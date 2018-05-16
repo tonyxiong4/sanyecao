@@ -1,90 +1,91 @@
-
-
-{include file="index/navleft"}
+ {include file="index/navleft"}
 <div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
-		<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
-			
-			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
-				<div class="layui-tab-item layui-show">
-                        <fieldset class="layui-elem-field layui-field-title">
-                            <legend>权限设置</legend>
-                        </fieldset> 
-                        <div class="layui-inline">
-                                <button class="layui-btn " id="addjob">
+    <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+
+        <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+            <div class="layui-tab-item layui-show">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>权限设置</legend>
+                </fieldset>
+                <div class="layui-inline">
+                    <button class="layui-btn " id="addjob">
                                 <i class="layui-icon">&#xe608;</i> 添加职位
                                 </button>
-                        </div>
-                        <!-- 表格 -->
-                        <table class="layui-table" lay-skin="line">
-            
-                            <thead>
-                                <tr>
-                                    <th>职位</th>
-                                    <th>操作</th>
-                                    <th>编辑</th>
-                                </tr> 
-                            </thead>
-                            <tbody>
-                                   {volist name='list' id='vo'}
-                                      <tr>
-                                          <td>{$vo.jobname}</td>
-                                          <td><a href="{:url('syc/setauth',['jobid'=>$vo['id']])}">设置权限</a></td>
-                                          <td><button class="layui-btn layui-btn-xs changeorderInfo" onclick="delJob({$vo.id})">删除</button></td>
-                                      </tr>
-                                  {/volist}
-                                  {if condition="count($list) elt 0"}
-                                      <tr>
-                                          <td colspan="3" style="text-align: center">没有您要查询的数据</td>
-                                      </tr>
-                                  {/if}
-                            </tbody>
-                            </table>
-                          {$list->render()}
-                        </div>
                 </div>
-         </div>
+                <!-- 表格 -->
+                <table class="layui-table" lay-skin="line">
+
+                    <thead>
+                        <tr>
+                            <th>职位</th>
+                            <th>操作</th>
+                            <th>编辑</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {volist name='list' id='vo'}
+                        <tr>
+                            <td>{$vo.jobname}</td>
+                            <td><a href="{:url('syc/setauth',['jobid'=>$vo['id']])}">设置权限</a></td>
+                            <td><button class="layui-btn layui-btn-xs changeorderInfo" onclick="delJob({$vo.id})">删除</button></td>
+                        </tr>
+                        {/volist} {if condition="count($list) elt 0"}
+                        <tr>
+                            <td colspan="3" style="text-align: center">没有您要查询的数据</td>
+                        </tr>
+                        {/if}
+                    </tbody>
+                </table>
+                {$list->render()}
+            </div>
+        </div>
+    </div>
 </div>
 <!-- 添加职位 -->
 <div id="addjobBox" style="display: none;">
-        <div style="padding:20px 25px 10px 5px;">
-            <div class="layui-form-item">
-                <label class="layui-form-label">职位名称：</label>
-                <div class="layui-input-block">
+    <div style="padding:20px 25px 10px 5px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">职位名称：</label>
+            <div class="layui-input-block">
                 <input id="job" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入职位名称" class="layui-input">
-                </div>
-            </div>       
+            </div>
         </div>
-        </div>
+    </div>
+</div>
 
 <script>
-
     /**
      * [delJob 删除职位]
      * @param  {[type]} id [description]
      * @return {[type]}    [description]
      */
     function delJob(id) {
-        var c = layui.use('layer',function(){
+        var c = layui.use('layer', function() {
             layer.confirm('您确认要删除吗？', {
-            btn: ['确认','取消'] //按钮
-            }, function(){
+                btn: ['确认', '取消'] //按钮
+            }, function() {
                 var url = "{:url('data/commonDel')}";
-                    $.ajax({
+                $.ajax({
                         url: url,
                         type: 'post',
                         dataType: 'json',
-                        data: { id: id ,tablename:'job'}
+                        data: {
+                            id: id,
+                            tablename: 'job'
+                        }
                     })
-                    .done(function (data) {
+                    .done(function(data) {
                         if (data && data.code == 200) {
-                            layui.use('layer', function(){
+                            layui.use('layer', function() {
                                 var layer = layui.layer;
                                 layer.msg(data.msg);
-                            }); 
-                            setTimeout(function () { window.location.reload(); }, 1000);  
-                            
+                            });
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 1000);
+
                         } else {
-                            layui.use('layer', function(){
+                            layui.use('layer', function() {
                                 var layer = layui.layer;
                                 layer.msg(data.msg);
                             });
@@ -93,58 +94,61 @@
             });
         })
 
-     
-        
+
+
     }
-     //
-   layui.use('layer',function(){
-       //添加职位
-    $('#addjob').click(function(){
-        layer.open({
-               type: 1
-               ,title: "添加职位"
-               ,area: ['300px;','200px;']
-               ,shade: 0.8
-               ,id: 'LAY_layuipro1' //设定一个id，防止重复弹出
-               ,btn: ['确定', '取消']
-               ,content: $('#addjobBox')
-               ,success: function(layero){
-               var btn = layero.find('.layui-layer-btn');
-               btn.find('.layui-layer-btn0').click(function(){
-                   //点击确定按钮后的时间
-                  var url = "{:url('data/addjob')}";
-                  var job = $("#job").val();
-                  
-                  
-                  $.ajax({
-                      url: url,
-                      type: 'post',
-                      dataType: 'json',
-                      data: { jobname: job}
-                  })
-                  .done(function (data) {
-                      if (data && data.code == 200) {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                          setTimeout(function () { window.location.reload(); }, 1000);  
-                      }else if (data && data.code == 100) {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                      }else {
-                          layui.use('layer', function(){
-                              layer.msg(data.msg);
-                          });
-                      }
-                  });
-               });
-               }
-           });
-
-             }) 
+    //
+    layui.use('layer', function() {
+        //添加职位
+        $('#addjob').click(function() {
+            layer.open({
+                type: 1,
+                title: "添加职位",
+                area: ['300px;', '200px;'],
+                shade: 0.8,
+                id: 'LAY_layuipro1' //设定一个id，防止重复弹出
+                    ,
+                btn: ['确定', '取消'],
+                content: $('#addjobBox'),
+                success: function(layero) {
+                    var btn = layero.find('.layui-layer-btn');
+                    btn.find('.layui-layer-btn0').click(function() {
+                        //点击确定按钮后的时间
+                        var url = "{:url('data/addjob')}";
+                        var job = $("#job").val();
+                        var hz = /^[\u4e00-\u9fa5]{2,10}$/g;
+                        if (!hz.test(job)) {
+                            layer.msg('职位只能是2到10个汉字！');
+                            return false;
+                        }
 
 
-    }) 
+                        $.ajax({
+                                url: url,
+                                type: 'post',
+                                dataType: 'json',
+                                data: {
+                                    jobname: job
+                                }
+                            })
+                            .done(function(data) {
+                                if (data && data.code == 200) {
+                                    layer.msg(data.msg);
+                                    setTimeout(function() {
+                                        window.location.reload();
+                                    }, 1000);
+                                } else if (data && data.code == 100) {
+                                    layer.msg(data.msg);
+                                } else {
+                                    layer.msg(data.msg);
+                                }
+                            });
+                    });
+                }
+            });
 
+        })
+
+
+    })
 </script>

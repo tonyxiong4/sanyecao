@@ -1,71 +1,70 @@
-   {include file="index/navleft"}
-    <div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
-        <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
-            
-            <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+ {include file="index/navleft"}
+<div class="layui-body" style="top: 60px;border-left: solid 2px #1AA094; padding:10px 20px;" id="admin-body">
+    <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+
+        <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
             <div class="layui-tab-item layui-show">
                 <fieldset class="layui-elem-field layui-field-title">
                     <legend>客户管理</legend>
                 </fieldset>
-                <div  class="layui-inline">
-                <form  method="POST" action="{:url('syc/customser')}">
-                    <div class="layui-inline">
-                        <input type="text" name="searchname" value="{:input('param.searchname')}"  lay-verify="required" placeholder="输入客户名或销售名" autocomplete="on" class="layui-input">
-                    </div>
-                    <div class="layui-inline">
-                        <input class="layui-btn" type="submit" value="查询">
-                    </div>     
-                </form>
+                <div class="layui-inline">
+                    <form method="POST" action="{:url('syc/customser')}">
+                        <div class="layui-inline">
+                            <input type="text" name="searchname" value="{:input('param.searchname')}" lay-verify="required" placeholder="输入客户名或销售名" autocomplete="on" class="layui-input">
+                        </div>
+                        <div class="layui-inline">
+                            <input class="layui-btn" type="submit" value="查询">
+                        </div>
+                    </form>
                 </div>
                 <div class="layui-inline">
-                        <button data-method="notice" class="layui-btn " id="addItem">
+                    <button data-method="notice" class="layui-btn " id="addItem">
                             <i class="layui-icon">&#xe608;</i> 添加
                         </button>
                 </div>
 
                 <table class="layui-table" lay-skin="line">
-                        <thead>
-                            <tr>
-                                <th>姓名</th>
-                                <th>公司名称</th>
-                                <th>电话</th>
-                                <th>所属人员</th>
-                                <th>添加时间</th>
-                                <th>操作</th>
-                            </tr> 
-                        </thead>
-                        <tbody>
-                            {volist name='list' id='vo'}
-                            <tr>
-                                <td>{$vo.name}</td>
-                                <td>{$vo.company}</td>
-                                <td>{$vo.phone}</td>
-                                <td>{$vo.username}</td>
-                                <td>{$vo.addtime}</td>
-                                <td>
-                                        <!-- 修改btn -->
-                                        <button class="layui-btn layui-btn-sm changeCusBox" data-uid="{$vo.id}"  title="修改">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>公司名称</th>
+                            <th>电话</th>
+                            <th>所属人员</th>
+                            <th>添加时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {volist name='list' id='vo'}
+                        <tr>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.company}</td>
+                            <td>{$vo.phone}</td>
+                            <td>{$vo.username}</td>
+                            <td>{$vo.addtime}</td>
+                            <td>
+                                <!-- 修改btn -->
+                                <button class="layui-btn layui-btn-sm changeCusBox" data-uid="{$vo.id}" title="修改">
                                         <i class="layui-icon">&#xe642;</i>
                                         </button>
-                                        <!-- 删除btn -->
-                                        <button class="layui-btn layui-btn-sm" onclick="delCustomser({$vo.id})" title="删除">
+                                <!-- 删除btn -->
+                                <button class="layui-btn layui-btn-sm" onclick="delCustomser({$vo.id})" title="删除">
                                         <i class="layui-icon">&#xe640;</i>
                                         </button>
-                                        
-                                </td>
-                            </tr>
-                            {/volist}
-                            {if condition="count($list) elt 0"}
-                                <tr>
-                                    <td colspan="6" style="text-align: center">没有您要查询的数据</td>
-                                </tr>
-                            {/if}
-                        </tbody>
-                    </table>
-                    {$list->render()}
-                </div>      
+
+                            </td>
+                        </tr>
+                        {/volist} {if condition="count($list) elt 0"}
+                        <tr>
+                            <td colspan="6" style="text-align: center">没有您要查询的数据</td>
+                        </tr>
+                        {/if}
+                    </tbody>
+                </table>
+                {$list->render()}
             </div>
         </div>
+    </div>
 </div>
 <!-- 添加 -->
 <div id="addCustomserBox" style="display: none;">
@@ -73,54 +72,51 @@
         <div class="layui-form-item">
             <label class="layui-form-label">客户姓名：</label>
             <div class="layui-input-block">
-            <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户信息" class="layui-input">
+                <input id="custname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户信息" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">所在公司：</label>
             <div class="layui-input-block">
-            <input id="custcompany" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所在公司" class="layui-input">
+                <input id="custcompany" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所在公司" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">电话：</label>
             <div class="layui-input-block">
-            <input  id="custphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户电话" class="layui-input">
+                <input id="custphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户电话" class="layui-input">
             </div>
         </div>
     </div>
 </div>
 <!-- 修改 -->
 <div id="changeCusBox" style="display: none;">
-        <div style="padding:20px 25px 10px 5px;">
-            <div class="layui-form-item">
-                <label class="layui-form-label">客户姓名：</label>
-                <div class="layui-input-block">
+    <div style="padding:20px 25px 10px 5px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户姓名：</label>
+            <div class="layui-input-block">
                 <input id="ucustname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户信息" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">所在公司：</label>
-                <div class="layui-input-block">
-                <input id="ucustcompany" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所在公司" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">电话：</label>
-                <div class="layui-input-block">
-                <input  id="ucustphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户电话" class="layui-input">
-                </div>
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所在公司：</label>
+            <div class="layui-input-block">
+                <input id="ucustcompany" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所在公司" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话：</label>
+            <div class="layui-input-block">
+                <input id="ucustphone" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入客户电话" class="layui-input">
+            </div>
+        </div>
+    </div>
 </div>
 
 
 
 
 <script>
-  
-   
-
     /**
      * [delCustomser 删除客户]
      * @param  {[type]} id [description]
@@ -129,27 +125,32 @@
 
 
     function delCustomser(id) {
-        var c = layui.use('layer',function(){
+        var c = layui.use('layer', function() {
             layer.confirm('您确认要删除吗？', {
-            btn: ['确认','取消'] //按钮
-            }, function(){
+                btn: ['确认', '取消'] //按钮
+            }, function() {
                 var url = "{:url('data/commonDel')}";
-                    $.ajax({
+                $.ajax({
                         url: url,
                         type: 'post',
                         dataType: 'json',
-                        data: { id: id ,tablename:'customer'}
+                        data: {
+                            id: id,
+                            tablename: 'customer'
+                        }
                     })
-                    .done(function (data) {
+                    .done(function(data) {
                         if (data && data.code == 200) {
-                            layui.use('layer', function(){
+                            layui.use('layer', function() {
                                 var layer = layui.layer;
                                 layer.msg(data.msg);
-                            }); 
-                            setTimeout(function () { window.location.reload(); }, 1000);  
-                            
+                            });
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 1000);
+
                         } else {
-                            layui.use('layer', function(){
+                            layui.use('layer', function() {
                                 var layer = layui.layer;
                                 layer.msg(data.msg);
                             });
@@ -158,187 +159,206 @@
             });
         })
 
-     
-        
+
+
     }
 
 
 
- /**
+    /**
      * [添加客户]
      * @param  {String} 
      * @return {[type]}    [description]
      */
     // 添加弹出层
-    layui.use('layer',function(){
-    
-            $('#addItem').click(function(){
-      //示范一个公告层
-      layer.open({
-        type: 1
-        ,title: false //不显示标题栏
-        ,closeBtn: false
-        ,area: '300px;'
-        ,shade: 0.8
-        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-        ,btn: ['确定', '取消']
-        ,btnAlign: 'c'
-        ,moveType: 1 //拖拽模式，0或者1
-        ,content: $('#addCustomserBox')
-        ,success: function(layero){
-          var btn = layero.find('.layui-layer-btn');
-          btn.find('.layui-layer-btn0').click(function(){
-            var url = "{:url('data/addCustomser')}";
-            var custname = $("#custname").val();
-            if(custname == "" || custname == null){
-                layer.msg('用户名不能为空');
-                return false;
-            }
-            var hz = /^[\u4e00-\u9fa5]{2,4}$/g;
-            if(!hz.test(custname)){
-                layer.msg('用户名只能是2到4个汉字！');
-                return false;
-            }
-            var custcompany = $("#custcompany").val();
-            if(custcompany == "" || custcompany == null){
-                layer.msg('公司不能为空！');
-                return false;
-            }
-            var hz1 = /^[\u4e00-\u9fa5]{2,20}$/g;
-            if(!hz1.test(custcompany)){
-                layer.msg('公司名只能是2到20个汉字！');
-                return false;
-            }
-            
-            var custphone = $("#custphone").val();
-            if(custphone == "" || custphone == null){
-                layer.msg('电话不能为空！');
-                return false;
-            }
-            var regMobile=/^[\d]{7,11}$/;
-            if(!regMobile.test(custphone)){
-                layer.msg('请输入正确的电话号码！');
-                return false;
-            }
-            $.ajax({
-                url: url,
-                type: 'post',
-                dataType: 'json',
-                data: { custname: custname, custcompany: custcompany, custphone: custphone }
-            })
-            .done(function (data) {
-                if (data && data.code == 200) {
-                    layui.use('layer', function(){
-                        layer.msg(data.msg);
-                    });
-                    setTimeout(function () { window.location.reload(); }, 1000);  
-                }else if (data && data.code == 100) {
-                    layui.use('layer', function(){
-                        layer.msg(data.msg);
-                    });
-                }else {
-                    layui.use('layer', function(){
-                        layer.msg(data.msg);
-                    });
-                }
-            });
+    layui.use('layer', function() {
 
-          });
-        }
-      });
-        })
-    //修改信息
-        $('.changeCusBox').click(function(){
-            var uid=$(this).attr('data-uid');
-      //示范一个公告层
-      layer.open({
-        type: 1
-        ,title: false //不显示标题栏
-        ,closeBtn: false
-        ,area: '300px;'
-        ,shade: 0.8
-        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-        ,btn: ['确定', '取消']
-        ,btnAlign: 'c'
-        ,moveType: 1 //拖拽模式，0或者1
-        ,content: $('#changeCusBox')
-        ,success: function(layero){
-            var geturl="{:url('data/getData')}";
-            
-            $.ajax({
-                url: geturl,
-                type: 'post',
-                dataType: 'json',
-                data: {id: uid,tablename:'customer'},
-            })
-            .done(function(data) {
-                if(data && data.code==200){
-                    $("#ucustname").val(data.data['name']);
-                    $("#ucustcompany").val(data.data['company']);
-                    $("#ucustphone").val(data.data['phone']);
-                    
-                }
-            });
-            
-              var btn = layero.find('.layui-layer-btn');
-              btn.find('.layui-layer-btn0').click(function(){
-                var url = "{:url('data/addCustomser')}";
-                var custname = $("#ucustname").val();
-                if(custname == "" || custname == null){
-                    layer.msg('用户名不能为空');
-                    return false;
-                }
-                var hz = /^[\u4e00-\u9fa5]{2,4}$/g;
-                if(!hz.test(custname)){
-                    layer.msg('用户名只能是2到4个汉字！');
-                    return false;
-                }
-                var custcompany = $("#ucustcompany").val();
-                if(custcompany == "" || custcompany == null){
-                    layer.msg('公司不能为空！');
-                    return false;
-                }
-                var hz1 = /^[\u4e00-\u9fa5]{2,20}$/g;
-                if(!hz1.test(custcompany)){
-                    layer.msg('公司名只能是2到20个汉字！');
-                    return false;
-                }
-                var custphone = $("#ucustphone").val();
-                if(custphone == "" || custphone == null){
-                    layer.msg('电话不能为空！');
-                    return false;
-                }
-                var regMobile=/^[\d]{7,11}$/;
-                if(!regMobile.test(custphone)){
-                    layer.msg('请输入正确的电话号码！');
-                    return false;
-                }
-                
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    dataType: 'json',
-                    data: { id:uid,custname: custname, custcompany: custcompany, custphone: custphone }
-                })
-                .done(function (data) {
-                    if (data && data.code == 200) {
-                        
-                            layer.msg(data.msg);
-                        
-                        setTimeout(function () { window.location.reload(); }, 1000);  
-                    }else {
-                       
-                            layer.msg(data.msg);
-                       
+        $('#addItem').click(function() {
+                //示范一个公告层
+                layer.open({
+                    type: 1,
+                    title: false //不显示标题栏
+                        ,
+                    closeBtn: false,
+                    area: '300px;',
+                    shade: 0.8,
+                    id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                        ,
+                    btn: ['确定', '取消'],
+                    btnAlign: 'c',
+                    moveType: 1 //拖拽模式，0或者1
+                        ,
+                    content: $('#addCustomserBox'),
+                    success: function(layero) {
+                        var btn = layero.find('.layui-layer-btn');
+                        btn.find('.layui-layer-btn0').click(function() {
+                            var url = "{:url('data/addCustomser')}";
+                            var custname = $("#custname").val();
+                            if (custname == "" || custname == null) {
+                                layer.msg('用户名不能为空');
+                                return false;
+                            }
+                            var hz = /^[\u4e00-\u9fa5]{2,4}$/g;
+                            if (!hz.test(custname)) {
+                                layer.msg('用户名是2到4个汉字！');
+                                return false;
+                            }
+                            var custcompany = $("#custcompany").val();
+                            if (custcompany == "" || custcompany == null) {
+                                layer.msg('公司不能为空！');
+                                return false;
+                            }
+                            var hz1 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,20}$/g;
+                            if (!hz1.test(custcompany)) {
+                                layer.msg('公司名只能是2到20个字符！');
+                                return false;
+                            }
+
+                            var custphone = $("#custphone").val();
+                            if (custphone == "" || custphone == null) {
+                                layer.msg('电话不能为空！');
+                                return false;
+                            }
+                            var regMobile = /^[\d]{7,11}$/;
+                            if (!regMobile.test(custphone)) {
+                                layer.msg('请输入正确的电话号码！');
+                                return false;
+                            }
+                            $.ajax({
+                                    url: url,
+                                    type: 'post',
+                                    dataType: 'json',
+                                    data: {
+                                        custname: custname,
+                                        custcompany: custcompany,
+                                        custphone: custphone
+                                    }
+                                })
+                                .done(function(data) {
+                                    if (data && data.code == 200) {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                        setTimeout(function() {
+                                            window.location.reload();
+                                        }, 1000);
+                                    } else if (data && data.code == 100) {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                    } else {
+                                        layui.use('layer', function() {
+                                            layer.msg(data.msg);
+                                        });
+                                    }
+                                });
+
+                        });
                     }
                 });
-              });
+            })
+            //修改信息
+        $('.changeCusBox').click(function() {
+            var uid = $(this).attr('data-uid');
+            //示范一个公告层
+            layer.open({
+                type: 1,
+                title: false //不显示标题栏
+                    ,
+                closeBtn: false,
+                area: '300px;',
+                shade: 0.8,
+                id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                    ,
+                btn: ['确定', '取消'],
+                btnAlign: 'c',
+                moveType: 1 //拖拽模式，0或者1
+                    ,
+                content: $('#changeCusBox'),
+                success: function(layero) {
+                    var geturl = "{:url('data/getData')}";
 
-        }
-      });
+                    $.ajax({
+                            url: geturl,
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                id: uid,
+                                tablename: 'customer'
+                            },
+                        })
+                        .done(function(data) {
+                            if (data && data.code == 200) {
+                                $("#ucustname").val(data.data['name']);
+                                $("#ucustcompany").val(data.data['company']);
+                                $("#ucustphone").val(data.data['phone']);
+
+                            }
+                        });
+
+                    var btn = layero.find('.layui-layer-btn');
+                    btn.find('.layui-layer-btn0').click(function() {
+                        var url = "{:url('data/addCustomser')}";
+                        var custname = $("#ucustname").val();
+                        if (custname == "" || custname == null) {
+                            layer.msg('用户名不能为空');
+                            return false;
+                        }
+                        var hz = /^[\u4e00-\u9fa5]{2,4}$/g;
+                        if (!hz.test(custname)) {
+                            layer.msg('用户名只能是2到4个汉字！');
+                            return false;
+                        }
+                        var custcompany = $("#ucustcompany").val();
+                        if (custcompany == "" || custcompany == null) {
+                            layer.msg('公司不能为空！');
+                            return false;
+                        }
+                        var hz1 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,20}$/g;
+                        if (!hz1.test(custcompany)) {
+                            layer.msg('公司名只能是2到20个字符！');
+                            return false;
+                        }
+                        var custphone = $("#ucustphone").val();
+                        if (custphone == "" || custphone == null) {
+                            layer.msg('电话不能为空！');
+                            return false;
+                        }
+                        var regMobile = /^[\d]{7,11}$/;
+                        if (!regMobile.test(custphone)) {
+                            layer.msg('请输入正确的电话号码！');
+                            return false;
+                        }
+
+                        $.ajax({
+                                url: url,
+                                type: 'post',
+                                dataType: 'json',
+                                data: {
+                                    id: uid,
+                                    custname: custname,
+                                    custcompany: custcompany,
+                                    custphone: custphone
+                                }
+                            })
+                            .done(function(data) {
+                                if (data && data.code == 200) {
+
+                                    layer.msg(data.msg);
+
+                                    setTimeout(function() {
+                                        window.location.reload();
+                                    }, 1000);
+                                } else {
+
+                                    layer.msg(data.msg);
+
+                                }
+                            });
+                    });
+
+                }
+            });
         })
     })
-
-    
-
 </script>
