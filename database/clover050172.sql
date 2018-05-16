@@ -161,6 +161,22 @@ CREATE TABLE `syc_orderdetail` (
 
 insert  into `syc_orderdetail`(`id`,`goodsid`,`count`,`total`,`sumcost`,`orderid`,`goodsname`,`goodsattribute`,`goodsunit`,`goodscostprice`,`goodsprice`,`truckage`,`status`) values (14,1,5,'80.00','25.00',10,'325水泥','32mm','克','5.00','10.00','30.00',9),(15,2,5,'50.00','25.00',10,'斯蒂芬','是地方1','是','5.00','10.00','0.00',9),(16,1,5,'80.00','25.00',10,'325水泥','32mm','克','5.00','10.00','30.00',0),(17,2,5,'50.00','25.00',10,'斯蒂芬','是地方1','是','5.00','10.00','0.00',9);
 
+/*Table structure for table `syc_orderimg` */
+
+DROP TABLE IF EXISTS `syc_orderimg`;
+
+CREATE TABLE `syc_orderimg` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orderid` int(11) NOT NULL DEFAULT '0' COMMENT '订单id',
+  `src` varchar(255) NOT NULL DEFAULT '' COMMENT '图片地址',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态0正常，9删除',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='订单图片	';
+
+/*Data for the table `syc_orderimg` */
+
+insert  into `syc_orderimg`(`id`,`orderid`,`src`,`status`) values (3,10,'20180517/248e66d1f5d50806bfe7b4f529dc841b.png',9),(4,10,'20180517/305f961bf46ac020a61c3264b872e2ce.png',0);
+
 /*Table structure for table `syc_role` */
 
 DROP TABLE IF EXISTS `syc_role`;
