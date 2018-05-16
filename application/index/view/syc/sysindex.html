@@ -58,7 +58,7 @@
 			        trigger: 'axis'
 			    },
 			    legend: {
-			        data:['建筑部','物流部','瓦工部','设计部','搬运部']
+			        data:[{volist name="departlist" id="vo"}'{$vo.departname}'{if condition="$i lt count($departlist)"},{/if}{/volist}]
 			    },
 			    grid: {
 			        left: '3%',
@@ -74,7 +74,7 @@
 			    xAxis: {
 			        type: 'category',
 			        boundaryGap: false,
-			        data: ['周一','周二','周三','周四','周五','周六','周日']
+			        data: ["{$days}"]
 			    },
 			    yAxis: {
 			        type: 'value'

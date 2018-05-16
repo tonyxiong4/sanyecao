@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-17 01:20:10
+ * @Last Modified time: 2018-05-17 02:09:47
  */
 
 namespace app\index\controller;
@@ -100,9 +100,20 @@ class Syc extends Base
     {   
       $ordercount=Db::name('order')->where('status',0)->wheretime('createtime','week')->count();
       $wcordercount=Db::name('order')->where('status',0)->where('orderstatus',5)->wheretime('createtime','week')->count();
+      $departlist=Db::name('department')->where('status',0)->select();
+      $day1=date("Y-m-d",strtotime("0 day"));   
+      $day2=date("Y-m-d",strtotime("-1 day"));   
+      $day3=date("Y-m-d",strtotime("-2 day"));   
+      $day4=date("Y-m-d",strtotime("-3 day"));   
+      $day5=date("Y-m-d",strtotime("-4 day"));   
+      $day6=date("Y-m-d",strtotime("-5 day"));   
+      $day7=date("Y-m-d",strtotime("-6 day"));  
+      $days=[$day1,$day2,$day3,$day4,$day5,$day6,$day7];
+
       $this->assign('ordercount',$ordercount);
       $this->assign('wcordercount',$wcordercount);
-
+      $this->assign('departlist',$departlist);
+      $this->assign('days',implode(',',$days));
       return $this->fetch('sysindex');
     }
     //订单
