@@ -81,50 +81,18 @@
                         </div>
                         <div style="padding: 20px; background-color: #F2F2F2;">
                             <div class="layui-row layui-col-space15">
-                            <div class="layui-col-md3">
-                                <div class="layui-card orderImg">
-                                    <img src="__IMG__img001.jpg" />
-                                    <i></i>
-                                    <button class="layui-btn layui-icon">&#xe640;</button>
-                                </div>
-                            </div>
-                            <div class="layui-col-md3">
-                                <div class="layui-card orderImg">
-                                    <img src="__IMG__img002.jpg" />
-                                     <button class="layui-btn layui-icon">&#xe640;</button>
-                                </div>
-                            </div>
-                            <div class="layui-col-md3">
-                                <div class="layui-card orderImg">
-                                   <img src="__IMG__img001.jpg" />
-                                    <button class="layui-btn layui-icon">&#xe640;</button>
-                                </div>
-                            </div>
-                            <div class="layui-col-md3">
-                                <div class="layui-card orderImg">
-                                    <img src="__IMG__img002.jpg" />
-                                     <button class="layui-btn layui-icon">&#xe640;</button>
-                                </div>
-                            </div>
-                            <div class="layui-col-md3">
-                                <div class="layui-card orderImg">
-                                    <img src="__IMG__img002.jpg" />
-                                     <button class="layui-btn layui-icon">&#xe640;</button>
-                                </div>
-                            </div>
-                            <div class="layui-col-md3">
-                                <div class="layui-card orderImg">
-                                    <img src="__IMG__img001.jpg" />
-                                     <button class="layui-btn layui-icon">&#xe640;</button>
-                                </div>
-                            </div>
-                            <div class="layui-col-md3">
-                                <div class="layui-card orderImg">
-                                    <img src="__IMG__img002.jpg" />
-                                     <button class="layui-btn layui-icon">&#xe640;</button>
-                                </div>
-                            </div>
-                           
+                                {volist name='imglist' id='img'}
+                                    <div class="layui-col-md3">
+                                        <div class="layui-card orderImg">
+                                            <img src="__UPLOADS__{$img.src}" />
+                                            <i></i>
+                                            <button class="layui-btn layui-icon" onclick="delImg({$img.id})">&#xe640;</button>
+                                        </div>
+                                    </div>
+                                {/volist}
+                                {if condition="count($imglist) elt 0"}
+                                    暂未上传图片
+                                {/if}
                             </div>
                         </div> 
                     </div>
@@ -291,13 +259,19 @@
 
     layui.use('upload', function(){
       var upload = layui.upload;
-       
+        var orderid="{$orderid}";
       //执行实例
       var uploadInst = upload.render({
         elem: '#uploadBtn' //绑定元素
-        ,url: '/upload/' //上传接口
+        ,url: "{:url('data/upload')}" //上传接口
+        ,data:{orderid:orderid}
         ,done: function(res){
-          //上传完毕回调
+          if(res.code==200){
+            layui.use('layer', function(){
+                layer.msg(res.msg);
+            });
+            setTimeout(function () { window.location.reload(); }, 1000);  
+          }
         }
         ,error: function(){
           //请求异常回调
@@ -311,6 +285,47 @@
      * @return {[type]}    [description]
      */
 
+
+    /**
+     * [delImg 删除图片]
+     * @param  {[type]} id [description]
+     * @return {[type]}    [description]
+     */
+
+
+    function delImg(imgid) {
+        var c = layui.use('layer',function(){
+            layer.confirm('您确认要删除吗？', {
+            btn: ['确认','取消'] //按钮
+            }, function(){
+                var url = "{:url('data/commonDel')}";
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: { id: imgid ,tablename:'orderimg'}
+                    })
+                    .done(function (data) {
+                        if (data && data.code == 200) {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            }); 
+                            setTimeout(function () { window.location.reload(); }, 1000);  
+                            
+                        } else {
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg(data.msg);
+                            });
+                        }
+                    });
+            });
+        })
+
+     
+        
+    }
 
     function delOrderDetail(id) {
         var c = layui.use('layer',function(){

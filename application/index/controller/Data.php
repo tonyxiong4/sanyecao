@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-16 01:44:43
+ * @Last Modified time: 2018-05-17 01:22:32
  */
 
 namespace app\index\controller;
@@ -101,7 +101,7 @@ class Data extends Controller
 	 */
 	public function commonDel()
 	{
-		$param=$this->request->param();
+		$param=$this->request->param('');
 		$id=$param['id'];//id
 		$tablename=$param['tablename'];
 		$where['id']=$id;
@@ -122,6 +122,16 @@ class Data extends Controller
 				$mes['code']=-1;
 				$mes['msg']="删除失败";
 			}
+		}elseif ($tablename=='orderimg') {
+			$imgsrc=Db::name('orderimg')->where('id',$id)->value('src');
+			$delimg=@unlink($_SERVER['DOCUMENT_ROOT'].config('view_replace_str')['__UPLOADS__'].$imgsrc);
+			if($delimg>0){
+				$mes['code']=200;
+				$mes['msg']="删除成功";
+			}else{
+				$mes['code']=-1;
+				$mes['msg']="删除失败";
+			}
 		}else{
 			if($result>0){
 				$mes['code']=200;
@@ -131,7 +141,6 @@ class Data extends Controller
 				$mes['msg']="删除失败";
 			}
 		}
-		
 		return json($mes);
 	}
 
@@ -510,5 +519,40 @@ class Data extends Controller
 
 		
 		return json($mes);
+	}
+
+	/**
+	 * [upload 文件上传]
+	 * @return [type] [description]
+	 */
+	public function upload(){
+
+
+		$file = request()->file('file');
+	    $orderid=$this->request->param('orderid');
+	    // 移动到框架应用根目录/public/uploads/ 目录下
+	    if($file){
+	        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+	        if($info){
+	            // 成功上传后 获取上传信息
+	            $data['src']=str_replace('\\','/',$info->getSaveName());
+	            $data['orderid']=$orderid;
+	            $result=Db::name('orderimg')->insert($data);
+	        
+		        if($result>0){
+			    	$mes['code']=200;
+					$mes['msg']="上传成功";
+			    }else{
+			    	$mes['code']=-1;
+					$mes['msg']="上传失败";
+			    }
+	        }else{
+	            // 上传失败获取错误信息
+	            $mes['code']=-1;
+				$mes['msg']="上传失败";
+	        }
+
+		    return json($mes);
+	    }
 	}
 }

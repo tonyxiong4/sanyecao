@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-07 10:35:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-16 01:53:23
+ * @Last Modified time: 2018-05-17 01:20:10
  */
 
 namespace app\index\controller;
@@ -144,6 +144,7 @@ class Syc extends Base
 
 
         $orderid=$this->request->param('orderid');
+        $imglist=Db::name('orderimg')->where('status',0)->where('orderid',$orderid)->select();
         $orderInfo=Db::name('order')->where('status',0)->where('id',$orderid)->find();
         $orderInfo['profit']=$orderInfo['total']-$orderInfo['cost'];
         $list=Db::name('orderdetail')
@@ -153,6 +154,7 @@ class Syc extends Base
         $this->assign('list',$list);
         $this->assign('orderid',$orderid);
         $this->assign('orderInfo',$orderInfo);
+        $this->assign('imglist',$imglist);
         return $this->fetch('myorderdetail');
      }
      //部门管理
