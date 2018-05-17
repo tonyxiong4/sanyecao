@@ -389,10 +389,46 @@
                             //点击确定按钮后的时间
                             var url = "{:url('data/addOrder')}";
                             var name = $("#ordername").val();
+                            if (name == "" || name == null) {
+                                layer.msg('订单名不能为空！');
+                                return false;
+                            }
+                            var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,15}$/g;
+                            if (!regEXP.test(name)) {
+                                layer.msg('订单名是2到15个字符！');
+                                return false;
+                            }
                             var remark = $("#ordermark").val();
+                            var regEXP1 = /^[A-Za-z0-9\u4e00-\u9fa5]{0,20}$/g;
+                            if (!regEXP1.test(remark)) {
+                                layer.msg('备注是0到30个字符');
+                                return false;
+                            }
                             var address = $("#orderaddress").val();
+                            if (address == "" || address == null) {
+                                layer.msg('订单地址不能为空！');
+                                return false;
+                            }
+                            var regEXP5 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,15}$/g;
+                            if (!regEXP5.test(address)) {
+                                layer.msg('订单地址是2到15个字符！');
+                                return false;
+                            }
                             var phone = $("#orderphone").val();
+                            if (phone == "" || phone == null) {
+                                layer.msg('电话址不能为空！');
+                                return false;
+                            }
+                            var regEXP4 = /^[0-9]{8,11}$/g;
+                            if (!regEXP4.test(phone)) {
+                                layer.msg('电话格式不对！');
+                                return false;
+                            }
                             var predicttime = $("#selTime02").val();
+                            if (predicttime == "" || predicttime == null) {
+                                layer.msg('请填写时间！');
+                                return false;
+                            }
                             $.ajax({
                                     url: url,
                                     type: 'post',
@@ -517,10 +553,47 @@
                         var url = "{:url('data/addOrder')}";
 
                         var name = $("#uordername").val();
+                        if (name == "" || name == null) {
+                            layer.msg('订单名不能为空！');
+                            return false;
+                        }
+                        var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,15}$/g;
+                        if (!regEXP.test(name)) {
+                            layer.msg('订单名是2到15个字符！');
+                            return false;
+                        }
+
                         var remark = $("#uordermark").val();
+                        var regEXP1 = /^[A-Za-z0-9\u4e00-\u9fa5]{0,20}$/g;
+                        if (!regEXP1.test(remark)) {
+                            layer.msg('备注是0到30个字符');
+                            return false;
+                        }
                         var address = $("#uorderaddress").val();
+                        if (address == "" || address == null) {
+                            layer.msg('订单地址不能为空！');
+                            return false;
+                        }
+                        var regEXP5 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,15}$/g;
+                        if (!regEXP5.test(address)) {
+                            layer.msg('订单地址是2到15个字符！');
+                            return false;
+                        }
                         var phone = $("#uorderphone").val();
+                        if (phone == "" || phone == null) {
+                            layer.msg('电话址不能为空！');
+                            return false;
+                        }
+                        var regEXP4 = /^[0-9]{8,11}$/g;
+                        if (!regEXP4.test(phone)) {
+                            layer.msg('电话格式不对！');
+                            return false;
+                        }
                         var predicttime = $("#selTime03").val();
+                        if (predicttime == "" || predicttime == null) {
+                            layer.msg('请填写时间！');
+                            return false;
+                        }
                         $.ajax({
                                 url: url,
                                 type: 'post',
