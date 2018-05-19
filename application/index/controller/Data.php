@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-19 14:40:06
+ * @Last Modified time: 2018-05-19 15:46:19
  */
 
 namespace app\index\controller;
@@ -300,8 +300,9 @@ class Data extends Controller
 			$data['phone']=trim($param['phone']);
 			$data['departid']=trim($param['departid']);
 			$data['jobid']=trim($param['jobid']);
-			$data['password']=md5(md5($param['password']).config('passwordext'));
-
+			if(!$id){
+				$data['password']=md5(md5($param['password']).config('passwordext'));
+			}
 		}
 		if($id){
 			$result=Db::name('user')->where('id',$id)->update(['username'=>$data['username'],'departid'=>$data['departid'],'phone'=>$data['phone'],'jobid'=>$data['jobid']]);

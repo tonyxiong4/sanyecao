@@ -49,10 +49,79 @@
 								<dd>
 									<a href="{:url('index/logout')}"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 								</dd>
+								<dd>
+									<a id="updatepwd1" data-id="{:session('userinfo.uid')}"><i class="fa fa-sign-out" id="updatepwd1"  aria-hidden="true"></i> 修改密码</a>
+								</dd>
 							</dl>
 						</li>
 					</ul>
-					
 				</div>
 			</div>
 		</div>
+		<div id="updatepwd" style="display: none;">
+			<div style="padding:20px 25px 10px 5px;">
+				<div class="layui-form-item">
+					<label class="layui-form-label">密码：</label>
+					<div class="layui-input-block">
+						<input id="password" type="password" name="title" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">确认密码：</label>
+					<div class="layui-input-block">
+						<input id="repassword" type="password" name="title" lay-verify="title" autocomplete="off" placeholder="请确认密码" class="layui-input">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			layui.use('layer', function() {
+				$("#updatepwd1").click(function(){
+					var userid=$(this).attr('data-id');
+					layer.open({
+                    type: 1,
+                    title: false //不显示标题栏
+                        ,
+                    closeBtn: false,
+                    area: '300px;',
+                    shade: 0.8,
+                    id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                        ,
+                    btn: ['确定', '取消'],
+                    btnAlign: 'c',
+                    moveType: 1 //拖拽模式，0或者1
+                        ,
+                    content: $('#updatepwd'),
+                    success: function(layero) {
+                        var btn = layero.find('.layui-layer-btn');
+                        btn.find('.layui-layer-btn0').click(function() {
+							var password=$("#password").val();
+
+							var url="{:url('data/resetPassword')}";
+							$.ajax({
+								type: "post",
+								url: url,
+								data: {uid:userid,password:password},
+								dataType: "json",
+								success: function (data) {
+									if (data && data.code == 200) {
+                                        
+                                            layer.msg(data.msg);
+                                        
+                                        setTimeout(function() {
+                                            window.location.href="{:url('index/logout)}";
+                                        }, 1000);
+
+                                    } else {
+                                        
+                                            layer.msg(data.msg);
+                                    }
+								}
+							});
+						});
+					}
+				});
+				});
+			});
+		</script>
