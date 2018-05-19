@@ -220,7 +220,9 @@
                         <option value="2">派单中</option>
                         <option value="3">配送中</option>
                         <option value="4">待付款</option>
-                        <option value="5">已完成</option>
+                        {if condition="(session('userinfo.jobid') eq 6) OR (session('userinfo.uid') eq 1)"}
+                            <option value="5">已完成</option>
+                        {/if}
                 </select>
             </div>
         </form>
@@ -273,7 +275,12 @@
 
         $('.sendOrderpart').click(function() {
                 var uidss = $(this).attr('data-uid');
-
+                var jobid = "{:session('userinfo.jobid')}";
+                var curuid = "{:session('userinfo.uid')}";
+                if ((jobid != 8) && (curuid != 1)) {
+                    layer.msg("只有系统管理员和助理拥有此权限");
+                    return;
+                }
                 layer.open({
                     type: 1,
                     title: "派单给部门",
@@ -322,6 +329,12 @@
             //派单给个人
         $('.sendOrderperson').click(function() {
                 var uidss = $(this).attr('data-uid');
+                var jobid = "{:session('userinfo.jobid')}";
+                var curuid = "{:session('userinfo.uid')}";
+                if((jobid >4) && (curuid != 1)){
+                    layer.msg("只有系统管理员和主管级以上拥有此权限");
+                    return;
+                }
                 layer.open({
                     type: 1,
                     title: "派单给个人",
