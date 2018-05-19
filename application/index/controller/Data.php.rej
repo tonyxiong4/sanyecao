@@ -1,0 +1,53 @@
+diff a/application/index/controller/Data.php b/application/index/controller/Data.php	(rejected hunks)
+@@ -287,6 +287,51 @@
+ 		return json($mes);
+ 	}
+ 
++/**
++	 * [addCustomser 添加客户]
++	 */
++	public function addUser()
++	{
++		$param=$this->request->param();
++		$id=$this->request->param('id');
++		$data=[];
++		if($param){
++			$data['username']=trim($param['username']);
++			$data['phone']=trim($param['phone']);
++			$data['departid']=trim($param['departid']);
++			$data['jobid']=trim($param['jobid']);
++			$data['password']=md5(md5($param['password']).config('passwordext'));
++
++		}
++		if($id){
++			$result=Db::name('user')->where('id',$id)->update(['username'=>$data['username'],'departid'=>$data['departid'],'phone'=>$data['phone'],'jobid'=>$data['jobid']]);
++			if($result>0){
++				$mes['code']=200;
++				$mes['msg']='更新成功';
++			}else{
++				$mes['code']=-1;
++				$mes['msg']='更新失败';
++			}
++		}else{
++			$isExist=$this->isExist('username',$data['username'],'user');
++			if($isExist){
++				$mes['code']=100;
++				$mes['msg']="该用户已经存在";
++			}else{
++				$result=Db::name('user')->insert($data);
++				if($result){
++					$mes['code']=200;
++					$mes['msg']="添加成功";
++				}else{
++					$mes['code']=-1;
++					$mes['msg']="添加失败";
++				}
++			}
++		}
++		
++		return json($mes);
++	}
++
+ 	/**
+ 	 * [addGoods 添加商品]
+ 	 */
