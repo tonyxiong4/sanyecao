@@ -21,6 +21,8 @@ class Index extends Controller
     {   
         $departData=action('Data/getDepart');
         $this->assign('depart',$departData);
+        $jobData=action('Data/getJob');
+        $this->assign('job',$jobData);
         return $this->fetch('syc/login');   
     }
 
@@ -78,7 +80,7 @@ class Index extends Controller
             $userpass = md5(md5($userpassword).config('passwordext'));
             $data['password']=$userpass;
             $data['departid']=$param['depart'];
-            // $data['jobid']=$param['job'];
+            $data['jobid']=$param['job'];
         }
         $result=Db::name('user')->insert($data);
         if($result){

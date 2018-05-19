@@ -3,7 +3,7 @@
  * @Author: tony
  * @Date:   2018-05-05 22:54:09
  * @Last Modified by:   tony
- * @Last Modified time: 2018-05-19 13:35:00
+ * @Last Modified time: 2018-05-17 01:22:32
  */
 
 namespace app\index\controller;
@@ -177,14 +177,7 @@ class Data extends Controller
 			}
 		}else{
 			$where['id']=$id;
-			$result=0;
-			if(($field=="departid") &&($tablename=="order")){
-				$departdate=date('Y-m-d',time());
-				$result=Db::name($tablename)->where($where)->update(['departid'=>$fieldvalue,'departdate'=>$departdate]);
-			}else{
-				$result=Db::name($tablename)->where($where)->setField($field,$fieldvalue);	
-			}
-			
+			$result=Db::name($tablename)->where($where)->setField($field,$fieldvalue);
 			if($result>0){
 				$mes['code']=200;
 				$mes['msg']="设置成功";
@@ -274,51 +267,6 @@ class Data extends Controller
 				$mes['msg']="该客户已经存在";
 			}else{
 				$result=Db::name('customer')->insert($data);
-				if($result){
-					$mes['code']=200;
-					$mes['msg']="添加成功";
-				}else{
-					$mes['code']=-1;
-					$mes['msg']="添加失败";
-				}
-			}
-		}
-		
-		return json($mes);
-	}
-
-/**
-	 * [addCustomser 添加客户]
-	 */
-	public function addUser()
-	{
-		$param=$this->request->param();
-		$id=$this->request->param('id');
-		$data=[];
-		if($param){
-			$data['username']=trim($param['username']);
-			$data['phone']=trim($param['phone']);
-			$data['departid']=trim($param['departid']);
-			$data['jobid']=trim($param['jobid']);
-			$data['password']=md5(md5($param['password']).config('passwordext'));
-
-		}
-		if($id){
-			$result=Db::name('user')->where('id',$id)->update(['username'=>$data['username'],'departid'=>$data['departid'],'phone'=>$data['phone'],'jobid'=>$data['jobid']]);
-			if($result>0){
-				$mes['code']=200;
-				$mes['msg']='更新成功';
-			}else{
-				$mes['code']=-1;
-				$mes['msg']='更新失败';
-			}
-		}else{
-			$isExist=$this->isExist('username',$data['username'],'user');
-			if($isExist){
-				$mes['code']=100;
-				$mes['msg']="该用户已经存在";
-			}else{
-				$result=Db::name('user')->insert($data);
 				if($result){
 					$mes['code']=200;
 					$mes['msg']="添加成功";

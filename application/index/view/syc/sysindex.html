@@ -74,21 +74,42 @@
 			    xAxis: {
 			        type: 'category',
 			        boundaryGap: false,
-			        data: [{foreach $days  as $key=>$vo}'{$vo}'{if condition="$key lt count($days)"},{/if}{/foreach}]
+			        data: ["{$days}"]
 			    },
 			    yAxis: {
 			        type: 'value'
 			    },
 			    series: [
-				    {volist name="departlist" id="vo"}
-				     {
-				     	name:'{$vo.departname}',
+			        {
+			            name:'建筑部',
 			            type:'line',
 			            stack: '总量',
-			            data:[{foreach $vo.count  as $key=>$voo}'{$voo}'{if condition="$key lt count($vo.count)"},{/if}{/foreach}]
-				     }
-				     {if condition="$i lt count($departlist)"},{/if}  
-		   			 {/volist}
+			            data:[120, 132, 101, 134, 90, 230, 210]
+			        },
+			        {
+			            name:'物流部',
+			            type:'line',
+			            stack: '总量',
+			            data:[220, 182, 191, 234, 290, 330, 310]
+			        },
+			        {
+			            name:'瓦工部',
+			            type:'line',
+			            stack: '总量',
+			            data:[150, 232, 201, 154, 190, 330, 410]
+			        },
+			        {
+			            name:'设计部',
+			            type:'line',
+			            stack: '总量',
+			            data:[320, 332, 301, 334, 390, 330, 320]
+			        },
+			        {
+			            name:'搬运部',
+			            type:'line',
+			            stack: '总量',
+			            data:[820, 932, 901, 934, 1290, 1330, 1320]
+			        }
 			    ]
 			};
 			

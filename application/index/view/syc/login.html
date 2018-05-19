@@ -61,9 +61,17 @@
 							</div>
 							<div class="input-field"> 
 								<select name='depart'>
-									<option value="0">请选择部门</option>
+									<option value="0">===请选择部门===</option>
 									{volist name='depart' id="vo"}
 										<option value="{$vo.id}">{$vo.departname}</option>
+									{/volist}
+								</select>
+							</div>
+							<div class="input-field"> 
+								<select name='job'>
+									<option value="0">===请选择职位===</option>
+									{volist name='job' id="vo"}
+										<option value="{$vo.id}">{$vo.jobname}</option>
 									{/volist}
 								</select>
 							</div>
