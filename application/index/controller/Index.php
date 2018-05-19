@@ -54,11 +54,14 @@ class Index extends Controller
             $expire = 3600 * 24 * 7;
             //本站COOKIE
             cookie(config('cookie_key'), config('secure_code').".{$info['id']}", $expire);
-            $this->success('登录成功！', url('Syc/sysindex'));
+            $mes['code']=200;
+            $mes['msg']="登录成功";
 
         }else {
-            $this->error('用户名或者密码错误！');
+            $mes['code']=-1;
+            $mes['msg']="用户名或者密码错误";
         }
+        return json($mes);
     }
 
     /**
@@ -77,14 +80,14 @@ class Index extends Controller
             $userpassword=$param['password'];
             $userpass = md5(md5($userpassword).config('passwordext'));
             $data['password']=$userpass;
-            $data['departid']=$param['depart'];
-            // $data['jobid']=$param['job'];
+            $data['departid']=$param['departid'];
         }
         $result=Db::name('user')->insert($data);
         if($result){
             $list=Db::name('user')->field('*')->where('username|phone',$account)->where('password',$userpass)->where('status',0)->select();
             if(count($list)>1){
-                $this->error('用户信息不明确，请与管理员联系！');
+                $mes['code']=-1;
+                $mes['msg']="用户信息不明确，请与管理员联系！";
             }
             if($list){
                 $info=$list[0];
@@ -102,10 +105,13 @@ class Index extends Controller
                 //本站COOKIE
                 cookie(config('cookie_key'), config('secure_code').".{$info['id']}", $expire);
             }
-            $this->success('注册成功', 'Syc/sysindex');
+            $mes['code']=200;
+            $mes['msg']="注册成功";
         }else{
-            $this->error('注册失败');
+            $mes['code']=-1;
+            $mes['msg']="注册失败";
         }
+        return json($mes);
     }
 
     /**
