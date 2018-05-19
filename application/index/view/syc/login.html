@@ -25,10 +25,10 @@
 						</div> -->
 						<form action="{:url('index/doLogin')}" method="post">
 							<div class="input-field"> 
-								<input type="text" name="account" autocomplete="off" spellcheck="false" placeholder="姓名/手机号">
+								<input type="text" id="account" name="account" autocomplete="off" spellcheck="false" placeholder="姓名/手机号">
 							</div>
 							<div class="input-field"> 
-								<input type="password" name="password" autocomplete="off" spellcheck="false" placeholder="密码"> 
+								<input type="password" id="password" name="password" autocomplete="off" spellcheck="false" placeholder="密码"> 
 							</div>
 							<div class="action"> 
 									<label for="agreement">没有分销账号？</label>  
@@ -36,7 +36,7 @@
 							</div>
 
 							<!-- <a class="action-btn">登录</a> -->
-							<input type="submit" name="submitBtn" class="action-btn" value="登录">
+							<input type="button" id="doLogin" name="submitBtn" class="action-btn" value="登录">
 						</form>
 
 					
@@ -47,20 +47,15 @@
 				<!-- 注册 -->
 				<div class="loginBox registerBox" style="display: none;">
 					<div class="baseLogin">
-						<!-- <div class="error-msg">
-							<i class="iconfont icon-msnui-sub"></i>
-							 您输入的信息不完整！
-							 <i class="iconfont icon-cha"></i>
-						</div> -->
 						<form action="{:url('index/doRegister')}" method="post">
 							<div class="input-field"> 
-								<input  type="text" name="username" autocomplete="off" spellcheck="false" placeholder="请输入您的真实姓名">
+								<input  type="text" id='username' name="username" autocomplete="off" spellcheck="false" placeholder="请输入您的真实姓名">
 							</div>
 							<div class="input-field"> 
-								<input  type="text" name="phone" autocomplete="off" spellcheck="false" placeholder="请输入手机号">
+								<input  type="text" id='phone' name="phone" autocomplete="off" spellcheck="false" placeholder="请输入手机号">
 							</div>
 							<div class="input-field"> 
-								<select name='depart'>
+								<select id='departid' name='depart'>
 									<option value="0">请选择部门</option>
 									{volist name='depart' id="vo"}
 										<option value="{$vo.id}">{$vo.departname}</option>
@@ -68,17 +63,17 @@
 								</select>
 							</div>
 							<div class="input-field"> 
-								<input  type="password" name="password" autocomplete="off" spellcheck="false" placeholder="请输入您的密码"> 
+								<input  type="password"id='zcpassword' name="rpassword" autocomplete="off" spellcheck="false" placeholder="请输入您的密码"> 
 							</div>
 							<div class="input-field"> 
-								<input  type="password" name="repassword" autocomplete="off" spellcheck="false" placeholder="请重复您的密码"> 
+								<input  type="password" id='zcrpassword' name="repassword" autocomplete="off" spellcheck="false" placeholder="请重复您的密码"> 
 							</div>
 							<div class="action"> 
 									<label for="agreement">已有账号！</label>  
 									<a class="forget forget2" href="javascript:;">返回登录</a> 
 							</div>
 
-							<input type="submit" name="submitBtn" class="action-btn" value="立即提交">
+							<input type="button" id="doRegister" name="submitBtn" class="action-btn" value="立即提交">
 							
 						</form>
 
@@ -103,6 +98,69 @@
                 $('.registerBox').hide();
         
             });
+
+            layui.use('layer', function() {
+            	$("#doLogin").click(function(event) {
+            		var url = "{:url('index/doLogin')}";
+            		var account=$("#account").val();
+            		var password=$("#password").val();
+            		 $.ajax({
+            		         url: url,
+            		         type: 'post',
+            		         dataType: 'json',
+            		         data: {account:account,password:password}
+            		     })
+            		     .done(function(data) {
+            		         if (data && data.code == 200) {
+            		             layui.use('layer', function() {
+            		                 layer.msg(data.msg);
+            		             });
+            		             setTimeout(function() {
+            		                 window.location.href="{:url('syc/sysindex')}";
+            		             }, 1000);
+            		         } else {
+            		             layui.use('layer', function() {
+            		                 layer.msg(data.msg);
+            		             });
+            		         }
+            		     });
+            	});
+
+            	$("#doRegister").click(function(event) {
+            		var url = "{:url('index/doRegister')}";
+            		var username=$("#username").val();
+            		var phone=$("#phone").val();
+            		var password=$("#zcpassword").val();
+            		var departid=$("#departid").val();
+            		
+            		 $.ajax({
+            		         url: url,
+            		         type: 'post',
+            		         dataType: 'json',
+            		         data: {username:username,phone:phone,password:password,departid,departid}
+            		     })
+            		     .done(function(data) {
+            		         if (data && data.code == 200) {
+            		             layui.use('layer', function() {
+            		                 layer.msg(data.msg);
+            		             });
+            		             setTimeout(function() {
+            		                 window.location.href="{:url('syc/sysindex')}";
+            		             }, 1000);
+            		         }else if(data && data.code == 100){
+            		         	layui.use('layer', function() {
+            		                 layer.msg(data.msg);
+            		             });
+            		         } else {
+            		             layui.use('layer', function() {
+            		                 layer.msg(data.msg);
+            		             });
+            		         }
+            		     });
+            	});
+            });
+
+
         </script>	
 		
 </body>
