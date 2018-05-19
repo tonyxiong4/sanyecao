@@ -60,7 +60,7 @@
                                 </button>
                             </td>
                             <td>
-                                <button class="layui-btn layui-btn-sm" id="changeCusBox" data-uid="{$vo.id}" title="修改">
+                                <button class="layui-btn layui-btn-sm changeCusBox" data-uid="{$vo.id}" title="修改">
                                         <i class="layui-icon">&#xe642;</i>
                                         </button> {neq name="$vo.id" value="1"}
                                 <button class="layui-btn layui-btn-sm" onclick="delUser({$vo.id})" title="删除">
@@ -127,13 +127,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">输入密码：</label>
                 <div class="layui-input-block">
-                    <input id="password" type="text" name="password" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input">
+                    <input id="password" type="password" name="password" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">重复密码：</label>
                 <div class="layui-input-block">
-                    <input id="repassword" type="text" name="repassword" lay-verify="title" autocomplete="off" placeholder="请重复密码" class="layui-input">
+                    <input id="repassword" type="password" name="repassword" lay-verify="title" autocomplete="off" placeholder="请重复密码" class="layui-input">
                 </div>
 
             </div>
@@ -272,6 +272,51 @@
                     btn.find('.layui-layer-btn0').click(function() {
                         var url = "{:url('data/addUser')}";
                         var data = $("#addForm").serialize();
+                        var username = $("#username").val();
+                        if (username == "" || username == null) {
+                            layer.msg('名子不能为空！');
+                            return false;
+                        }
+                        var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,6}$/g;
+                        if (!regEXP.test(username)) {
+                            layer.msg('名字格式不对！');
+                            return false;
+                        }
+                        var phone = $("#phone").val();
+                        if (phone == "" || phone == null) {
+                            layer.msg('电话不能为空！');
+                            return false;
+                        }
+                        var regEXP = /^[0-9]{8,11}$/g;
+                        if (!regEXP.test(phone)) {
+                            layer.msg('电话格式不正确！');
+                            return false;
+                        }
+                        var departid = $("#departid").val();
+                        if (departid == 0) {
+                            layer.msg('请选择部门！');
+                            return false;
+                        }
+                        var jobid = $("#jobid").val();
+                        if (jobid == 0) {
+                            layer.msg('请选职位！');
+                            return false;
+                        }
+                        var password = $("#password").val();
+                        if (password == "" || password == null) {
+                            layer.msg('密码不能为空！');
+                            return false;
+                        }
+                        var regEXP1 = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/g;
+                        if (!regEXP1.test(password)) {
+                            layer.msg('密码由6-10数字和字母混合组成');
+                            return false;
+                        }
+                        var repassword = $("#repassword").val();
+                        if (password != repassword) {
+                            layer.msg("两次输入密码不一致");
+                            return;
+                        }
                         $.ajax({
                                 url: url,
                                 type: 'post',
@@ -304,7 +349,7 @@
 
 
         //修改信息
-        $('#changeCusBox').click(function() {
+        $('.changeCusBox').click(function() {
             var uid = $(this).attr('data-uid');
             //示范一个公告层
             layer.open({
@@ -344,9 +389,35 @@
                     btn.find('.layui-layer-btn0').click(function() {
                         var url = "{:url('data/addUser')}";
                         var username = $("#uusername").val();
+                        if (username == "" || username == null) {
+                            layer.msg('名子不能为空！');
+                            return false;
+                        }
+                        var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,6}$/g;
+                        if (!regEXP.test(username)) {
+                            layer.msg('名字格式不对！');
+                            return false;
+                        }
                         var phone = $("#uphone").val();
+                        if (phone == "" || phone == null) {
+                            layer.msg('电话不能为空！');
+                            return false;
+                        }
+                        var regEXP = /^[0-9]{8,11}$/g;
+                        if (!regEXP.test(phone)) {
+                            layer.msg('电话格式不正确！');
+                            return false;
+                        }
                         var departid = $("#udepartid").val();
+                        if (departid == 0) {
+                            layer.msg('请选职位！');
+                            return false;
+                        }
                         var jobid = $("#ujobid").val();
+                        if (jobid == 0) {
+                            layer.msg('请选职位！');
+                            return false;
+                        }
                         $.ajax({
                                 url: url,
                                 type: 'post',
