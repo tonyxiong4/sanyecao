@@ -1,167 +1,218 @@
 {__NOLAYOUT__}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8" />
-	<link rel="stylesheet" type="text/css" href="__CSS__reset.css">
-	<link rel="stylesheet" type="text/css" href="__CSS__login.css">
-	<link rel="stylesheet" href="__LIBS__layui/css/layui.css">
-	<script src="__LIBS__layui/layui.js"></script>
-	<title>登录</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="__CSS__reset.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__login.css">
+    <link rel="stylesheet" href="__LIBS__layui/css/layui.css">
+    <link rel="icon" href="/public/favicon.ico" mce_href="/public/favicon.ico" type="image/x-icon">
+    <script src="__LIBS__layui/layui.js"></script>
+    <title>登录</title>
 </head>
+
 <body style="min-width: 1220px; overflow-x: hidden;">
-		<div class="login_wrap">
-			<div class="content" id="login_cont">
-				<a href="" class="login-wrap clearfix">
-					<img class="fl" src="__IMG__logo.png">
-					<div class="fl title">三叶草后台管理系统</div>
-				</a>
-				<div class="loginBox loginBoxOne" style="display: block;">
-					<div class="baseLogin">
-						<!-- <div class="error-msg">
+    <div class="login_wrap">
+        <div class="content" id="login_cont">
+            <a href="{:url('index/index')}" class="login-wrap clearfix">
+                <img class="fl" src="__IMG__logo.png">
+                <div class="fl title">三叶草后台管理系统</div>
+            </a>
+            <div class="loginBox loginBoxOne" style="display: block;">
+                <div class="baseLogin">
+                    <!-- <div class="error-msg">
 							<i class="iconfont icon-msnui-sub"></i>
 							 您输入的信息不完整！
 							 <i class="iconfont icon-cha"></i>
 						</div> -->
-						<form action="{:url('index/doLogin')}" method="post">
-							<div class="input-field"> 
-								<input type="text" id="account" name="account" autocomplete="off" spellcheck="false" placeholder="姓名/手机号">
-							</div>
-							<div class="input-field"> 
-								<input type="password" id="password" name="password" autocomplete="off" spellcheck="false" placeholder="密码"> 
-							</div>
-							<div class="action"> 
-									<label for="agreement">没有分销账号？</label>  
-									<a class="forget forget1" href="javascript:;">立即注册</a> 
-							</div>
+                    <form action="{:url('index/doLogin')}" method="post">
+                        <div class="input-field">
+                            <input type="text" id="account" name="account" autocomplete="off" spellcheck="false" placeholder="姓名/手机号">
+                        </div>
+                        <div class="input-field">
+                            <input type="password" id="password" name="password" autocomplete="off" spellcheck="false" placeholder="密码">
+                        </div>
+                        <div class="action">
+                            <label for="agreement">没有分销账号？</label>
+                            <a class="forget forget1" href="javascript:;">立即注册</a>
+                        </div>
 
-							<!-- <a class="action-btn">登录</a> -->
-							<input type="button" id="doLogin" name="submitBtn" class="action-btn" value="登录">
-						</form>
-
-					
-					</div>
-				</div>
+                        <!-- <a class="action-btn">登录</a> -->
+                        <input type="button" id="doLogin" name="submitBtn" class="action-btn" value="登录">
+                    </form>
 
 
-				<!-- 注册 -->
-				<div class="loginBox registerBox" style="display: none;">
-					<div class="baseLogin">
-						<form action="{:url('index/doRegister')}" method="post">
-							<div class="input-field"> 
-								<input  type="text" id='username' name="username" autocomplete="off" spellcheck="false" placeholder="请输入您的真实姓名">
-							</div>
-							<div class="input-field"> 
-								<input  type="text" id='phone' name="phone" autocomplete="off" spellcheck="false" placeholder="请输入手机号">
-							</div>
-							<div class="input-field"> 
-								<select id='departid' name='depart'>
+                </div>
+            </div>
+
+
+            <!-- 注册 -->
+            <div class="loginBox registerBox" style="display: none;">
+                <div class="baseLogin">
+                    <form action="{:url('index/doRegister')}" method="post">
+                        <div class="input-field">
+                            <input type="text" id='username' name="username" autocomplete="off" spellcheck="false" placeholder="请输入您的真实姓名">
+                        </div>
+                        <div class="input-field">
+                            <input type="text" id='phone' name="phone" autocomplete="off" spellcheck="false" placeholder="请输入手机号">
+                        </div>
+                        <div class="input-field">
+                            <select id='departid' name='depart'>
 									<option value="0">请选择部门</option>
 									{volist name='depart' id="vo"}
 										<option value="{$vo.id}">{$vo.departname}</option>
 									{/volist}
 								</select>
-							</div>
-							<div class="input-field"> 
-								<input  type="password"id='zcpassword' name="rpassword" autocomplete="off" spellcheck="false" placeholder="请输入您的密码"> 
-							</div>
-							<div class="input-field"> 
-								<input  type="password" id='zcrpassword' name="repassword" autocomplete="off" spellcheck="false" placeholder="请重复您的密码"> 
-							</div>
-							<div class="action"> 
-									<label for="agreement">已有账号！</label>  
-									<a class="forget forget2" href="javascript:;">返回登录</a> 
-							</div>
+                        </div>
+                        <div class="input-field">
+                            <input type="password" id='zcpassword' name="rpassword" autocomplete="off" spellcheck="false" placeholder="请输入您的密码">
+                        </div>
+                        <div class="input-field">
+                            <input type="password" id='zcrpassword' name="repassword" autocomplete="off" spellcheck="false" placeholder="请重复您的密码">
+                        </div>
+                        <div class="action">
+                            <label for="agreement">已有账号！</label>
+                            <a class="forget forget2" href="javascript:;">返回登录</a>
+                        </div>
 
-							<input type="button" id="doRegister" name="submitBtn" class="action-btn" value="立即提交">
-							
-						</form>
+                        <input type="button" id="doRegister" name="submitBtn" class="action-btn" value="立即提交">
 
-						
-					</div>
-				</div>
-			</div>
-		</div>
+                    </form>
 
-        <script type="text/javascript" src="__JS__jquery-1.11.2.min.js"></script>
-        <script type="text/javascript">
-            var windowHeight =document.documentElement.clientHeight;
-            var loginCont = document.getElementById('login_cont');
-            loginCont.style.height = windowHeight + "px";
-            $('.baseLogin .action .forget1').click(function(event) {
-                $('.loginBoxOne').hide();
-                $('.registerBox').show();
-        
-            });
-            $('.baseLogin .action .forget2').click(function(event) {
-                $('.loginBoxOne').show();
-                $('.registerBox').hide();
-        
-            });
 
-            layui.use('layer', function() {
-            	$("#doLogin").click(function(event) {
-            		var url = "{:url('index/doLogin')}";
-            		var account=$("#account").val();
-            		var password=$("#password").val();
-            		 $.ajax({
-            		         url: url,
-            		         type: 'post',
-            		         dataType: 'json',
-            		         data: {account:account,password:password}
-            		     })
-            		     .done(function(data) {
-            		         if (data && data.code == 200) {
-            		             layui.use('layer', function() {
-            		                 layer.msg(data.msg);
-            		             });
-            		             setTimeout(function() {
-            		                 window.location.href="{:url('syc/sysindex')}";
-            		             }, 1000);
-            		         } else {
-            		             layui.use('layer', function() {
-            		                 layer.msg(data.msg);
-            		             });
-            		         }
-            		     });
-            	});
+                </div>
+            </div>
+        </div>
+    </div>
 
-            	$("#doRegister").click(function(event) {
-            		var url = "{:url('index/doRegister')}";
-            		var username=$("#username").val();
-            		var phone=$("#phone").val();
-            		var password=$("#zcpassword").val();
-            		var departid=$("#departid").val();
-            		
-            		 $.ajax({
-            		         url: url,
-            		         type: 'post',
-            		         dataType: 'json',
-            		         data: {username:username,phone:phone,password:password,departid,departid}
-            		     })
-            		     .done(function(data) {
-            		         if (data && data.code == 200) {
-            		             layui.use('layer', function() {
-            		                 layer.msg(data.msg);
-            		             });
-            		             setTimeout(function() {
-            		                 window.location.href="{:url('syc/sysindex')}";
-            		             }, 1000);
-            		         }else if(data && data.code == 100){
-            		         	layui.use('layer', function() {
-            		                 layer.msg(data.msg);
-            		             });
-            		         } else {
-            		             layui.use('layer', function() {
-            		                 layer.msg(data.msg);
-            		             });
-            		         }
-            		     });
-            	});
+    <script type="text/javascript" src="__JS__jquery-1.11.2.min.js"></script>
+    <script type="text/javascript">
+        var windowHeight = document.documentElement.clientHeight;
+        var loginCont = document.getElementById('login_cont');
+        loginCont.style.height = windowHeight + "px";
+        $('.baseLogin .action .forget1').click(function(event) {
+            $('.loginBoxOne').hide();
+            $('.registerBox').show();
+
+        });
+        $('.baseLogin .action .forget2').click(function(event) {
+            $('.loginBoxOne').show();
+            $('.registerBox').hide();
+
+        });
+
+        layui.use('layer', function() {
+            $("#doLogin").click(function(event) {
+                var url = "{:url('index/doLogin')}";
+                var account = $("#account").val();
+                if (account == "" || account == null) {
+                    layer.msg('用户名不能为空！');
+                    return false;
+                }
+                var password = $("#password").val();
+                $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            account: account,
+                            password: password
+                        }
+                    })
+                    .done(function(data) {
+                        if (data && data.code == 200) {
+                            layui.use('layer', function() {
+                                layer.msg(data.msg);
+                            });
+                            setTimeout(function() {
+                                window.location.href = "{:url('syc/sysindex')}";
+                            }, 1000);
+                        } else {
+                            layui.use('layer', function() {
+                                layer.msg(data.msg);
+                            });
+                        }
+                    });
             });
 
+            $("#doRegister").click(function(event) {
+                var url = "{:url('index/doRegister')}";
+                var username = $("#username").val();
+                if (username == "" || username == null) {
+                    layer.msg('用户名不能为空！');
+                    return false;
+                }
+                var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,15}$/g;
+                if (!regEXP.test(username)) {
+                    layer.msg('用户名是2到6个字符！');
+                    return false;
+                }
+                var phone = $("#phone").val();
+                if (phone == "" || phone == null) {
+                    layer.msg('号码不能为空！');
+                    return false;
+                }
+                var regEXP = /^[0-9]{8,11}$/g;
+                if (!regEXP.test(phone)) {
+                    layer.msg('号码格式不对！');
+                    return false;
+                }
+                var departid = $("#departid").val();
+                if (departid == 0) {
+                    layer.msg('请选择部门！');
+                    return false;
+                }
+                var password = $("#zcpassword").val();
+                if (password == "" || password == null) {
+                    layer.msg('密码不能为空！');
+                    return false;
+                }
+                var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{6,10}$/g;
+                if (!regEXP.test(password)) {
+                    layer.msg('密码格式不对！');
+                    return false;
+                }
+                var repassword = $('#zcrpassword').val();
+                if (password != repassword) {
+                    layer.msg("两次输入密码不一致");
+                    return;
+                }
 
-        </script>	
-		
+                $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            username: username,
+                            phone: phone,
+                            password: password,
+                            departid,
+                            departid
+                        }
+                    })
+                    .done(function(data) {
+                        if (data && data.code == 200) {
+                            layui.use('layer', function() {
+                                layer.msg(data.msg);
+                            });
+                            setTimeout(function() {
+                                window.location.href = "{:url('syc/sysindex')}";
+                            }, 1000);
+                        } else if (data && data.code == 100) {
+                            layui.use('layer', function() {
+                                layer.msg(data.msg);
+                            });
+                        } else {
+                            layui.use('layer', function() {
+                                layer.msg(data.msg);
+                            });
+                        }
+                    });
+            });
+        });
+    </script>
+
 </body>
+
 </html>
