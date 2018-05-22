@@ -60,9 +60,10 @@
                                 </button>
                             </td>
                             <td>
-                                <button class="layui-btn layui-btn-sm changeCusBox" data-uid="{$vo.id}" title="修改">
+                                 {neq name="$vo.id" value="1"}
+                                 <button class="layui-btn layui-btn-sm changeCusBox" data-uid="{$vo.id}" title="修改">
                                         <i class="layui-icon">&#xe642;</i>
-                                        </button> {neq name="$vo.id" value="1"}
+                                        </button>
                                 <button class="layui-btn layui-btn-sm" onclick="delUser({$vo.id})" title="删除">
                                     <i class="layui-icon">&#xe640;</i>
                                 </button> {/neq}
@@ -277,8 +278,8 @@
                             layer.msg('名子不能为空！');
                             return false;
                         }
-                        var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,6}$/g;
-                        if (!regEXP.test(username)) {
+                        var regEXP1 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,6}$/g;
+                        if (!regEXP1.test(username)) {
                             layer.msg('名字格式不对！');
                             return false;
                         }
@@ -287,8 +288,8 @@
                             layer.msg('电话不能为空！');
                             return false;
                         }
-                        var regEXP = /^[0-9]{8,11}$/g;
-                        if (!regEXP.test(phone)) {
+                        var regEXP2 = /^[0-9]{8,11}$/g;
+                        if (!regEXP2.test(phone)) {
                             layer.msg('电话格式不正确！');
                             return false;
                         }
@@ -303,12 +304,13 @@
                             return false;
                         }
                         var password = $("#password").val();
+
                         if (password == "" || password == null) {
                             layer.msg('密码不能为空！');
                             return false;
                         }
-                        var regEXP1 = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/g;
-                        if (!regEXP1.test(password)) {
+                        var regEXP3 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,10}$/g;
+                        if (!regEXP3.test(password)) {
                             layer.msg('密码由6-10数字和字母混合组成');
                             return false;
                         }
@@ -351,6 +353,7 @@
         //修改信息
         $('.changeCusBox').click(function() {
             var uid = $(this).attr('data-uid');
+
             //示范一个公告层
             layer.open({
                 type: 1,
@@ -393,8 +396,8 @@
                             layer.msg('名子不能为空！');
                             return false;
                         }
-                        var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,6}$/g;
-                        if (!regEXP.test(username)) {
+                        var regEXP1 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,6}$/g;
+                        if (!regEXP1.test(username)) {
                             layer.msg('名字格式不对！');
                             return false;
                         }
@@ -403,8 +406,8 @@
                             layer.msg('电话不能为空！');
                             return false;
                         }
-                        var regEXP = /^[0-9]{8,11}$/g;
-                        if (!regEXP.test(phone)) {
+                        var regEXP2 = /^[0-9]{8,11}$/g;
+                        if (!regEXP2.test(phone)) {
                             layer.msg('电话格式不正确！');
                             return false;
                         }
@@ -567,7 +570,7 @@
                             //点击确定按钮后的事件
                             var url = "{:url('data/resetPassword')}";
                             var upassword = $("#upassword").val();
-                            var regEXP1 = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/g;
+                            var regEXP1 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,10}$/g;
                             if (!regEXP1.test(upassword)) {
                                 layer.msg('密码由6-10数字和字母混合组成');
                                 return false;
