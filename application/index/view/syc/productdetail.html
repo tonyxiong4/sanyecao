@@ -233,31 +233,31 @@
                                 layer.msg('商品名不能为空！');
                                 return false;
                             }
-                            var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,15}$/g;
-                            if (!regEXP.test(goodsname)) {
-                                layer.msg('商品名是2到15个字符！');
-                                return false;
-                            }
+                            // var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,15}$/g;
+                            // if (!regEXP.test(goodsname)) {
+                            //     layer.msg('商品名是2到15个字符！');
+                            //     return false;
+                            // }
                             var goodsattribute = $("#goodsattribute").val();
                             if (goodsattribute == "" || goodsattribute == null) {
                                 layer.msg('属性不能为空！');
                                 return false;
                             }
-                            var regEXP1 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,20}$/g;
-                            if (!regEXP1.test(goodsattribute)) {
-                                layer.msg('属性是2到20个字符！');
-                                return false;
-                            }
+                            // var regEXP1 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,20}$/g;
+                            // if (!regEXP1.test(goodsattribute)) {
+                            //     layer.msg('属性是2到20个字符！');
+                            //     return false;
+                            // }
                             var goodsunit = $("#goodsunit").val();
                             if (goodsunit == "" || goodsunit == null) {
                                 layer.msg('单位不能为空！');
                                 return false;
                             }
-                            var regEXP2 = /^[A-Za-z0-9\u4e00-\u9fa5]{1,10}$/g;
-                            if (!regEXP2.test(goodsunit)) {
-                                layer.msg('单位是1-10的字符！');
-                                return false;
-                            }
+                            // var regEXP2 = /^[A-Za-z0-9\u4e00-\u9fa5]{1,10}$/g;
+                            // if (!regEXP2.test(goodsunit)) {
+                            //     layer.msg('单位是1-10的字符！');
+                            //     return false;
+                            // }
                             var goodscostprice = $("#goodscostprice").val();
                             if (goodscostprice == "" || goodscostprice == null) {
                                 layer.msg('成本不能为空！');
