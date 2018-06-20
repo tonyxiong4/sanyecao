@@ -369,21 +369,21 @@
                             layer.msg('商品名不能为空！');
                             return false;
                         }
-                        var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,15}$/g;
-                        if (!regEXP.test(goodsname)) {
-                            layer.msg('商品名是2到15个字符！');
-                            return false;
-                        }
+                        // var regEXP = /^[A-Za-z0-9\u4e00-\u9fa5]{2,15}$/g;
+                        // if (!regEXP.test(goodsname)) {
+                        //     layer.msg('商品名是2到15个字符！');
+                        //     return false;
+                        // }
                         var goodsattribute = $("#ugoodsattribute").val();
                         if (goodsattribute == "" || goodsattribute == null) {
                             layer.msg('属性不能为空！');
                             return false;
                         }
-                        var regEXP1 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,20}$/g;
-                        if (!regEXP1.test(goodsattribute)) {
-                            layer.msg('属性是2到20个字符！');
-                            return false;
-                        }
+                        // var regEXP1 = /^[A-Za-z0-9\u4e00-\u9fa5]{2,20}$/g;
+                        // if (!regEXP1.test(goodsattribute)) {
+                        //     layer.msg('属性是2到20个字符！');
+                        //     return false;
+                        // }
                         var goodsunit = $("#ugoodsunit").val();
                         if (goodsunit == "" || goodsunit == null) {
                             layer.msg('单位不能为空！');
