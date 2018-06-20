@@ -77,6 +77,8 @@
         </div>
     </div>
 
+    <div class="navleftBtn layui-icon layui-icon-spread-left" title="菜单"></div>        
+
     <script>
         layui.use('layer', function() {
             $("#updatepwd1").click(function() {
@@ -128,4 +130,10 @@
                 });
             });
         });
+
+        $('.navleftBtn').click(function(){
+            $('.layui-side').css({'display':'block'});
+            $('.navleftBtn').css({'display':'none'})
+        })
+
     </script>

@@ -7,7 +7,7 @@
                 <fieldset class="layui-elem-field layui-field-title">
                     <legend>我的订单</legend>
                 </fieldset>
-                <div class="layui-inline">
+                <div class="layui-inline editBtnBox">
                     <form method="POST" action="{:url('syc/myorder',['departid'=>$departid])}" class="layui-form">
                         <div class="layui-inline">
                             <input type="text" name="searchname" value="{:input('param.searchname')}" lay-verify="required" placeholder="请输入订单名称" autocomplete="on" class="layui-input">
@@ -34,25 +34,25 @@
                         </div>
                     </form>
                 </div>
-                <div class="layui-inline">
-                    <button class="layui-btn " id="addOderItem">
+                <div class="layui-inline additemBtn">
+                    <button class="layui-btn" id="addOderItem">
                                         <i class="layui-icon">&#xe608;</i> 添加
                                      </button>
                 </div>
 
                 <!-- 表格 -->
-                <table class="layui-table" lay-skin="line">
+                <table class="layui-table">
                     <thead>
                         <tr>
                             <th>订单名称</th>
                             <th>状态</th>
-                            <th>成本（元）</th>
+                            <th class="removeDom">成本（元）</th>
                             <th>总价（元）</th>
                             <th>发布时间</th>
-                            <th>备注</th>
-                            <th>部门</th>
-                            <th>负责人</th>
-                            <th>编辑</th>
+                            <th class="removeDom">备注</th>
+                            <th class="removeDom">部门</th>
+                            <th >负责人</th>
+                            <th class="removeDom">编辑</th>
                             <th>查看</th>
                         </tr>
                     </thead>
@@ -61,11 +61,11 @@
                         <tr>
                             <td>{$vo.name}</td>
                             <td>{:getOrderStatus($vo.orderstatus,$vo.id)}</td>
-                            <td>{$vo.cost}</td>
+                            <td class="removeDom">{$vo.cost}</td>
                             <td>{$vo.total}</td>
                             <td>{$vo.createtime}</td>
-                            <td>{$vo.remark}</td>
-                            <td>
+                            <td class="removeDom">{$vo.remark}</td>
+                            <td class="removeDom">
                                 <button class="layui-btn layui-btn-xs sendOrderpart" data-uid="{$vo.id}" title="派单给部门">
                                                   {gt name="vo['departid']" value="0"}
                                                   {$vo.departname}
@@ -83,7 +83,7 @@
                                                   {/gt}
                                                 </button>
                             </td>
-                            <td>
+                            <td class="removeDom">
                                 <button class="layui-btn layui-btn-xs changeorderInfo" data-uid="{$vo.id}" data-userid="{$vo.uid}">修改</button>
                             </td>
                             <td>
@@ -640,4 +640,9 @@
 
         })
     })
+//当屏幕小于750时触发函数
+var screenWidth = document.body.clientWidth;
+if(screenWidth<=750){
+ $('.removeDom').remove();
+}
 </script>
