@@ -8,6 +8,22 @@
           });
         });
 
+        //当屏幕小于750时触发函数
+		var screenWidth = document.body.clientWidth;
+		if(screenWidth<=750){
+		 $('.removeDom').remove();
+
+		}
+		$('.navleftBtn').click(function(){
+            $('.layui-side').css({'display':'block'});
+            $('.navleftBtn').css({'display':'none'})
+        })
+
+		$('.leftNavCloseBtn').click(function(event) {
+			$('.layui-side').css({"display":"none"});
+			$('.navleftBtn').css({'display':'block'})
+		});
+
         
        
 </script>

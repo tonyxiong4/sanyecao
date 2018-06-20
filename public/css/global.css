@@ -421,7 +421,12 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
   }
   
 }
-
+.leftNavCloseBtn{
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 30px;
+}
 
 .layui-iconright{
   margin-right: 10px;

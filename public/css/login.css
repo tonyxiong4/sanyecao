@@ -141,16 +141,22 @@ li{
     line-height: 26px;
     padding: 0 2px;
 }
-.action-btn{
+a.action-btn{
     display: block;
 	color: #fff;
     font-size: 18px;
     line-height: 42px;
+    height: 42px;
     width: 300px;
     text-align: center;
     background-color: #00A520;
     cursor: pointer;
+    text-decoration: none;
 }
+a.action-btn:hover{
+    color: #fff;
+}
+
 .baseLogin .sns-login{
 	font-size: 0;
     text-align: center;
@@ -177,11 +183,18 @@ li{
     line-height: 18px;
 }
 
-@media screen and (max-width: 750px) {
-    .login_wrap .content{
-        background: #fff;
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
